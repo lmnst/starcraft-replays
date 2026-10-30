@@ -11,7 +11,7 @@
 - 新建独立 `replay-site/`，未覆盖其他窗口的仓库。三份 MPQ 及引擎复用 pilot 已验证版本；MPQ 不再使用上游主机。
 - 初始部署成功：https://github.com/lmnst/starcraft-replays/actions/runs/41001237439 （`c86c582`）。
 - 完整播放器翻译部署成功：https://github.com/lmnst/starcraft-replays/actions/runs/41001317586 （`4edf617`）。
-- 最终功能提交：`947b72326571a498dccc5c6bde0c8f1bd3525cda`；发布运行：https://github.com/lmnst/starcraft-replays/actions/runs/41001475004 。
+- 最终功能提交：`947b72326571a498dccc5c6bde0c8f1bd3525cda`；发布成功：https://github.com/lmnst/starcraft-replays/actions/runs/41001475004 。
 
 ## 本轮确实执行的验证
 
@@ -22,6 +22,7 @@
 - 本机预览浏览器实际看到五场比赛；搜索 `tier-s` 并选择 Benzene 后只剩一场；中文切换后打开 `?match=05-loss-benzene&lang=zh`，标题和说明为中文。
 - 本机预览使用独立的正式版 IndexedDB 名称，自动加载 MPQ 和 `.rep`；看到 Benzene1.1 回放画面和 `00:22` 计时，无手动文件导入。此项不能记为公开 HTTPS 的首次无缓存播放验证。
 - 公开 HTTPS 只读 smoke 检查共 18 项均返回 200，包括页面、脚本、WASM、catalog、五份回放、三份 MPQ；所有回放和 MPQ 的完整下载 SHA256 与本地记录一致。第一次 smoke 对应公开 revision `4edf617`；原始报告在本机忽略的 `evidence/https-smoke.json`。
+- 最后再次核对公开 catalog 为 `947b723`，五场比赛齐全；首页、应用脚本/样式、来源页及播放器翻译脚本与最终源码逐字节一致（文本统一换行为 LF 后比较）。未引用的旧 `heartbreak-v1.rep` 返回 404。完整 HTTP 证据已提交到 `verification/public-https-20261030.json`，文档提交不触发重复部署。
 
 ## 未完成，不能勾选通过
 
