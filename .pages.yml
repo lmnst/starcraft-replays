@@ -1,0 +1,66 @@
+media:
+  - name: replays
+    label: Replay files (.rep)
+    input: site/replays
+    output: /replays
+    extensions: [rep]
+    rename: random
+content:
+  - name: matches
+    label: Matches
+    type: collection
+    path: content/matches
+    format: json
+    operations:
+      rename: false
+    filename: '{fields.id}.json'
+    fields:
+      - name: id
+        label: Permanent match ID
+        type: string
+        required: true
+        description: 'Use a unique lowercase ID, e.g. match-006. Never change an existing ID: replace the replay file instead.'
+      - name: title_en
+        label: English title
+        type: string
+        required: true
+      - name: title_zh
+        label: Chinese title
+        type: string
+        required: true
+      - name: player1
+        label: Player / bot 1
+        type: string
+        required: true
+      - name: player2
+        label: Player / bot 2
+        type: string
+        required: true
+      - name: map
+        label: Map
+        type: string
+        required: true
+      - name: replay
+        label: Replay file
+        type: file
+        required: true
+        options:
+          media: replays
+          extensions: [rep]
+      - name: visible
+        label: Show on website
+        type: boolean
+      - name: description_en
+        label: English description (verified facts only)
+        type: text
+      - name: description_zh
+        label: Chinese description
+        type: text
+      - name: result
+        label: Result for player 1
+        type: select
+        options:
+          values: [unknown, win, loss]
+    view:
+      primary: title_en
+      fields: [title_en, map, visible]

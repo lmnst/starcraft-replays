@@ -1,0 +1,14 @@
+{
+  "id": "03-win-destination",
+  "title_en": "Baseline vs reference-tier-s · Destination",
+  "title_zh": "Baseline 对阵 reference-tier-s · Destination",
+  "player1": "baseline",
+  "player2": "reference-tier-s",
+  "map": "Destination",
+  "replay": "/replays/03-win-destination.rep",
+  "visible": true,
+  "result": "win",
+  "frames": 13054,
+  "description_en": "Local Bot test match. Result refers to baseline; this is not a tournament ranking.",
+  "description_zh": "本地 Bot 测试对局。胜负以 baseline 为准，不代表正式赛事或榜单成绩。"
+}

@@ -1,0 +1,5 @@
+/* The archive owns navigation and match selection. Keep replay interaction. */
+#pregame-overlay,#rv-rc-open-replay,#rv-rc-copy-link,#rv-rc-export,#rv-rc-export-settings,#playlist-controls{display:none!important}
+html,body{margin:0;overflow:hidden;background:#080c0b}
+#canvas{outline:none;touch-action:none}
+@media(max-width:600px){#info-dock{max-width:100%}.info-dock-title{font-size:10px}#zoom-buttons{right:6px!important;bottom:8px!important}#viewport-export{top:8px!important;right:8px!important}}

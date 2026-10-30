@@ -1,0 +1,7 @@
+dist/
+__pycache__/
+evidence/
+build/
+*.mpq
+*.MPQ
+!site/game-data/*.mpq

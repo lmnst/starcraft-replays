@@ -1,0 +1,14 @@
+{
+  "id": "02-win-benzene",
+  "title_en": "Baseline vs reference-tier-d · Benzene",
+  "title_zh": "Baseline 对阵 reference-tier-d · Benzene",
+  "player1": "baseline",
+  "player2": "reference-tier-d",
+  "map": "Benzene",
+  "replay": "/replays/02-win-benzene.rep",
+  "visible": true,
+  "result": "win",
+  "frames": 11411,
+  "description_en": "Local Bot test match. Result refers to baseline; this is not a tournament ranking.",
+  "description_zh": "本地 Bot 测试对局。胜负以 baseline 为准，不代表正式赛事或榜单成绩。"
+}

@@ -1,0 +1,16 @@
+{
+  "sha256": "00a40a883da972fe5f24ee47be458b69b9f3a2869cde63566a107d61a6fe2212",
+  "passed": true,
+  "events": [
+    {
+      "event": "replay_start",
+      "is_replay": true,
+      "expected_frames": 21888
+    },
+    {
+      "event": "replay_end",
+      "frames": 21890
+    }
+  ],
+  "mode": "headless_playback"
+}

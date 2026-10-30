@@ -1,0 +1,18 @@
+{
+  "url": "https://davechurchill.ca/starcraft/files/Starcraft_1161.zip",
+  "archive_sha256": "1b9f0bf5b719c59ec44563ba0df834bfc7087332315d7a9e67b0731268ae90dc",
+  "files": {
+    "StarDat.mpq": {
+      "bytes": 66184491,
+      "sha256": "63c53eb726435569fb94ff2aed7a3e2cfd0e9cc803fca752a4f6df6b1ea1100b"
+    },
+    "BrooDat.mpq": {
+      "bytes": 23519727,
+      "sha256": "5788e4df8cd7a4606d0ec664990ba20b4e0c6b5041dbe3e06c131ca9bdee8f46"
+    },
+    "Patch_rt.mpq": {
+      "bytes": 636958,
+      "sha256": "285a45f2ede329c14713120de4aad001e7fb82046f149fad11a7f6f40b7ebe71"
+    }
+  }
+}
