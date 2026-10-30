@@ -31,7 +31,7 @@ function renderCards(){
   const top=document.createElement('div');top.className='card-top';const name=document.createElement('span');name.className='map-name';name.textContent=m.map;
   const badge=document.createElement('span');badge.className='badge '+m.result;badge.textContent=(c[m.result]||c.unknown).replace('BASELINE',m.player1.toUpperCase());top.append(name,badge);
   const body=document.createElement('div');body.className='card-body';const h=document.createElement('h2');h.textContent=`${m.player1} vs ${m.player2}`;
-  const p=document.createElement('p');p.textContent=`${c.local} / ${m.frames?m.frames.toLocaleString()+(lang==='zh'?' 帧':' frames'):m.id}`;
+  const p=document.createElement('p');p.textContent=`${c.local} / ${m.replay_frames?m.replay_frames.toLocaleString()+(lang==='zh'?' 帧':' frames'):m.id}`;
   const watch=document.createElement('span');watch.className='watch';watch.textContent=c.watch+' →';body.append(h,p,watch);a.append(top,body);$('cards').append(a);
  });
 }
@@ -48,6 +48,7 @@ async function boot(){
 $('language').onclick=()=>{lang=lang==='en'?'zh':'en';const u=new URL(location.href);u.searchParams.set('lang',lang);history.replaceState(null,'',u);translate();};
 $('search').oninput=renderCards;$('map-filter').onchange=renderCards;$('reset').onclick=()=>{$('search').value='';$('map-filter').value='';renderCards();};
 $('catalog-retry').onclick=()=>{if(catalogFailed){$('library-page').hidden=false;boot();}};$('retry').onclick=loadPlayer;
+$('exit-fullscreen').onclick=()=>document.exitFullscreen();
 $('fullscreen').onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await $('screen').requestFullscreen();}catch(error){$('error-detail').textContent=error.message;}};
 document.addEventListener('fullscreenchange',()=>{$('fullscreen').textContent=copy[lang][document.fullscreenElement?'exitFullscreen':'fullscreen'];});
 window.addEventListener('message',event=>{if(event.source!==$('viewer').contentWindow||event.origin!==location.origin||event.data?.type!=='pilot-status')return;state=event.data.state;mb=event.data.mb||0;errorDetail=event.data.message||'';if(Number.isFinite(event.data.percent))$('progress').value=event.data.percent;if(state==='playing'){$('progress').value=100;document.body.dataset.loadedSeconds=((performance.now()-started)/1000).toFixed(1);}renderStatus();});

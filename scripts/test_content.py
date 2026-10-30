@@ -45,6 +45,18 @@ class ContentTests(unittest.TestCase):
         self.record['id']='renamed-match'
         self.assertNotEqual(self.build().returncode,0)
 
+    def test_replacement_keeps_id_and_changes_public_hash(self):
+        self.assertEqual(self.build().returncode,0)
+        first=json.loads((self.root / 'dist/catalog.json').read_text())['matches'][0]
+        shutil.copyfile(ROOT / 'site/replays/02-win-benzene.rep',self.root / 'site/replays/replacement.rep')
+        self.record['replay']='/replays/replacement.rep'
+        self.assertEqual(self.build().returncode,0)
+        second=json.loads((self.root / 'dist/catalog.json').read_text())['matches'][0]
+        self.assertEqual(first['id'],second['id'])
+        self.assertNotEqual(first['sha256'],second['sha256'])
+        self.assertNotEqual(first['replay_frames'],second['replay_frames'])
+        self.assertFalse((self.root / 'dist/replays/01-win-heartbreak.rep').exists())
+
     def test_corruption_rejected(self):
         path=self.root / 'site/replays/01-win-heartbreak.rep'
         data=bytearray(path.read_bytes());data[0]^=1;path.write_bytes(data)
