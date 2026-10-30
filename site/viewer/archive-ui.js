@@ -2,6 +2,7 @@
 (function(){
  var lang=new URLSearchParams(location.search).get('lang')==='zh'?'zh':'en';
  var words={
+ 'SUPPLY':'人口','MINERALS':'矿物','GAS':'瓦斯','WORKERS':'工人','ARMY':'军队','APM':'每分钟操作','Toggle player vision':'切换选手视野',
  'Production':'生产','Army':'军队','Tech':'科技','Research':'研究','Hotkeys':'快捷键','Key':'按键','Description':'说明',
  'No-spoiler mode.':'隐藏剧透。','Double playback speed.':'播放速度加倍。','Halve playback speed.':'播放速度减半。','Pause/unpause.':'暂停 / 继续。',
  'Pause, then jump -10/-1/+1/+10 frames.':'暂停并跳转 -10/-1/+1/+10 帧。','Jump -30/-10/+10/+30 seconds.':'跳转 -30/-10/+10/+30 秒。','Pan camera.':'移动镜头。','Zoom out/in.':'缩小 / 放大。','Show/hide info graphs.':'显示 / 隐藏统计图。','Open the jump dialog.':'打开跳转窗口。',
@@ -22,9 +23,10 @@
    if(/^(SCRIPT|STYLE)$/.test(node.parentElement.tagName))continue;
    var original=originals.get(node)||node.nodeValue;
    if(words[original.trim()]){originals.set(node,original);var value=lang==='zh'?original.replace(original.trim(),words[original.trim()]):original;if(node.nodeValue!==value)node.nodeValue=value;}
+   else if(/^(time: |speed: )/.test(original)){originals.set(node,original);var value=lang==='zh'?original.replace(/^time: /,'时间：').replace(/^speed: /,'倍速：'):original;if(node.nodeValue!==value)node.nodeValue=value;}
   }
   document.querySelectorAll('[title],[aria-label],input[type=submit]').forEach(function(el){
-   ['title','aria-label','value'].forEach(function(attr){if(!el.hasAttribute(attr))return;var key='data-original-'+attr;var text=el.getAttribute(key)||el.getAttribute(attr);if(words[text]){el.setAttribute(key,text);var value=lang==='zh'?words[text]:text;if(el.getAttribute(attr)!==value)el.setAttribute(attr,value);}});
+   ['title','aria-label','value'].forEach(function(attr){if(!el.hasAttribute(attr))return;var key='data-original-'+attr;var text=el.getAttribute(key)||el.getAttribute(attr);if(words[text]){el.setAttribute(key,text);var value=lang==='zh'?words[text]:text;if(el.getAttribute(attr)!==value)el.setAttribute(attr,value);}else if(/^Frame \d+$/.test(text)){var value=lang==='zh'?text.replace('Frame ','帧 '):text;if(el.getAttribute(attr)!==value){el.setAttribute(key,text);el.setAttribute(attr,value);}}});
   });
   var controls={'rv-rc-play':lang==='zh'?'暂停 / 继续':'Pause / resume','rv-rc-slower':lang==='zh'?'减速':'Slower','rv-rc-faster':lang==='zh'?'加速':'Faster','rv-rc-sound':lang==='zh'?'切换声音':'Toggle sound','game-slider-handle':lang==='zh'?'回放进度':'Replay timeline'};
   Object.keys(controls).forEach(function(id){var el=document.getElementById(id);if(el){el.setAttribute('aria-label',controls[id]);el.title=controls[id];}});

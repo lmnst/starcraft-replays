@@ -27,6 +27,7 @@ jobs:
       - name: Validate scripts, game archives and replay content
         run: |
           node --check site/app.js
+          node --check site/credits.js
           node --check site/viewer/pilot-bridge.js
           node --check site/viewer/archive-ui.js
           python scripts/build.py

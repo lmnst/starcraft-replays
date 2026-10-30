@@ -17,8 +17,8 @@ function translate(){
  $('progress').setAttribute('aria-label',c.progress);$('viewer').title=c.viewer;
  document.querySelectorAll('[data-library]').forEach(a=>a.href=urlFor());$('all-maps').textContent=c.allMaps;
  document.title=(match?match['title_'+lang]:c.library)+' · Replay Archive';
- if(match){$('title').textContent=match['title_'+lang];$('meta').textContent=`${match.map} / ${match.player1} vs ${match.player2} / ${c[match.result]||c.unknown}`;$('description').textContent=match['description_'+lang]||c.about;}
- renderCards();renderStatus();$('fullscreen').textContent=document.fullscreenElement?c.exitFullscreen:c.fullscreen;$('catalog-message').textContent=c.catalogError;
+ if(match){$('title').textContent=match['title_'+lang];$('meta').textContent=`${match.map} / ${match.player1} ${lang==='zh'?'对阵':'vs'} ${match.player2} / ${(c[match.result]||c.unknown).replace('BASELINE',match.player1.toUpperCase())}`;$('description').textContent=match['description_'+lang]||c.about;}
+ renderCards();renderStatus();$('fullscreen').textContent=document.fullscreenElement?c.exitFullscreen:c.fullscreen;$('catalog-message').textContent=c.catalogError;document.querySelector('[data-i18n=credits]').href='credits.html'+(lang==='zh'?'?lang=zh':'');
  $('viewer').contentWindow?.postMessage({type:'replay-language',lang},location.origin);
 }
 function renderStatus(){const c=copy[lang];$('status').textContent=state==='download'?`${c.download} · ${mb.toFixed(1)} / 90.3 MB`:(c[state]||c.loading);$('retry').hidden=state!=='error';$('error-detail').textContent=state==='error'?errorDetail:'';}
@@ -29,7 +29,7 @@ function renderCards(){
  filtered.forEach(m=>{
   const a=document.createElement('a');a.className='card';a.href=urlFor(m.id);
   const top=document.createElement('div');top.className='card-top';const name=document.createElement('span');name.className='map-name';name.textContent=m.map;
-  const badge=document.createElement('span');badge.className='badge '+m.result;badge.textContent=c[m.result]||c.unknown;top.append(name,badge);
+  const badge=document.createElement('span');badge.className='badge '+m.result;badge.textContent=(c[m.result]||c.unknown).replace('BASELINE',m.player1.toUpperCase());top.append(name,badge);
   const body=document.createElement('div');body.className='card-body';const h=document.createElement('h2');h.textContent=`${m.player1} vs ${m.player2}`;
   const p=document.createElement('p');p.textContent=`${c.local} / ${m.frames?m.frames.toLocaleString()+(lang==='zh'?' 帧':' frames'):m.id}`;
   const watch=document.createElement('span');watch.className='watch';watch.textContent=c.watch+' →';body.append(h,p,watch);a.append(top,body);$('cards').append(a);
