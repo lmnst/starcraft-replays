@@ -1,0 +1,154 @@
+{
+  "url": "https://lmnst.github.io/starcraft-replays/",
+  "checks": [
+    {
+      "path": "",
+      "status": 200,
+      "bytes": 3031,
+      "sha256": "a9904622729bc324beb2e2953c632ee94d29683daa58330e8407a6067cbfce13"
+    },
+    {
+      "path": "app.js",
+      "status": 200,
+      "bytes": 9812,
+      "sha256": "11b68717b3bcf796e5ef4e99cd931020d4418d1df4f7f66978e5f41a4f5fce05"
+    },
+    {
+      "path": "app.css",
+      "status": 200,
+      "bytes": 5022,
+      "sha256": "3e987c17e8e836def033233e808a6320153124fc8991c1dae6380b6cbd3e3e61"
+    },
+    {
+      "path": "credits.html",
+      "status": 200,
+      "bytes": 2108,
+      "sha256": "744ba48fefaa4dc9f980e7c95c07a806103b773711492b12b4132ba8bc000611"
+    },
+    {
+      "path": "credits.js",
+      "status": 200,
+      "bytes": 781,
+      "sha256": "787a5a0ece3e265cfe062b1562538200c3678bf6db6670cce7d71477bd890cb8"
+    },
+    {
+      "path": "viewer/index.html",
+      "status": 200,
+      "bytes": 117380,
+      "sha256": "050bae2ade913c4fe4d5d49e7c0c90bd19ecf0d2c36c596deae958d8e47e689a"
+    },
+    {
+      "path": "viewer/pilot-bridge.js",
+      "status": 200,
+      "bytes": 5563,
+      "sha256": "dac8e3ba01f1d3cb29b8b13189e66e37d45533b7537fbc303ee50318715767fc"
+    },
+    {
+      "path": "viewer/archive-ui.js",
+      "status": 200,
+      "bytes": 4769,
+      "sha256": "03033efffd3ae38e095e50c624b7b932dc43e3d0911f6d8d46a7bb2230f257d3"
+    },
+    {
+      "path": "viewer/v1.4/openbw.wasm",
+      "status": 200,
+      "bytes": 1685888,
+      "sha256": "56c81ed70f6b3fdc7eab32d4b7d6aed802613a75c8cba2fb7487f9f276d7c543"
+    },
+    {
+      "path": "catalog.json",
+      "status": 200,
+      "bytes": 3963,
+      "sha256": "74a62aff9bec2f20a89fabc773a98fae7b664a23634d8a2d6cabeb6f28aa1191"
+    },
+    {
+      "path": "/replays/01-win-heartbreak.rep?v=a8a1eb173dbac48a2d775e4cf3b67673e98c0ff4a897c413701022d85989bf8b",
+      "status": 200,
+      "bytes": 33190,
+      "sha256": "a8a1eb173dbac48a2d775e4cf3b67673e98c0ff4a897c413701022d85989bf8b"
+    },
+    {
+      "path": "/replays/02-win-benzene.rep?v=8c895db39ea07ac216d2bfe6755d2c6e66f5b07b568d1004a2a24e9ff2a947a9",
+      "status": 200,
+      "bytes": 60532,
+      "sha256": "8c895db39ea07ac216d2bfe6755d2c6e66f5b07b568d1004a2a24e9ff2a947a9"
+    },
+    {
+      "path": "/replays/03-win-destination.rep?v=b93e4b9298135eb6aadb0f3efcb62cf5054a7428d1ffb106c021d6dfab2fcd52",
+      "status": 200,
+      "bytes": 67851,
+      "sha256": "b93e4b9298135eb6aadb0f3efcb62cf5054a7428d1ffb106c021d6dfab2fcd52"
+    },
+    {
+      "path": "/replays/04-loss-heartbreak.rep?v=33906315e6476a3fd414c7da43bc99450ce10e50be785010bfbe365bb5f37e07",
+      "status": 200,
+      "bytes": 143254,
+      "sha256": "33906315e6476a3fd414c7da43bc99450ce10e50be785010bfbe365bb5f37e07"
+    },
+    {
+      "path": "/replays/05-loss-benzene.rep?v=00a40a883da972fe5f24ee47be458b69b9f3a2869cde63566a107d61a6fe2212",
+      "status": 200,
+      "bytes": 145900,
+      "sha256": "00a40a883da972fe5f24ee47be458b69b9f3a2869cde63566a107d61a6fe2212"
+    },
+    {
+      "path": "game-data/StarDat.mpq",
+      "status": 200,
+      "bytes": 66184491,
+      "sha256": "63c53eb726435569fb94ff2aed7a3e2cfd0e9cc803fca752a4f6df6b1ea1100b"
+    },
+    {
+      "path": "game-data/BrooDat.mpq",
+      "status": 200,
+      "bytes": 23519727,
+      "sha256": "5788e4df8cd7a4606d0ec664990ba20b4e0c6b5041dbe3e06c131ca9bdee8f46"
+    },
+    {
+      "path": "game-data/Patch_rt.mpq",
+      "status": 200,
+      "bytes": 636958,
+      "sha256": "285a45f2ede329c14713120de4aad001e7fb82046f149fad11a7f6f40b7ebe71"
+    }
+  ],
+  "revision": "4edf617b8b0bcf63964d4715bbd7f37aaa35dad8",
+  "passed": true,
+  "final_release": {
+    "revision": "947b72326571a498dccc5c6bde0c8f1bd3525cda",
+    "matches": 5,
+    "assets": [
+      {
+        "path": "index.html",
+        "matches_final_source": true,
+        "sha256_normalized": "0f37c4a5846f45d2965f2312f4ac4cd48cc7bf0d6625766024f9a94a27879da4"
+      },
+      {
+        "path": "app.js",
+        "matches_final_source": true,
+        "sha256_normalized": "490abefcf41485065ec62056c9749819f25c87d7b39100df838b852639d84a58"
+      },
+      {
+        "path": "app.css",
+        "matches_final_source": true,
+        "sha256_normalized": "3c0ea1cd9adfcbfd29f80901a5ff352bc4983a5c73a64c1b06ea3427b7eb3917"
+      },
+      {
+        "path": "credits.html",
+        "matches_final_source": true,
+        "sha256_normalized": "744ba48fefaa4dc9f980e7c95c07a806103b773711492b12b4132ba8bc000611"
+      },
+      {
+        "path": "credits.js",
+        "matches_final_source": true,
+        "sha256_normalized": "787a5a0ece3e265cfe062b1562538200c3678bf6db6670cce7d71477bd890cb8"
+      },
+      {
+        "path": "viewer/archive-ui.js",
+        "matches_final_source": true,
+        "sha256_normalized": "03033efffd3ae38e095e50c624b7b932dc43e3d0911f6d8d46a7bb2230f257d3"
+      }
+    ],
+    "unreferenced_pilot_file_status": 404,
+    "workflow": "https://github.com/lmnst/starcraft-replays/actions/runs/41001475004",
+    "workflow_conclusion": "success"
+  }
+}
