@@ -1,0 +1,19 @@
+{
+  "id": "d-a-v6-win",
+  "title_en": "Agnes vs Tier A · Destination",
+  "title_zh": "Agnes 对阵 A 级对手 · Destination",
+  "player1": "Agnes",
+  "player2": "Locutus",
+  "replay_player1": "compat1",
+  "replay_player2": "compat2",
+  "map": "Destination",
+  "map_code": "D",
+  "opponent_tier": "A",
+  "bot_version": "v6",
+  "replay": "/replays/d-a-v6-win.rep",
+  "visible": true,
+  "result": "win",
+  "source_job": "m022",
+  "description_en": "Agnes v6 · Victory against a Tier A opponent. Natural game end; replay verified.",
+  "description_zh": "Agnes v6 · 胜利，对阵 A 级对手。自然终局，回放已验证。"
+}

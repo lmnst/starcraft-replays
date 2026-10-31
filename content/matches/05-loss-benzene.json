@@ -6,7 +6,7 @@
   "player2": "reference-tier-s",
   "map": "Benzene",
   "replay": "/replays/05-loss-benzene.rep",
-  "visible": true,
+  "visible": false,
   "result": "loss",
   "frames": 21889,
   "description_en": "Local Bot test match. Result refers to Agnes; this is not a tournament ranking.",

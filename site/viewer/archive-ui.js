@@ -2,6 +2,7 @@
 (function(){
  var lang=new URLSearchParams(location.search).get('lang')==='zh'?'zh':'en';
  var words={
+ 'Tier D':'D 级对手','Tier C':'C 级对手','Tier B':'B 级对手','Tier A':'A 级对手','Tier S':'S 级对手',
  'SUPPLY':'人口','MINERALS':'矿物','GAS':'瓦斯','WORKERS':'工人','ARMY':'军队','APM':'每分钟操作','Toggle player vision':'切换选手视野',
  'Production':'生产','Army':'军队','Tech':'科技','Research':'研究','Hotkeys':'快捷键','Key':'按键','Description':'说明',
  'No-spoiler mode.':'隐藏剧透。','Double playback speed.':'播放速度加倍。','Halve playback speed.':'播放速度减半。','Pause/unpause.':'暂停 / 继续。',

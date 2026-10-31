@@ -6,7 +6,7 @@
   "player2": "reference-tier-s",
   "map": "Destination",
   "replay": "/replays/03-win-destination.rep",
-  "visible": true,
+  "visible": false,
   "result": "win",
   "frames": 13054,
   "description_en": "Local Bot test match. Result refers to Agnes; this is not a tournament ranking.",

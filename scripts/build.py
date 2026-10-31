@@ -57,6 +57,18 @@ for replay, relative in published_files:
     target = OUT / relative
     target.parent.mkdir(parents=True, exist_ok=True)
     shutil.copyfile(replay, target)
+# A content save must not mix a fresh catalog with a cached, older player UI.
+for page in OUT.rglob('*.html'):
+    def version_asset(match):
+        attribute, url = match.groups()
+        path = url.split('?', 1)[0]
+        asset = page.parent / path
+        if Path(path).suffix not in ('.js', '.css') or not asset.is_file():
+            return match.group(0)
+        digest = hashlib.sha256(asset.read_bytes()).hexdigest()[:12]
+        return f'{attribute}="{path}?v={digest}"'
+    html = page.read_text(encoding='utf-8')
+    page.write_text(re.sub(r'(src|href)="([^"]+)"', version_asset, html), encoding='utf-8')
 catalog = {'matches': records, 'revision': os.environ.get('GITHUB_SHA', 'local'),
            'built_at': datetime.now(timezone.utc).isoformat()}
 (OUT / 'catalog.json').write_text(json.dumps(catalog, ensure_ascii=False, indent=2), encoding='utf-8')

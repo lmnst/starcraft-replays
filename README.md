@@ -4,7 +4,11 @@
 
 管理后台：https://app.pagescms.org/lmnst/starcraft-replays/main/collection/matches
 
-独立于 `starcraft-replay-pilot` 和 `starcraft-replay-viewer`。英文默认，`?lang=zh` 使用中文。固定比赛链接格式：`?match=01-win-heartbreak`。
+独立于 `starcraft-replay-pilot` 和 `starcraft-replay-viewer`。英文默认，`?lang=zh` 使用中文。比赛链接示例：`?match=h-c-v6-win`。
+
+当前精选六场：H / Heartbreak Ridge（C 级，v6 胜 / v3 负）、B / Benzene（B 级，v5 胜 / v3 负）、D / Destination（A 级，v6 胜 / v3 负）。每组固定同一个真实对手；页面和播放器只显示等级，我方统一 Agnes，迭代版本单独标注。旧五场参考 Bot 回放保留记录但已下架。
+
+等级依据：https://starskirmish.com/hillclimb/ 。沿用其对手分组，不宣称本地二进制与官方版本完全相同。选局证据及原始对手名见 `verification/map-pairs-selection.json`；六场均为自然终局，已有完整无界面回放验证和 SHA256。H、D 配对出生侧不同，不用于宣称受控版本提升。
 
 ## 管理比赛
 

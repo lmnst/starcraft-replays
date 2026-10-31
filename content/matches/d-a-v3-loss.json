@@ -1,0 +1,19 @@
+{
+  "id": "d-a-v3-loss",
+  "title_en": "Agnes vs Tier A · Destination",
+  "title_zh": "Agnes 对阵 A 级对手 · Destination",
+  "player1": "Agnes",
+  "player2": "Locutus",
+  "replay_player1": "compat1",
+  "replay_player2": "compat2",
+  "map": "Destination",
+  "map_code": "D",
+  "opponent_tier": "A",
+  "bot_version": "v3",
+  "replay": "/replays/d-a-v3-loss.rep",
+  "visible": true,
+  "result": "loss",
+  "source_job": "m022",
+  "description_en": "Agnes v3 · Defeat against a Tier A opponent. Natural game end; replay verified.",
+  "description_zh": "Agnes v3 · 失败，对阵 A 级对手。自然终局，回放已验证。"
+}

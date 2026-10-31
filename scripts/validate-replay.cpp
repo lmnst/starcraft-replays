@@ -7,6 +7,9 @@
 #include <vector>
 #include <stdexcept>
 using bytes = std::vector<uint8_t>;
+std::string quoted(const uint8_t* data,size_t length){
+ std::string out="\"";for(size_t i=0;i<length&&data[i];++i){auto c=data[i];if(c=='"'||c=='\\'){out+='\\';out+=char(c);}else if(c>=32)out+=char(c);}return out+'"';
+}
 struct Reader {
  const bytes& b; size_t p=0;
  uint32_t u32(){ if(p+4>b.size())throw std::runtime_error("truncated integer");uint32_t v=0;for(int i=0;i<4;++i)v|=uint32_t(b[p++])<<(8*i);return v; }
@@ -39,6 +42,8 @@ int main(int argc,char**argv){
   // covers the entire map, including that trailing data.
   while(m.p+8<=map.size()){auto id=m.u32();auto n=m.u32();if(n>map.size()-m.p)break;if(id==0x204d4944&&n==4)dimensions=true;if(id==0x20524556&&n==2)version=true;m.p+=n;}
   if(!dimensions||!version)throw std::runtime_error("missing CHK dimensions/version");if(r.p!=data.size())throw std::runtime_error("unexpected trailing replay data");
-  std::cout<<"{\"frames\":"<<frames<<",\"structure_valid\":true}"<<std::endl;
+  std::cout<<"{\"frames\":"<<frames<<",\"structure_valid\":true,\"map_name\":"<<quoted(header.data()+97,32)<<",\"players\":[";
+  bool first=true;for(int slot=0;slot<12;++slot){auto offset=161+36*slot;if(!header[offset+11])continue;if(!first)std::cout<<",";first=false;std::cout<<"{\"slot\":"<<slot<<",\"name\":"<<quoted(header.data()+offset+11,25)<<"}";}
+  std::cout<<"]}"<<std::endl;
  }catch(const std::exception&e){std::cerr<<e.what()<<std::endl;return 1;}
 }

@@ -1,0 +1,19 @@
+{
+  "id": "h-c-v6-win",
+  "title_en": "Agnes vs Tier C · Heartbreak Ridge",
+  "title_zh": "Agnes 对阵 C 级对手 · Heartbreak Ridge",
+  "player1": "Agnes",
+  "player2": "PylonPuller",
+  "replay_player1": "compat1",
+  "replay_player2": "compat2",
+  "map": "Heartbreak Ridge",
+  "map_code": "H",
+  "opponent_tier": "C",
+  "bot_version": "v6",
+  "replay": "/replays/h-c-v6-win.rep",
+  "visible": true,
+  "result": "win",
+  "source_job": "m051",
+  "description_en": "Agnes v6 · Victory against a Tier C opponent. Natural game end; replay verified.",
+  "description_zh": "Agnes v6 · 胜利，对阵 C 级对手。自然终局，回放已验证。"
+}

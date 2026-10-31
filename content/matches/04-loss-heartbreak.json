@@ -6,7 +6,7 @@
   "player2": "reference-tier-s",
   "map": "Heartbreak Ridge",
   "replay": "/replays/04-loss-heartbreak.rep",
-  "visible": true,
+  "visible": false,
   "result": "loss",
   "frames": 21734,
   "description_en": "Local Bot test match. Result refers to Agnes; this is not a tournament ranking.",

@@ -1,0 +1,390 @@
+{
+  "tier_source": "https://starskirmish.com/hillclimb/",
+  "selection_policy": "Three maps, same opponent within each pair, one verified natural win and one verified natural loss; display opponent tier only. Not a controlled proof of version improvement.",
+  "matches": [
+    {
+      "id": "h-c-v6-win",
+      "map_code": "H",
+      "opponent_tier": "C",
+      "bot_version": "v6",
+      "job_id": "m051",
+      "map": "HeartbreakRidge",
+      "internal_opponent": "PylonPuller",
+      "result": "win",
+      "run_id": "20261031T131835-757091-ast34-v6-w14",
+      "requested_seed": 8613102,
+      "starts": [
+        [
+          {
+            "event": "start",
+            "map_hash": "fe25d8b79495870ac1981c2dfee9368f543321e3",
+            "actual_seed": 1611796807,
+            "requested_seed": 8613102,
+            "start": [
+              7,
+              37
+            ],
+            "race": "Protoss",
+            "cap": 86400
+          }
+        ],
+        [
+          {
+            "event": "start",
+            "map_hash": "fe25d8b79495870ac1981c2dfee9368f543321e3",
+            "actual_seed": 1611796807,
+            "requested_seed": 8613102,
+            "start": [
+              117,
+              56
+            ],
+            "race": "Protoss",
+            "cap": 86400
+          }
+        ]
+      ],
+      "frames": 19626,
+      "replay_sha256": "ae0a716627204aff6a9cb451f6504feceb6ae4407c806a8548c981460d66f381",
+      "replay_bytes": 143116,
+      "candidate_sha256": "8a555ff516f444ef37c843db330ac5fa3bff483d93863de8e9ad75cb09ab1a44",
+      "headless_replay_check": {
+        "side": 1,
+        "passed": true,
+        "exit_code": 0,
+        "events": [
+          {
+            "event": "replay_start",
+            "is_replay": true,
+            "expected_frames": 19625
+          },
+          {
+            "event": "replay_end",
+            "frames": 19627
+          }
+        ],
+        "sha256": "ae0a716627204aff6a9cb451f6504feceb6ae4407c806a8548c981460d66f381"
+      },
+      "natural_end": true
+    },
+    {
+      "id": "h-c-v3-loss",
+      "map_code": "H",
+      "opponent_tier": "C",
+      "bot_version": "v3",
+      "job_id": "m051",
+      "map": "HeartbreakRidge",
+      "internal_opponent": "PylonPuller",
+      "result": "loss",
+      "run_id": "20261031T114349-731396-ast34-v3-w16",
+      "requested_seed": 8613102,
+      "starts": [
+        [
+          {
+            "event": "start",
+            "map_hash": "fe25d8b79495870ac1981c2dfee9368f543321e3",
+            "actual_seed": 1611796807,
+            "requested_seed": 8613102,
+            "start": [
+              117,
+              56
+            ],
+            "race": "Protoss",
+            "cap": 86400
+          }
+        ],
+        [
+          {
+            "event": "start",
+            "map_hash": "fe25d8b79495870ac1981c2dfee9368f543321e3",
+            "actual_seed": 1611796807,
+            "requested_seed": 8613102,
+            "start": [
+              7,
+              37
+            ],
+            "race": "Protoss",
+            "cap": 86400
+          }
+        ]
+      ],
+      "frames": 18324,
+      "replay_sha256": "5dcc3b695b441f01a1c432da1519ae0c499f70ad8f6062eb37a19377b1f8120d",
+      "replay_bytes": 128610,
+      "candidate_sha256": "e60e307cfab9a0607c0d70ad1baee3b717d062b19363f82700aa17d40b5bc33b",
+      "headless_replay_check": {
+        "side": 1,
+        "passed": true,
+        "exit_code": 0,
+        "events": [
+          {
+            "event": "replay_start",
+            "is_replay": true,
+            "expected_frames": 18323
+          },
+          {
+            "event": "replay_end",
+            "frames": 18325
+          }
+        ],
+        "sha256": "5dcc3b695b441f01a1c432da1519ae0c499f70ad8f6062eb37a19377b1f8120d"
+      },
+      "natural_end": true
+    },
+    {
+      "id": "b-b-v5-win",
+      "map_code": "B",
+      "opponent_tier": "B",
+      "bot_version": "v5",
+      "job_id": "m031",
+      "map": "Benzene",
+      "internal_opponent": "Steamhammer",
+      "result": "win",
+      "run_id": "20261031T124806-913164-ast34-v5-w15",
+      "requested_seed": 8613102,
+      "starts": [
+        [
+          {
+            "event": "start",
+            "map_hash": "5fba62687ba00c8868fdd64c7869c4005a142772",
+            "actual_seed": 1611796807,
+            "requested_seed": 8613102,
+            "start": [
+              117,
+              13
+            ],
+            "race": "Protoss",
+            "cap": 86400
+          }
+        ],
+        [
+          {
+            "event": "start",
+            "map_hash": "5fba62687ba00c8868fdd64c7869c4005a142772",
+            "actual_seed": 1611796807,
+            "requested_seed": 8613102,
+            "start": [
+              7,
+              96
+            ],
+            "race": "Protoss",
+            "cap": 86400
+          }
+        ]
+      ],
+      "frames": 12961,
+      "replay_sha256": "a160a5a2c3f18c0f165818a950e05fb4f6c7c61fcb99eb19fc71a834b4f7f591",
+      "replay_bytes": 81333,
+      "candidate_sha256": "fbf9442b4ce0c526593cc1f9687f873e4a6bd6f6a654dcab7249deadfcd469c1",
+      "headless_replay_check": {
+        "side": 1,
+        "passed": true,
+        "exit_code": 0,
+        "events": [
+          {
+            "event": "replay_start",
+            "is_replay": true,
+            "expected_frames": 12960
+          },
+          {
+            "event": "replay_end",
+            "frames": 12962
+          }
+        ],
+        "sha256": "a160a5a2c3f18c0f165818a950e05fb4f6c7c61fcb99eb19fc71a834b4f7f591"
+      },
+      "natural_end": true
+    },
+    {
+      "id": "b-b-v3-loss",
+      "map_code": "B",
+      "opponent_tier": "B",
+      "bot_version": "v3",
+      "job_id": "m031",
+      "map": "Benzene",
+      "internal_opponent": "Steamhammer",
+      "result": "loss",
+      "run_id": "20261031T114122-930611-ast34-v3-w13",
+      "requested_seed": 8613102,
+      "starts": [
+        [
+          {
+            "event": "start",
+            "map_hash": "5fba62687ba00c8868fdd64c7869c4005a142772",
+            "actual_seed": 1611796807,
+            "requested_seed": 8613102,
+            "start": [
+              117,
+              13
+            ],
+            "race": "Protoss",
+            "cap": 86400
+          }
+        ],
+        [
+          {
+            "event": "start",
+            "map_hash": "5fba62687ba00c8868fdd64c7869c4005a142772",
+            "actual_seed": 1611796807,
+            "requested_seed": 8613102,
+            "start": [
+              7,
+              96
+            ],
+            "race": "Protoss",
+            "cap": 86400
+          }
+        ]
+      ],
+      "frames": 46782,
+      "replay_sha256": "1dbc04ecd09920aeef9da971d0487e272e54d305bd04b8b42b63aef4b0ba1881",
+      "replay_bytes": 591543,
+      "candidate_sha256": "e60e307cfab9a0607c0d70ad1baee3b717d062b19363f82700aa17d40b5bc33b",
+      "headless_replay_check": {
+        "side": 1,
+        "passed": true,
+        "exit_code": 0,
+        "events": [
+          {
+            "event": "replay_start",
+            "is_replay": true,
+            "expected_frames": 46781
+          },
+          {
+            "event": "replay_end",
+            "frames": 46783
+          }
+        ],
+        "sha256": "1dbc04ecd09920aeef9da971d0487e272e54d305bd04b8b42b63aef4b0ba1881"
+      },
+      "natural_end": true
+    },
+    {
+      "id": "d-a-v6-win",
+      "map_code": "D",
+      "opponent_tier": "A",
+      "bot_version": "v6",
+      "job_id": "m022",
+      "map": "Destination",
+      "internal_opponent": "Locutus",
+      "result": "win",
+      "run_id": "20261031T131458-809868-ast34-v6-w02",
+      "requested_seed": 8613101,
+      "starts": [
+        [
+          {
+            "event": "start",
+            "map_hash": "e39c1c81740a97a733d227e238bd11df734eaf96",
+            "actual_seed": 1589101330,
+            "requested_seed": 8613101,
+            "start": [
+              64,
+              118
+            ],
+            "race": "Protoss",
+            "cap": 86400
+          }
+        ],
+        [
+          {
+            "event": "start",
+            "map_hash": "e39c1c81740a97a733d227e238bd11df734eaf96",
+            "actual_seed": 1589101330,
+            "requested_seed": 8613101,
+            "start": [
+              31,
+              7
+            ],
+            "race": "Protoss",
+            "cap": 86400
+          }
+        ]
+      ],
+      "frames": 22726,
+      "replay_sha256": "9985e35e59d99d2942218cdf5eff8cdf03ccd2965ab4e7a6f84cb067bd4dad7a",
+      "replay_bytes": 233481,
+      "candidate_sha256": "8a555ff516f444ef37c843db330ac5fa3bff483d93863de8e9ad75cb09ab1a44",
+      "headless_replay_check": {
+        "side": 1,
+        "passed": true,
+        "exit_code": 0,
+        "events": [
+          {
+            "event": "replay_start",
+            "is_replay": true,
+            "expected_frames": 22725
+          },
+          {
+            "event": "replay_end",
+            "frames": 22727
+          }
+        ],
+        "sha256": "9985e35e59d99d2942218cdf5eff8cdf03ccd2965ab4e7a6f84cb067bd4dad7a"
+      },
+      "natural_end": true
+    },
+    {
+      "id": "d-a-v3-loss",
+      "map_code": "D",
+      "opponent_tier": "A",
+      "bot_version": "v3",
+      "job_id": "m022",
+      "map": "Destination",
+      "internal_opponent": "Locutus",
+      "result": "loss",
+      "run_id": "20261031T114046-884838-ast34-v3-w05",
+      "requested_seed": 8613101,
+      "starts": [
+        [
+          {
+            "event": "start",
+            "map_hash": "e39c1c81740a97a733d227e238bd11df734eaf96",
+            "actual_seed": 1589101330,
+            "requested_seed": 8613101,
+            "start": [
+              31,
+              7
+            ],
+            "race": "Protoss",
+            "cap": 86400
+          }
+        ],
+        [
+          {
+            "event": "start",
+            "map_hash": "e39c1c81740a97a733d227e238bd11df734eaf96",
+            "actual_seed": 1589101330,
+            "requested_seed": 8613101,
+            "start": [
+              64,
+              118
+            ],
+            "race": "Protoss",
+            "cap": 86400
+          }
+        ]
+      ],
+      "frames": 12682,
+      "replay_sha256": "b42c0122c6129d871ac8d254a4c1543617da3338563c7593fc0c6e9ebd0dedb4",
+      "replay_bytes": 140558,
+      "candidate_sha256": "e60e307cfab9a0607c0d70ad1baee3b717d062b19363f82700aa17d40b5bc33b",
+      "headless_replay_check": {
+        "side": 1,
+        "passed": true,
+        "exit_code": 0,
+        "events": [
+          {
+            "event": "replay_start",
+            "is_replay": true,
+            "expected_frames": 12681
+          },
+          {
+            "event": "replay_end",
+            "frames": 12683
+          }
+        ],
+        "sha256": "b42c0122c6129d871ac8d254a4c1543617da3338563c7593fc0c6e9ebd0dedb4"
+      },
+      "natural_end": true
+    }
+  ]
+}

@@ -21,6 +21,7 @@ class ContentTests(unittest.TestCase):
             (self.root / folder).mkdir(parents=True)
         shutil.copyfile(ROOT / 'scripts/build.py', self.root / 'scripts/build.py')
         self.record = json.loads((ROOT / 'content/matches/01-win-heartbreak.json').read_text())
+        self.record['visible'] = True
         shutil.copyfile(ROOT / 'site/replays/01-win-heartbreak.rep', self.root / 'site/replays/01-win-heartbreak.rep')
         manifest = {'files': {}}
         for name in ('StarDat.mpq','BrooDat.mpq','Patch_rt.mpq'):

@@ -33,9 +33,20 @@ content:
         type: string
         required: true
       - name: player2
-        label: Player / bot 2
+        label: Opponent name (internal record only)
         type: string
         required: true
+      - name: opponent_tier
+        label: Opponent tier shown on website
+        type: select
+        options:
+          values: [D, C, B, A, S]
+      - name: bot_version
+        label: Agnes iteration (e.g. v6)
+        type: string
+      - name: map_code
+        label: Map code (H, B or D)
+        type: string
       - name: replay_player1
         label: Original replay nickname for bot 1
         type: string
@@ -43,7 +54,7 @@ content:
       - name: replay_player2
         label: Original replay nickname for bot 2
         type: string
-        description: 'Exact nickname stored in the replay, e.g. player2. Displayed as Player / bot 2 above.'
+        description: 'Exact nickname stored in the replay, e.g. compat2. Displayed using the opponent tier, not the internal bot name.'
       - name: map
         label: Map
         type: string

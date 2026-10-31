@@ -1,0 +1,19 @@
+{
+  "id": "b-b-v5-win",
+  "title_en": "Agnes vs Tier B · Benzene",
+  "title_zh": "Agnes 对阵 B 级对手 · Benzene",
+  "player1": "Agnes",
+  "player2": "Steamhammer",
+  "replay_player1": "compat1",
+  "replay_player2": "compat2",
+  "map": "Benzene",
+  "map_code": "B",
+  "opponent_tier": "B",
+  "bot_version": "v5",
+  "replay": "/replays/b-b-v5-win.rep",
+  "visible": true,
+  "result": "win",
+  "source_job": "m031",
+  "description_en": "Agnes v5 · Victory against a Tier B opponent. Natural game end; replay verified.",
+  "description_zh": "Agnes v5 · 胜利，对阵 B 级对手。自然终局，回放已验证。"
+}
