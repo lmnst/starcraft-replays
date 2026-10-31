@@ -1,5 +1,17 @@
 /* Public archive integration, derived from the verified pilot bridge. */
 (function () {
+  // Match replay nicknames, not display row order: OpenBW can sort players.
+  var query = new URLSearchParams(location.search);
+  var playerNames = new Map();
+  [1, 2].forEach(function(index) {
+    var replayName = query.get('nick' + index);
+    var displayName = query.get('name' + index);
+    if (replayName && displayName) playerNames.set(replayName, displayName);
+  });
+  var originalSetNick = set_nick;
+  set_nick = function(player, nick) {
+    originalSetNick(player, playerNames.get(nick) || nick);
+  };
   function notify(state, extra) {
     parent.postMessage(Object.assign({type:'pilot-status',state:state},extra || {}), location.origin);
   }

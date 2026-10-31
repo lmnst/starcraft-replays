@@ -1,14 +1,16 @@
 {
   "id": "05-loss-benzene",
-  "title_en": "Baseline vs reference-tier-s · Benzene",
-  "title_zh": "Baseline 对阵 reference-tier-s · Benzene",
-  "player1": "baseline",
+  "title_en": "Agnes vs reference-tier-s · Benzene",
+  "title_zh": "Agnes 对阵 reference-tier-s · Benzene",
+  "player1": "Agnes",
   "player2": "reference-tier-s",
   "map": "Benzene",
   "replay": "/replays/05-loss-benzene.rep",
   "visible": true,
   "result": "loss",
   "frames": 21889,
-  "description_en": "Local Bot test match. Result refers to baseline; this is not a tournament ranking.",
-  "description_zh": "本地 Bot 测试对局。胜负以 baseline 为准，不代表正式赛事或榜单成绩。"
+  "description_en": "Local Bot test match. Result refers to Agnes; this is not a tournament ranking.",
+  "description_zh": "本地 Bot 测试对局。胜负以 Agnes 为准，不代表正式赛事或榜单成绩。",
+  "replay_player1": "player1",
+  "replay_player2": "player2"
 }

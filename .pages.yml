@@ -36,6 +36,14 @@ content:
         label: Player / bot 2
         type: string
         required: true
+      - name: replay_player1
+        label: Original replay nickname for bot 1
+        type: string
+        description: 'Exact nickname stored in the replay, e.g. player1. Displayed as Player / bot 1 above.'
+      - name: replay_player2
+        label: Original replay nickname for bot 2
+        type: string
+        description: 'Exact nickname stored in the replay, e.g. player2. Displayed as Player / bot 2 above.'
       - name: map
         label: Map
         type: string

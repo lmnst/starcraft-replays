@@ -2089,7 +2089,7 @@ function set_color(player, color) {
 function set_nick(player, nick) {
 	var element = document.getElementById("nick" + player);
 	element.dataset.fullName = nick;
-	element.innerHTML = nick;
+	element.textContent = nick;
 	refresh_infobar_names();
 }
 
@@ -2106,7 +2106,7 @@ function refresh_infobar_names() {
 	for (var i = 1; i <= 8; ++i) {
 		var nickElement = document.getElementById("nick" + i);
 		if (nickElement && nickElement.dataset.fullName) {
-			nickElement.innerHTML = abbreviate ? abbreviate_name(nickElement.dataset.fullName) : nickElement.dataset.fullName;
+			nickElement.textContent = abbreviate ? abbreviate_name(nickElement.dataset.fullName) : nickElement.dataset.fullName;
 		}
 	}
 	var map1 = document.getElementById("map1");
