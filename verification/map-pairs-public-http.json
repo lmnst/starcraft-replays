@@ -1,0 +1,55 @@
+{
+  "revision": "e613b9d2e01bb845a81863a4170b677438981b28",
+  "url": "https://lmnst.github.io/starcraft-replays/",
+  "checks": [
+    {
+      "id": "b-b-v3-loss",
+      "status": 200,
+      "sha256": "1dbc04ecd09920aeef9da971d0487e272e54d305bd04b8b42b63aef4b0ba1881",
+      "version": "v3",
+      "result": "loss",
+      "tier": "B"
+    },
+    {
+      "id": "b-b-v5-win",
+      "status": 200,
+      "sha256": "a160a5a2c3f18c0f165818a950e05fb4f6c7c61fcb99eb19fc71a834b4f7f591",
+      "version": "v5",
+      "result": "win",
+      "tier": "B"
+    },
+    {
+      "id": "d-a-v3-loss",
+      "status": 200,
+      "sha256": "b42c0122c6129d871ac8d254a4c1543617da3338563c7593fc0c6e9ebd0dedb4",
+      "version": "v3",
+      "result": "loss",
+      "tier": "A"
+    },
+    {
+      "id": "d-a-v6-win",
+      "status": 200,
+      "sha256": "9985e35e59d99d2942218cdf5eff8cdf03ccd2965ab4e7a6f84cb067bd4dad7a",
+      "version": "v6",
+      "result": "win",
+      "tier": "A"
+    },
+    {
+      "id": "h-c-v3-loss",
+      "status": 200,
+      "sha256": "5dcc3b695b441f01a1c432da1519ae0c499f70ad8f6062eb37a19377b1f8120d",
+      "version": "v3",
+      "result": "loss",
+      "tier": "C"
+    },
+    {
+      "id": "h-c-v6-win",
+      "status": 200,
+      "sha256": "ae0a716627204aff6a9cb451f6504feceb6ae4407c806a8548c981460d66f381",
+      "version": "v6",
+      "result": "win",
+      "tier": "C"
+    }
+  ],
+  "passed": true
+}
