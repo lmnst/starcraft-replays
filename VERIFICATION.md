@@ -1,5 +1,14 @@
 # 正式版第一轮验收记录
 
+## 2026-10-31：首页精简与 Bot 名称
+
+- 删除首页的 eyebrow、口号及介绍三段内容，筛选和比赛列表直接置顶。
+- 按用户指定将我方显示名称统一为 Agnes。对手仍为项目记录核实的 `reference-tier-d` / `reference-tier-s`。
+- `scripts/run-games.py` 将 candidate 命名为回放内的 `player1`，opponent 命名为 `player2`；按原始昵称映射显示名，不按播放器行号判断，避免引擎排序颠倒双方身份。原始 `.rep` 不变。
+- 本机浏览器实际加载 Benzene，统计栏显示 `reference-tier-s` 和 `Agnes`；切换中文后保持名称和当前比赛，计时从 00:13 前进到 00:30。首页列表显示五场 Agnes 对局，原首页介绍区已消失。
+- JavaScript 语法、双方行序颠倒的名称映射检查和原有六项回归通过。此项不替代下文仍待完成的 CMS、手机和跨浏览器验收。
+- 已部署 `453c272`，Actions：https://github.com/lmnst/starcraft-replays/actions/runs/41176729513 。公开首页实测直接显示筛选与五场 Agnes 对局；公开 Heartbreak 回放自动载入，播放器统计栏显示 `Agnes` 与 `reference-tier-d`，计时到达 00:07。
+
 日期：2026-10-30（Asia/Shanghai）。**已上线，完整验收尚未完成。**
 
 ## 隔离及发布
