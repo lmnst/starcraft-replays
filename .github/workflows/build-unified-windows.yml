@@ -27,7 +27,7 @@ jobs:
         shell: cmd
         run: |
           call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" x86
-          cmake -S bwapi -B native -G Ninja -DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=clang-cl -DCMAKE_CXX_COMPILER_TARGET=i686-pc-windows-msvc -DCMAKE_CXX_FLAGS="/DWIN32 /DNOMINMAX /FIcstdint -I%CD%/engine/deps/asio" -DOPENBW_ENABLE_UI=OFF -DOPENBW_DIR="%CD%/engine"
+          cmake -S bwapi -B native -G Ninja -DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DCMAKE_BUILD_TYPE=Release -DCMAKE_C_COMPILER=clang-cl -DCMAKE_C_COMPILER_TARGET=i686-pc-windows-msvc -DCMAKE_CXX_COMPILER=clang-cl -DCMAKE_CXX_COMPILER_TARGET=i686-pc-windows-msvc -DCMAKE_CXX_FLAGS="/DWIN32 /DNOMINMAX /FIcstdint -I%CD%/engine/deps/asio" -DOPENBW_ENABLE_UI=OFF -DOPENBW_DIR="%CD%/engine"
           if errorlevel 1 exit /b %errorlevel%
           cmake --build native --target OpenBWData BWAPILauncher --parallel 4
           if errorlevel 1 exit /b %errorlevel%
