@@ -1,0 +1,37 @@
+name: Build unified Windows engine
+on:
+  push:
+    branches: [unified-engine-20261101]
+    paths: ['.github/workflows/build-unified-windows.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  windows:
+    runs-on: windows-2022
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: scripts/unified
+      - name: Get the same pinned simulation sources
+        shell: bash
+        run: |
+          git clone https://github.com/OpenBW/openbw.git engine
+          git -C engine checkout 4b046d5f65302b10cb0a745f0fecd37ec85b20a8
+          git clone https://github.com/OpenBW/bwapi.git bwapi
+          git -C bwapi checkout 48124ba8ed1b4d52b3dfd52acbaf34afb9a37fe2
+          python scripts/unified/prepare_engine.py engine
+          python -c 'from pathlib import Path;p=Path("bwapi/bwapi/OpenBWData/BW/BWData.cpp");p.write_text(p.read_text().replace("throw std::runtime_error(\"ReplayHead_gameSeed_randSeed\");", "return impl->st.lcg_rand_state;"))'
+      - name: Build 32-bit Windows modules using Clang
+        shell: cmd
+        run: |
+          call "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Auxiliary\Build\vcvarsall.bat" x86
+          cmake -S bwapi -B native -G Ninja -DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_COMPILER=clang-cl -DCMAKE_CXX_COMPILER_TARGET=i686-pc-windows-msvc -DCMAKE_CXX_FLAGS="/DWIN32 /DNOMINMAX /FIcstdint -I%CD%/engine/deps/asio" -DOPENBW_ENABLE_UI=OFF -DOPENBW_DIR="%CD%/engine"
+          if errorlevel 1 exit /b %errorlevel%
+          cmake --build native --target OpenBWData BWAPILauncher --parallel 4
+          if errorlevel 1 exit /b %errorlevel%
+      - uses: actions/upload-artifact@v4
+        with:
+          name: unified-windows-clang
+          path: native/bin/*
