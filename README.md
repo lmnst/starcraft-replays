@@ -6,9 +6,11 @@
 
 独立于 `starcraft-replay-pilot` 和 `starcraft-replay-viewer`。英文默认，`?lang=zh` 使用中文。比赛链接示例：`?match=h-c-v6-win`。
 
-当前精选六场：H / Heartbreak Ridge（C 级，v6 胜 / v3 负）、B / Benzene（B 级，v5 胜 / v3 负）、D / Destination（A 级，v6 胜 / v3 负）。每组固定同一个真实对手；页面和播放器只显示等级，我方统一 Agnes，迭代版本单独标注。旧五场参考 Bot 回放保留记录但已下架。
+当前六场保留原始胜负与 bot：H / Heartbreak Ridge（PylonPuller，v6 胜 / v3 负），B / Benzene（Steamhammer，v5 胜 / v3 负），D / Destination（Locutus，v6 胜 / v3 负）。原始回放完整，升级网页播放核心后重新验证，未以补跑败局替换原有胜局。
 
-等级依据：https://starskirmish.com/hillclimb/ 。沿用其对手分组，不宣称本地二进制与官方版本完全相同。选局证据及原始对手名见 `verification/map-pairs-selection.json`；六场均为自然终局，已有完整无界面回放验证和 SHA256。H、D 配对出生侧不同，不用于宣称受控版本提升。
+新 Windows 对战核心、Linux 回放校验器与网页 WASM 使用统一 OpenBW 源码。新对战首场的 22,074 帧已逐帧核对对战、原生回放与网页；时间轴与自由镜头已实测。原始六场保留其自然终局及真实胜负来源，另将实际网页的每帧状态指纹与新原生回放逐帧核对。历史对战没有留存同格式的逐帧指纹，不宣称已将它们每一帧与历史对战重新比较。证据见 `verification/unified/`。
+
+等级沿用 https://starskirmish.com/hillclimb/ 的对手分组，不宣称本地二进制与官方版本完全相同。六场是精选演示，不用于宣称受控的版本提升。构建方式见 `scripts/unified/README.md`。
 
 ## 管理比赛
 

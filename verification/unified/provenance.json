@@ -1,0 +1,32 @@
+{
+  "openbw_revision": "4b046d5f65302b10cb0a745f0fecd37ec85b20a8",
+  "viewer_revision": "bb4b9a3a89b7b1c189bbc3fcaafb5c33a8ca66e8",
+  "windows_build": {
+    "commit": "16e4ba0dc6885703a8d2bb8a30930369a877a869",
+    "url": "https://github.com/lmnst/starcraft-replays/actions/runs/41308176895",
+    "compiler": "clang-cl x86 C++14",
+    "core_sha256": "824a1372df5c7e0c758577cbee2cf553d67ebc7c9fb88a8564b8341eb9b1d69a"
+  },
+  "browser_build": {
+    "commit": "4c7ff81595815b8dba03f6cdaa4168b562e850fd",
+    "url": "https://github.com/lmnst/starcraft-replays/actions/runs/41309390567",
+    "wasm_sha256": "3fc429b76f624031afaad493496916ae7e54208f3da2a12ab67b9090210f3b60",
+    "js_sha256": "e22a05a0be8cd284406e47f90d066f9ae2104f41f601a06a949d2d275b028844"
+  },
+  "bot_policy": "Original server Windows candidate and opponent DLLs; original server BWAPI.dll and launcher; no source-rebuilt opponents.",
+  "instrumentation_difference": "Browser adds per-frame output.flush(); Windows writes the same fingerprint, flushed at exit. Simulation patch is identical.",
+  "pilot_browser": {
+    "passed": true,
+    "comparedFrames": 22074,
+    "expectedFrames": 22074,
+    "finalFrame": 22074,
+    "sha256": "a8af2563477bf8734eb40f12d0890ba6b3256e9e32c561bbd613058c1f5634cf"
+  },
+  "pilot_manual_controls": {
+    "forward_seek": "08:11",
+    "backward_seek": "02:28",
+    "camera": "Minimap click moved camera to opposing base while paused.",
+    "final_frame": 22074
+  },
+  "published_selection": "Original six archived matches; native replay versus actual WASM full-frame traces. Original live per-frame trace unavailable."
+}

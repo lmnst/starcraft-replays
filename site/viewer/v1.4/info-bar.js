@@ -1476,10 +1476,10 @@ function update_player_vision_buttons() {
 		var button = $('#vision' + (i + 1));
 		if (!button.length) continue;
 		if (!main_has_been_called || typeof Module._fog_of_war_player_get_value !== "function" || i >= players.length) {
-			button.hide();
+			button.css('visibility', 'hidden').show();
 			continue;
 		}
-		button.show();
+		button.css('visibility', 'visible').show();
 		button.toggleClass('is-enabled', _fog_of_war_player_get_value(players[i]) !== 0);
 	}
 }

@@ -1,0 +1,128 @@
+{
+  "opponent": "Locutus",
+  "map": "Destination",
+  "exit_codes": [
+    0,
+    0
+  ],
+  "forced_stop_sides": [],
+  "starts": [
+    [
+      {
+        "event": "start",
+        "map_hash": "e39c1c81740a97a733d227e238bd11df734eaf96",
+        "actual_seed": 1589101330,
+        "requested_seed": 8613101,
+        "start": [
+          31,
+          7
+        ],
+        "race": "Protoss",
+        "cap": 86400
+      }
+    ],
+    [
+      {
+        "event": "start",
+        "map_hash": "e39c1c81740a97a733d227e238bd11df734eaf96",
+        "actual_seed": 1589101330,
+        "requested_seed": 8613101,
+        "start": [
+          64,
+          118
+        ],
+        "race": "Protoss",
+        "cap": 86400
+      }
+    ]
+  ],
+  "ends": [
+    [
+      {
+        "event": "end",
+        "frame": 12682,
+        "winner": false,
+        "kills": 1400,
+        "razings": 0,
+        "score": 1400
+      }
+    ],
+    [
+      {
+        "event": "end",
+        "frame": 12713,
+        "winner": true,
+        "kills": 11100,
+        "razings": 3300,
+        "score": 14400
+      }
+    ]
+  ],
+  "caps": [
+    [],
+    []
+  ],
+  "issues": [],
+  "passed": true,
+  "outcome": "loss",
+  "requested_seed": 8613101,
+  "candidate_sha256": "e60e307cfab9a0607c0d70ad1baee3b717d062b19363f82700aa17d40b5bc33b",
+  "id": "d-a-v3-loss",
+  "natural_end": true,
+  "replay_sha256": "b42c0122c6129d871ac8d254a4c1543617da3338563c7593fc0c6e9ebd0dedb4",
+  "replay_check": {
+    "frame": 12681,
+    "players": [
+      {
+        "name": "compat1",
+        "minerals": 2030,
+        "gas": 1288,
+        "workers": 21,
+        "army": 10,
+        "supply_used": 82,
+        "supply_total": 82,
+        "units": {
+          "64": 21,
+          "65": 10,
+          "154": 1,
+          "156": 4,
+          "157": 1,
+          "160": 2
+        }
+      },
+      {
+        "name": "compat2",
+        "minerals": 1450,
+        "gas": 1262,
+        "workers": 28,
+        "army": 9,
+        "supply_used": 92,
+        "supply_total": 114,
+        "units": {
+          "64": 28,
+          "65": 1,
+          "66": 8,
+          "154": 2,
+          "156": 7,
+          "157": 2,
+          "160": 2,
+          "164": 1
+        }
+      }
+    ]
+  },
+  "reference": {
+    "frames": 12681,
+    "sha256": "3bcd9bb631454526e8216191dddc66b35be6ddb5f3d622d1ff462badc4a96669"
+  },
+  "validation_mode": "Original archived natural match, full native/WASM replay equivalence",
+  "original_run": "20261031T114046-884838-ast34-v3-w05",
+  "live_per_frame_trace_available": false,
+  "browser_check": {
+    "passed": true,
+    "comparedFrames": 12681,
+    "expectedFrames": 12681,
+    "finalFrame": 12681,
+    "sha256": "3bcd9bb631454526e8216191dddc66b35be6ddb5f3d622d1ff462badc4a96669"
+  }
+}

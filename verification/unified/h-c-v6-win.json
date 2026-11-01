@@ -1,0 +1,121 @@
+{
+  "opponent": "PylonPuller",
+  "map": "HeartbreakRidge",
+  "exit_codes": [
+    0,
+    0
+  ],
+  "forced_stop_sides": [],
+  "starts": [
+    [
+      {
+        "event": "start",
+        "map_hash": "fe25d8b79495870ac1981c2dfee9368f543321e3",
+        "actual_seed": 1611796807,
+        "requested_seed": 8613102,
+        "start": [
+          7,
+          37
+        ],
+        "race": "Protoss",
+        "cap": 86400
+      }
+    ],
+    [
+      {
+        "event": "start",
+        "map_hash": "fe25d8b79495870ac1981c2dfee9368f543321e3",
+        "actual_seed": 1611796807,
+        "requested_seed": 8613102,
+        "start": [
+          117,
+          56
+        ],
+        "race": "Protoss",
+        "cap": 86400
+      }
+    ]
+  ],
+  "ends": [
+    [
+      {
+        "event": "end",
+        "frame": 19626,
+        "winner": true,
+        "kills": 18700,
+        "razings": 3075,
+        "score": 21775
+      }
+    ],
+    [
+      {
+        "event": "end",
+        "frame": 19595,
+        "winner": false,
+        "kills": 5100,
+        "razings": 0,
+        "score": 5100
+      }
+    ]
+  ],
+  "caps": [
+    [],
+    []
+  ],
+  "issues": [],
+  "passed": true,
+  "outcome": "win",
+  "requested_seed": 8613102,
+  "candidate_sha256": "8a555ff516f444ef37c843db330ac5fa3bff483d93863de8e9ad75cb09ab1a44",
+  "id": "h-c-v6-win",
+  "natural_end": true,
+  "replay_sha256": "ae0a716627204aff6a9cb451f6504feceb6ae4407c806a8548c981460d66f381",
+  "replay_check": {
+    "frame": 19625,
+    "players": [
+      {
+        "name": "compat1",
+        "minerals": 2410,
+        "gas": 1690,
+        "workers": 30,
+        "army": 21,
+        "supply_used": 144,
+        "supply_total": 148,
+        "units": {
+          "64": 30,
+          "65": 7,
+          "66": 14,
+          "154": 2,
+          "156": 8,
+          "157": 1,
+          "160": 2,
+          "164": 1
+        }
+      },
+      {
+        "name": "compat2",
+        "minerals": 5004,
+        "gas": 0,
+        "workers": 0,
+        "army": 0,
+        "supply_used": 0,
+        "supply_total": 0,
+        "units": {}
+      }
+    ]
+  },
+  "reference": {
+    "frames": 19625,
+    "sha256": "672d8b9987e7ef6f9bd1d63cca360cb55d1ebdb77e5b6daad581f1d6f43762af"
+  },
+  "validation_mode": "Original archived natural match, full native/WASM replay equivalence",
+  "original_run": "20261031T131835-757091-ast34-v6-w14",
+  "live_per_frame_trace_available": false,
+  "browser_check": {
+    "passed": true,
+    "comparedFrames": 19625,
+    "expectedFrames": 19625,
+    "finalFrame": 19625,
+    "sha256": "672d8b9987e7ef6f9bd1d63cca360cb55d1ebdb77e5b6daad581f1d6f43762af"
+  }
+}

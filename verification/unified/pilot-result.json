@@ -1,0 +1,87 @@
+{
+  "id": "pilot-windows-pylon-04",
+  "opponent": "PylonPuller",
+  "map": "(2)Heartbreak Ridge.scx",
+  "requested_seed": 8613102,
+  "wall_seconds": 113.348,
+  "exit_codes": [
+    0,
+    0
+  ],
+  "forced_stop_sides": [],
+  "ends": [
+    [
+      {
+        "event": "end",
+        "frame": 22075,
+        "winner": false,
+        "kills": 0,
+        "razings": 0,
+        "score": 0
+      }
+    ],
+    [
+      {
+        "event": "end",
+        "frame": 22106,
+        "winner": true,
+        "kills": 0,
+        "razings": 0,
+        "score": 0
+      }
+    ]
+  ],
+  "caps": [
+    [],
+    []
+  ],
+  "replay_check": {
+    "frame": 22074,
+    "players": [
+      {
+        "name": "compat1",
+        "minerals": 23,
+        "gas": 262,
+        "workers": 0,
+        "army": 0,
+        "supply_used": 0,
+        "supply_total": 0,
+        "units": {}
+      },
+      {
+        "name": "compat2",
+        "minerals": 2033,
+        "gas": 1682,
+        "workers": 40,
+        "army": 38,
+        "supply_used": 224,
+        "supply_total": 228,
+        "units": {
+          "64": 40,
+          "66": 34,
+          "83": 1,
+          "85": 3,
+          "154": 2,
+          "155": 1,
+          "156": 13,
+          "157": 2,
+          "160": 3,
+          "164": 1,
+          "167": 1,
+          "171": 1
+        }
+      }
+    ],
+    "compared_frames": 22074,
+    "first_mismatch": null,
+    "peer_first_mismatch": null,
+    "coverage_complete": true
+  },
+  "issues": [],
+  "passed": true,
+  "natural_end": true,
+  "outcome": "loss",
+  "replay_sha256": "466b53cfcda09e86076b62d235a21d8bb139754382a0b2ae4c46dff2fcda2bba",
+  "candidate_sha256": "8a555ff516f444ef37c843db330ac5fa3bff483d93863de8e9ad75cb09ab1a44",
+  "opponent_sha256": "171b0feca4b5bd065d3fb0c1d6c46a4946a1cddb0860cb731384ad3acddf1c52"
+}

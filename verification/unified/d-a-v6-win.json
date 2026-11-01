@@ -1,0 +1,120 @@
+{
+  "opponent": "Locutus",
+  "map": "Destination",
+  "exit_codes": [
+    0,
+    0
+  ],
+  "forced_stop_sides": [],
+  "starts": [
+    [
+      {
+        "event": "start",
+        "map_hash": "e39c1c81740a97a733d227e238bd11df734eaf96",
+        "actual_seed": 1589101330,
+        "requested_seed": 8613101,
+        "start": [
+          64,
+          118
+        ],
+        "race": "Protoss",
+        "cap": 86400
+      }
+    ],
+    [
+      {
+        "event": "start",
+        "map_hash": "e39c1c81740a97a733d227e238bd11df734eaf96",
+        "actual_seed": 1589101330,
+        "requested_seed": 8613101,
+        "start": [
+          31,
+          7
+        ],
+        "race": "Protoss",
+        "cap": 86400
+      }
+    ]
+  ],
+  "ends": [
+    [
+      {
+        "event": "end",
+        "frame": 22726,
+        "winner": true,
+        "kills": 33950,
+        "razings": 5100,
+        "score": 39050
+      }
+    ],
+    [
+      {
+        "event": "end",
+        "frame": 22717,
+        "winner": false,
+        "kills": 5600,
+        "razings": 0,
+        "score": 5600
+      }
+    ]
+  ],
+  "caps": [
+    [],
+    []
+  ],
+  "issues": [],
+  "passed": true,
+  "outcome": "win",
+  "requested_seed": 8613101,
+  "candidate_sha256": "8a555ff516f444ef37c843db330ac5fa3bff483d93863de8e9ad75cb09ab1a44",
+  "id": "d-a-v6-win",
+  "natural_end": true,
+  "replay_sha256": "9985e35e59d99d2942218cdf5eff8cdf03ccd2965ab4e7a6f84cb067bd4dad7a",
+  "replay_check": {
+    "frame": 22725,
+    "players": [
+      {
+        "name": "compat2",
+        "minerals": 4160,
+        "gas": 596,
+        "workers": 0,
+        "army": 0,
+        "supply_used": 0,
+        "supply_total": 0,
+        "units": {}
+      },
+      {
+        "name": "compat1",
+        "minerals": 3446,
+        "gas": 2856,
+        "workers": 30,
+        "army": 26,
+        "supply_used": 164,
+        "supply_total": 212,
+        "units": {
+          "64": 30,
+          "65": 26,
+          "154": 2,
+          "156": 11,
+          "157": 1,
+          "160": 3,
+          "166": 1
+        }
+      }
+    ]
+  },
+  "reference": {
+    "frames": 22725,
+    "sha256": "41686b26bd2146026a25ceb9a517d9020ab520c154fbce92abc4e8ef90d61728"
+  },
+  "validation_mode": "Original archived natural match, full native/WASM replay equivalence",
+  "original_run": "20261031T131458-809868-ast34-v6-w02",
+  "live_per_frame_trace_available": false,
+  "browser_check": {
+    "passed": true,
+    "comparedFrames": 22725,
+    "expectedFrames": 22725,
+    "finalFrame": 22725,
+    "sha256": "41686b26bd2146026a25ceb9a517d9020ab520c154fbce92abc4e8ef90d61728"
+  }
+}

@@ -22,3 +22,7 @@
 上游播放器仓库根目录未提供独立 LICENSE 文件；这里记录来源，不给第三方代码重新声明许可证。公开发布前应核实上游代码与图片的分发许可。
 
 按项目所有者的明确要求，`site/game-data/` 包含从其本地项目复制的 StarCraft 1.16.1 MPQ 数据；来源及 SHA256 见该目录 `manifest.json`。这些游戏资源仍属于相应权利人，不因本项目托管而获得新的开源许可。`site/replays/` 是本项目的对局回放，不代表官方榜单成绩。
+
+## 2026-11-01 统一引擎
+
+网页 WASM 和 Windows 对战核心从 OpenBW `4b046d5f65302b10cb0a745f0fecd37ec85b20a8` 加同一份 `scripts/unified/prepare_engine.py` 补丁构建。浏览器壳保留上述 dgant 提交及本站修改。Windows 核心由 Clang 编译，与服务器原有 BWAPI/launcher 及原 bot DLL 配合；Linux BWAPI 构建参考 https://github.com/OpenBW/bwapi ，固定提交 `48124ba8ed1b4d52b3dfd52acbaf34afb9a37fe2`。构建工作流和逐帧证据保存在仓库中。

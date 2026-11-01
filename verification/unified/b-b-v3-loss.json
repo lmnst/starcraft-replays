@@ -1,0 +1,129 @@
+{
+  "opponent": "Steamhammer",
+  "map": "Benzene",
+  "exit_codes": [
+    0,
+    0
+  ],
+  "forced_stop_sides": [],
+  "starts": [
+    [
+      {
+        "event": "start",
+        "map_hash": "5fba62687ba00c8868fdd64c7869c4005a142772",
+        "actual_seed": 1611796807,
+        "requested_seed": 8613102,
+        "start": [
+          117,
+          13
+        ],
+        "race": "Protoss",
+        "cap": 86400
+      }
+    ],
+    [
+      {
+        "event": "start",
+        "map_hash": "5fba62687ba00c8868fdd64c7869c4005a142772",
+        "actual_seed": 1611796807,
+        "requested_seed": 8613102,
+        "start": [
+          7,
+          96
+        ],
+        "race": "Protoss",
+        "cap": 86400
+      }
+    ]
+  ],
+  "ends": [
+    [
+      {
+        "event": "end",
+        "frame": 46782,
+        "winner": false,
+        "kills": 49700,
+        "razings": 3450,
+        "score": 53150
+      }
+    ],
+    [
+      {
+        "event": "end",
+        "frame": 46813,
+        "winner": true,
+        "kills": 59700,
+        "razings": 9825,
+        "score": 69525
+      }
+    ]
+  ],
+  "caps": [
+    [],
+    []
+  ],
+  "issues": [],
+  "passed": true,
+  "outcome": "loss",
+  "requested_seed": 8613102,
+  "candidate_sha256": "e60e307cfab9a0607c0d70ad1baee3b717d062b19363f82700aa17d40b5bc33b",
+  "id": "b-b-v3-loss",
+  "natural_end": true,
+  "replay_sha256": "1dbc04ecd09920aeef9da971d0487e272e54d305bd04b8b42b63aef4b0ba1881",
+  "replay_check": {
+    "frame": 46781,
+    "players": [
+      {
+        "name": "compat1",
+        "minerals": 7468,
+        "gas": 3008,
+        "workers": 18,
+        "army": 17,
+        "supply_used": 104,
+        "supply_total": 146,
+        "units": {
+          "64": 18,
+          "65": 17,
+          "154": 1,
+          "156": 8,
+          "157": 1,
+          "160": 2,
+          "166": 1
+        }
+      },
+      {
+        "name": "compat2",
+        "minerals": 6870,
+        "gas": 5850,
+        "workers": 26,
+        "army": 16,
+        "supply_used": 116,
+        "supply_total": 116,
+        "units": {
+          "64": 26,
+          "65": 1,
+          "66": 15,
+          "154": 2,
+          "156": 5,
+          "157": 3,
+          "160": 4,
+          "164": 1
+        }
+      }
+    ]
+  },
+  "reference": {
+    "frames": 46781,
+    "sha256": "633b4bf0530934186b646f726d300115b5ac9072d2bb3220e550595ec101f12b"
+  },
+  "validation_mode": "Original archived natural match, full native/WASM replay equivalence",
+  "original_run": "20261031T114122-930611-ast34-v3-w13",
+  "live_per_frame_trace_available": false,
+  "browser_check": {
+    "passed": true,
+    "comparedFrames": 46781,
+    "expectedFrames": 46781,
+    "finalFrame": 46781,
+    "sha256": "633b4bf0530934186b646f726d300115b5ac9072d2bb3220e550595ec101f12b"
+  }
+}
