@@ -27,6 +27,7 @@ if 'void unified_trace_frame()' not in text:
             add(0xffffffffffffffffull);
         }
         output<<std::dec<<st.current_frame<<' '<<std::hex<<std::setw(16)<<std::setfill('0')<<hash<<'\n';
+        output.flush();
     }
 '''
     needle='\tvoid next_frame() {\n\t\t++st.current_frame;\n\t\tprocess_frame();\n\t\tprocess_triggers();\n\t}'
