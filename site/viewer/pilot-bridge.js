@@ -74,7 +74,7 @@
         console.info('Replay Lab game data:',url);
         req.open('GET',url,true);
         req.responseType = 'arraybuffer';
-        req.timeout = 180000;
+        req.timeout = 1800000;
         req.onprogress = function(event){loaded[index]=event.loaded;report();};
         req.onload = function(){
           if(req.status !== 200){reject(new Error(C_MPQ_FILENAMES[index]+': HTTP '+req.status));return;}
