@@ -1,0 +1,76 @@
+{
+  "revision": "9b661f4f78223ee6357246c35472cd171d7da559",
+  "deployment": "https://github.com/lmnst/starcraft-replays/actions/runs/41314795364",
+  "published_matches": 6,
+  "original_wins_preserved": true,
+  "public_bridge_sha256": "336679d083892cdfa17f173a577536c6deec596a96eb60d5e88f551590753a52",
+  "large_download_timeout_seconds": 1800,
+  "artifact_hash_checks": {
+    "revision": "d91be18fde91ba364dc4bd107b4dbdcc33d8ab2a",
+    "catalog_matches": 6,
+    "checks": [
+      {
+        "path": "viewer/v1.4/openbw.wasm",
+        "bytes": 1868441,
+        "sha256": "3fc429b76f624031afaad493496916ae7e54208f3da2a12ab67b9090210f3b60",
+        "passed": true
+      },
+      {
+        "path": "viewer/v1.4/openbw.js",
+        "bytes": 496189,
+        "sha256": "e22a05a0be8cd284406e47f90d066f9ae2104f41f601a06a949d2d275b028844",
+        "passed": true
+      },
+      {
+        "path": "viewer/verify-trace.js",
+        "bytes": 1767,
+        "sha256": "f4110de4848bcf6a37563863f359a00d21a724e038b2ae6640b5de6790257a09",
+        "passed": true
+      },
+      {
+        "path": "app.js",
+        "bytes": 11068,
+        "sha256": "58ce829382fa4b70e663a43bf0d23723d86dd4cf729dfe54fc15445d5eac8d13",
+        "passed": true
+      },
+      {
+        "path": "replays/b-b-v3-loss.rep",
+        "bytes": 591543,
+        "sha256": "1dbc04ecd09920aeef9da971d0487e272e54d305bd04b8b42b63aef4b0ba1881",
+        "passed": true
+      },
+      {
+        "path": "replays/b-b-v5-win.rep",
+        "bytes": 81333,
+        "sha256": "a160a5a2c3f18c0f165818a950e05fb4f6c7c61fcb99eb19fc71a834b4f7f591",
+        "passed": true
+      },
+      {
+        "path": "replays/d-a-v3-loss.rep",
+        "bytes": 140558,
+        "sha256": "b42c0122c6129d871ac8d254a4c1543617da3338563c7593fc0c6e9ebd0dedb4",
+        "passed": true
+      },
+      {
+        "path": "replays/d-a-v6-win.rep",
+        "bytes": 233481,
+        "sha256": "9985e35e59d99d2942218cdf5eff8cdf03ccd2965ab4e7a6f84cb067bd4dad7a",
+        "passed": true
+      },
+      {
+        "path": "replays/h-c-v3-loss.rep",
+        "bytes": 128610,
+        "sha256": "5dcc3b695b441f01a1c432da1519ae0c499f70ad8f6062eb37a19377b1f8120d",
+        "passed": true
+      },
+      {
+        "path": "replays/h-c-v6-win.rep",
+        "bytes": 143116,
+        "sha256": "ae0a716627204aff6a9cb451f6504feceb6ae4407c806a8548c981460d66f381",
+        "passed": true
+      }
+    ],
+    "passed": true
+  },
+  "first_uncached_public_mpq_download": "Not completed on the current slow connection; localhost full playback of all six passed."
+}
