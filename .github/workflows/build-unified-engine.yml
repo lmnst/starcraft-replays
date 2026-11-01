@@ -1,0 +1,41 @@
+name: Build unified replay engine
+on:
+  push:
+    branches: [unified-engine-20261101]
+    paths: ['scripts/unified/**', '.github/workflows/build-unified-engine.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  wasm:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: scripts/unified
+      - name: Get pinned public sources
+        run: |
+          git clone --depth 1 --filter=blob:none --sparse https://github.com/dgant/openbw-replay-viewer.git upstream
+          git -C upstream sparse-checkout set build
+          git -C upstream fetch --depth 1 origin bb4b9a3a89b7b1c189bbc3fcaafb5c33a8ca66e8
+          git -C upstream checkout bb4b9a3a89b7b1c189bbc3fcaafb5c33a8ca66e8
+          git clone --depth 1 https://github.com/OpenBW/openbw.git engine
+          git -C engine fetch --depth 1 origin 4b046d5f65302b10cb0a745f0fecd37ec85b20a8
+          git -C engine checkout 4b046d5f65302b10cb0a745f0fecd37ec85b20a8
+          python scripts/unified/prepare_engine.py engine
+          test ! -e upstream/build/openbw || rmdir upstream/build/openbw
+          cp -a engine upstream/build/openbw
+          cp scripts/unified/build_wasm.sh upstream/build/build_js.sh
+          chmod +x upstream/build/build_js.sh
+      - name: Build the browser engine
+        run: |
+          docker run --rm -v "$PWD/upstream/build:/work" -w /work trzeci/emscripten:sdk-tag-1.38.13-64bit /bin/bash ./build_js.sh
+          mkdir -p engine-artifact
+          cp upstream/build/openbw.js upstream/build/openbw.wasm engine-artifact/
+          printf '%s\n' 'OpenBW: 4b046d5f65302b10cb0a745f0fecd37ec85b20a8' > engine-artifact/source.txt
+          sha256sum engine-artifact/* > engine-artifact/SHA256SUMS
+      - uses: actions/upload-artifact@v4
+        with:
+          name: unified-browser-engine
+          path: engine-artifact
