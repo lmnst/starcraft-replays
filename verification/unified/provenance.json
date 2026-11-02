@@ -2,10 +2,11 @@
   "openbw_revision": "4b046d5f65302b10cb0a745f0fecd37ec85b20a8",
   "viewer_revision": "bb4b9a3a89b7b1c189bbc3fcaafb5c33a8ca66e8",
   "windows_build": {
-    "commit": "16e4ba0dc6885703a8d2bb8a30930369a877a869",
-    "url": "https://github.com/lmnst/starcraft-replays/actions/runs/41308176895",
+    "commit": "ad41c94",
+    "url": "https://github.com/lmnst/starcraft-replays/actions/runs/41389537524",
     "compiler": "clang-cl x86 C++14",
-    "core_sha256": "824a1372df5c7e0c758577cbee2cf553d67ebc7c9fb88a8564b8341eb9b1d69a"
+    "core_sha256": "c67271fd4ab2145c596454427931666c08020abbbf2c6042018883e1ab1b32e0",
+    "patch": "prepare_engine.py: archived VS2017 OpenBWData.dll gas exit offsets"
   },
   "browser_build": {
     "commit": "2047178",
