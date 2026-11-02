@@ -18,7 +18,7 @@
   C_MUSIC_TRACKS_BY_RACE = {0:[],1:[],2:[]};
   var runtimeReady = false;
   Module.locateFile = function (path, prefix) {
-    return prefix + path + (path.endsWith('.wasm') ? '?v=3fc429b76f62' : '');
+    return prefix + path + (path.endsWith('.wasm') ? '?v=0f4f7c9df799' : '');
   };
   var pendingRead = false;
   var runtimeInitialized = Module.onRuntimeInitialized;

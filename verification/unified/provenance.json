@@ -8,10 +8,11 @@
     "core_sha256": "824a1372df5c7e0c758577cbee2cf553d67ebc7c9fb88a8564b8341eb9b1d69a"
   },
   "browser_build": {
-    "commit": "4c7ff81595815b8dba03f6cdaa4168b562e850fd",
-    "url": "https://github.com/lmnst/starcraft-replays/actions/runs/41309390567",
-    "wasm_sha256": "3fc429b76f624031afaad493496916ae7e54208f3da2a12ab67b9090210f3b60",
-    "js_sha256": "e22a05a0be8cd284406e47f90d066f9ae2104f41f601a06a949d2d275b028844"
+    "commit": "2047178",
+    "url": "https://github.com/lmnst/starcraft-replays/actions/runs/41385740957",
+    "wasm_sha256": "0f4f7c9df799c03ee55517d4ba6d56e83e7f911f8cbc2affd13336e51af029ca",
+    "js_sha256": "bccf7b493ca71bb091b74aa5e486a8267c0e35ecda66c8465863d8f5d60f6c34",
+    "patch": "prepare_engine.py: archived VS2017 OpenBWData.dll gas exit offsets"
   },
   "bot_policy": "Original server Windows candidate and opponent DLLs; original server BWAPI.dll and launcher; no source-rebuilt opponents.",
   "instrumentation_difference": "Browser adds per-frame output.flush(); Windows writes the same fingerprint, flushed at exit. Simulation patch is identical.",

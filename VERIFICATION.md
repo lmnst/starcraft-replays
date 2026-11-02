@@ -1,5 +1,25 @@
 # 回放验收记录
 
+## 2026-11-02：六场回放不同步的根因与修复
+
+现象：网页及 dgant 原版播放器播放六场时，长度正确，但没有原对局的交战，最后卡在末帧；h-c-v6-win 只有运营，最后突然判胜。
+
+根因：原始六场在服务器上由 VS2017 x86 编译的 `OpenBWData.dll`（sha256 `a7aa50b8…0918c04`，readiness/stock 版同字节）运行。`find_gas_exit_position` 中 `direction_xy(heading - 64_dir, 32)` 在该编译产物里未把 `heading - 64` 回绕为 8 位方向值；heading 落在 [-128, -65] 时越界读取 `direction_table` 之前的 64 项（`.data` 中的 korean.h 表，无重定位）。Clang、GCC、Emscripten 按正确回绕计算，第一个出气矿的探机落点不同，此后模拟分叉。h-c-v6-win 在第 5078 帧分叉。
+
+`.rep` 只记录操作，所以文件本身没问题，原 DLL 可完整重放。对手被打光的局面只在原 DLL 中出现。在网页引擎中，19,582 帧时对手仍有 19 个农民、5004 矿，随后其 bot 在第 19,594 帧发出退出动作。OpenBW 的 `remove_player` 会把退出方单位全部转为中立，因此"对手单位清零"和"判胜"并不表示战斗发生。
+
+此前 11-01 的"自然播放到终局"和网页/原生指纹一致只证明两个 Clang/GCC 系引擎互相一致，二者都与原对局分叉；该结论作废。`verification/unified/*.json` 中的 `replay_check`、`browser_check` 不再作为正确播放的证据。
+
+修复：`scripts/unified/prepare_engine.py` 在该处使用原 DLL 的这 64 项字节，其余模拟不变。验证：
+
+- 原 DLL + BWAPI 观察模块逐 1200 帧采样，与打补丁的 GCC 原生回放对比：六场全部采样点与终局的矿、农民、建筑一致（b-b-v3-loss 第 33,600 帧农民数差 1、矿相同，下一采样点又一致，判断为 BWAPI 对气矿内探机的计数口径不同）。
+- h-c-v6-win 在原 DLL 中：对手阵亡 116 单位，19,580 帧建筑全毁，19,594 帧退出。
+- `site/validation/*-reference.json` 已按打补丁的原生回放重新生成。
+- 新 WASM（Actions run 41385740957，wasm sha256 `0f4f7c9d…af029ca`）在本机浏览器 `verify=` 模式下六场全部 `passed`，逐帧指纹数与参考相同（19,625 / 18,323 / 12,960 / 46,781 / 22,725 / 12,681）。h-c-v6-win 第 19,582 帧对手 0 农民、0 部队、18 矿，与原 DLL 一致。
+- 本机测试时浏览器面板被隐藏，`requestAnimationFrame` 不触发，因此切到 setTimeout 主循环并直接拖到末帧。未逐场人工观看画面，也未测手机。
+
+未证明的部分：只核对了采样点和终局，不是原 DLL 逐帧全状态比对。若其他处也有同类编译差异而这六场未触发，新回放仍可能分叉。新对局使用的 Windows Clang 核心同样经 `prepare_engine.py` 打补丁，需重新构建后才与网页一致。
+
 ## 2026-11-01：统一对战核心与交互回放
 
 Windows 对战核心、Linux 回放校验器与网页 WASM 固定同一个 OpenBW 提交 `4b046d5f65302b10cb0a745f0fecd37ec85b20a8`，共用模拟补丁。Windows 使用 Clang 编译核心，保留服务器原 BWAPI、launcher、我方及对手 DLL。构建与哈希见 `verification/unified/provenance.json`。
