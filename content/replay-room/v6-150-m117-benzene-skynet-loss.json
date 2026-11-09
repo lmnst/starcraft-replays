@@ -1,0 +1,21 @@
+{
+  "id": "v6-150-m117-benzene-skynet-loss",
+  "title_en": "m117 · v6 vs Skynet · Benzene (loss)",
+  "title_zh": "m117 · v6 对 Skynet · Benzene（负局）",
+  "type": "replay",
+  "file": "/room-media/v6-150-m117-benzene-skynet-loss.rep",
+  "visible": true,
+  "map": "Benzene",
+  "bot_version": "v6",
+  "player1": "v6",
+  "player2": "Skynet",
+  "replay_player1": "compat1",
+  "replay_player2": "compat2",
+  "result": "loss",
+  "description_en": "m117 from the frozen v6 150-game experiment, randomly selected from the loss group for a one-win, three-loss Skynet sample. Original server replay; 12,278 frames. v6 is compat1; Skynet is compat2.",
+  "description_zh": "从 v6 150 局实验中按胜负分组随机抽取的 Skynet 三负一胜样本。m117 为 v6 负局，来自服务器原始回放，共 12,278 帧。v6 对应 compat1，Skynet 对应 compat2。",
+  "source_batch": "v6-150games-20261109T022703Z",
+  "source_match": "m117",
+  "source_replay_sha256": "69683786db98124ebb00ad04616879eaa3c5958213ac9a8bc6aba972b5ae3171",
+  "selection_method": "SystemRandom.sample: 1 verified win from 2 and 3 verified losses from 13; selection fixed before upload"
+}

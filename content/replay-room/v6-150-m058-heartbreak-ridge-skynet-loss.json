@@ -1,0 +1,21 @@
+{
+  "id": "v6-150-m058-heartbreak-ridge-skynet-loss",
+  "title_en": "m058 · v6 vs Skynet · Heartbreak Ridge (loss)",
+  "title_zh": "m058 · v6 对 Skynet · Heartbreak Ridge（负局）",
+  "type": "replay",
+  "file": "/room-media/v6-150-m058-heartbreak-ridge-skynet-loss.rep",
+  "visible": true,
+  "map": "Heartbreak Ridge",
+  "bot_version": "v6",
+  "player1": "v6",
+  "player2": "Skynet",
+  "replay_player1": "compat1",
+  "replay_player2": "compat2",
+  "result": "loss",
+  "description_en": "m058 from the frozen v6 150-game experiment, randomly selected from the loss group for a one-win, three-loss Skynet sample. Original server replay; 13,890 frames. v6 is compat1; Skynet is compat2.",
+  "description_zh": "从 v6 150 局实验中按胜负分组随机抽取的 Skynet 三负一胜样本。m058 为 v6 负局，来自服务器原始回放，共 13,890 帧。v6 对应 compat1，Skynet 对应 compat2。",
+  "source_batch": "v6-150games-20261109T022703Z",
+  "source_match": "m058",
+  "source_replay_sha256": "faa7b25c79926145b439fd9cd43f9ea227abd319b2bacf31d7d498f88bdd9dde",
+  "selection_method": "SystemRandom.sample: 1 verified win from 2 and 3 verified losses from 13; selection fixed before upload"
+}

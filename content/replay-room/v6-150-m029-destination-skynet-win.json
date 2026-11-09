@@ -1,0 +1,21 @@
+{
+  "id": "v6-150-m029-destination-skynet-win",
+  "title_en": "m029 · v6 vs Skynet · Destination (win)",
+  "title_zh": "m029 · v6 对 Skynet · Destination（胜局）",
+  "type": "replay",
+  "file": "/room-media/v6-150-m029-destination-skynet-win.rep",
+  "visible": true,
+  "map": "Destination",
+  "bot_version": "v6",
+  "player1": "v6",
+  "player2": "Skynet",
+  "replay_player1": "compat1",
+  "replay_player2": "compat2",
+  "result": "win",
+  "description_en": "m029 from the frozen v6 150-game experiment, randomly selected from the win group for a one-win, three-loss Skynet sample. Original server replay; 19,532 frames. v6 is compat1; Skynet is compat2.",
+  "description_zh": "从 v6 150 局实验中按胜负分组随机抽取的 Skynet 三负一胜样本。m029 为 v6 胜局，来自服务器原始回放，共 19,532 帧。v6 对应 compat1，Skynet 对应 compat2。",
+  "source_batch": "v6-150games-20261109T022703Z",
+  "source_match": "m029",
+  "source_replay_sha256": "ebe74d0799ef903442dafb89589db3d7b10ec28593d9aa817f4bde6cff375626",
+  "selection_method": "SystemRandom.sample: 1 verified win from 2 and 3 verified losses from 13; selection fixed before upload"
+}

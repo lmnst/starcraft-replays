@@ -65,5 +65,5 @@ roomElement('room-fullscreen').onclick=async()=>{try{if(document.fullscreenEleme
 roomElement('room-exit-fullscreen').onclick=()=>document.exitFullscreen();document.addEventListener('fullscreenchange',()=>{roomElement('room-fullscreen').textContent=roomCopy[roomLang][document.fullscreenElement?'exitFullscreen':'fullscreen'];});
 roomElement('room-video').addEventListener('loadedmetadata',()=>{roomState='videoReady';roomRenderStatus();});roomElement('room-video').addEventListener('error',()=>{if(roomItem?.type==='video'){roomState='error';roomError=roomCopy[roomLang].error;roomRenderStatus();}});
 window.addEventListener('message',event=>{if(roomItem?.type!=='replay'||event.source!==roomElement('room-viewer').contentWindow||event.origin!==location.origin||event.data?.type!=='pilot-status')return;roomState=event.data.state;roomError=event.data.message||'';roomRenderStatus();});
-if(['PylonPuller','Steamhammer'].includes(roomParams.get('opponent')))roomElement('room-opponent').value=roomParams.get('opponent');
+if(['PylonPuller','Steamhammer','Skynet'].includes(roomParams.get('opponent')))roomElement('room-opponent').value=roomParams.get('opponent');
 roomBoot();
