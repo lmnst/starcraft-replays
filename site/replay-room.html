@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+ <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+ <meta name="description" content="A separate room for StarCraft test replays and match videos.">
+ <title>Replay room · Replay Archive</title><link rel="icon" href="data:,">
+ <link rel="stylesheet" href="app.css"><link rel="stylesheet" href="replay-room.css">
+ <script src="replay-room.js" defer></script>
+</head>
+<body>
+<a href="#main" class="skip" data-i18n="skip">Skip to content</a>
+<header><a class="brand" href="./" data-library>REPLAY ARCHIVE<span>STARCRAFT / BROOD WAR</span></a><nav><a href="./" data-library data-i18n="library">Match library</a><a class="button" href="replay-room.html" data-room aria-current="page" data-i18n="room">Replay room</a><button id="language">中文</button></nav></header>
+<main id="main">
+ <section id="room-library">
+  <div class="room-heading"><div><p class="room-eyebrow" data-i18n="eyebrow">WATCH / EXPLORE / REVIEW</p><h1 data-i18n="room">Replay room</h1><p class="room-intro" data-i18n="intro">A place for test matches, interesting moments, and a closer look at how the bots play.</p></div><span class="room-tag" data-i18n="tag">MATCH NOTES IN MOTION</span></div>
+  <div class="filters"><label><span data-i18n="searchLabel">Find a replay</span><input id="room-search" type="search" autocomplete="off"></label><label><span data-i18n="formatLabel">Format</span><select id="room-format"><option value="" data-i18n="allFormats">All formats</option><option value="replay" data-i18n="interactive">Interactive replay</option><option value="video" data-i18n="video">Video</option></select></label><button id="room-reset" data-i18n="reset">Clear filters</button></div>
+  <p id="room-count" role="status"></p><div id="room-cards" class="cards"></div>
+  <div id="room-empty" class="room-empty" hidden><span class="room-play" aria-hidden="true">▷</span><h2 data-i18n="emptyTitle">The room is ready.</h2><p data-i18n="emptyText">New replays and videos will appear here. Choose one to watch when it arrives.</p></div>
+  <p id="room-no-results" class="empty" data-i18n="noResults" hidden>No matching replays. Try another search.</p>
+  <div class="context"><div><h2 data-i18n="replayTitle">Explore the match</h2><p data-i18n="replayHelp">Interactive replays keep the game sound, free camera, playback speed, and timeline controls.</p></div><div><h2 data-i18n="videoTitle">Watch a video</h2><p data-i18n="videoHelp">Videos play directly, with pause, seeking, volume, and fullscreen controls.</p></div></div>
+ </section>
+ <section id="room-detail" hidden>
+  <a class="back" href="replay-room.html" id="room-back" data-i18n="back">← Replay room</a>
+  <h1 id="room-title"></h1><p id="room-meta"></p><p id="room-description"></p>
+  <div class="player-toolbar"><span id="room-status" role="status"></span><button id="room-retry" hidden data-i18n="retry">Retry</button><button id="room-fullscreen" data-i18n="fullscreen">Fullscreen</button></div>
+  <p id="room-playback-error" class="error" hidden></p>
+  <div id="room-screen"><button id="room-exit-fullscreen" data-i18n="exitFullscreen">Exit fullscreen</button><iframe id="room-viewer" title="Interactive replay player" allow="autoplay; fullscreen" allowfullscreen hidden></iframe><video id="room-video" controls playsinline preload="metadata" hidden></video></div>
+  <p id="room-playback-help"></p>
+ </section>
+ <section id="room-missing" class="empty" hidden><h1 data-i18n="missing">Replay unavailable</h1><p data-i18n="missingHelp">Return to the room and choose another match.</p><a class="button" href="replay-room.html" data-room data-i18n="back">← Replay room</a></section>
+ <section id="room-error" class="empty" role="alert" hidden><h2 data-i18n="loadError">The replay room could not load.</h2><p id="room-error-detail"></p><button id="room-reload" data-i18n="retry">Retry</button></section>
+</main>
+<footer><span>Powered by <a href="https://github.com/dgant/openbw-replay-viewer">OpenBW Replay Viewer</a> · <a href="credits.html" id="room-credits" data-i18n="credits">Sources & credits</a></span><a href="https://app.pagescms.org/lmnst/starcraft-replays/main/collection/replay-room" target="_blank" rel="noopener" data-i18n="manage">Manage replay room</a><small id="room-revision"></small></footer>
+</body></html>

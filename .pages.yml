@@ -5,6 +5,12 @@ media:
     output: /replays
     extensions: [rep]
     rename: random
+  - name: room-media
+    label: Replay room files (.rep, .mp4, .webm)
+    input: site/room-media
+    output: /room-media
+    extensions: [rep, mp4, webm]
+    rename: random
 content:
   - name: matches
     label: Matches
@@ -83,3 +89,69 @@ content:
     view:
       primary: title_en
       fields: [title_en, map, visible]
+  - name: replay-room
+    label: Replay room / 对战效果
+    type: collection
+    path: content/replay-room
+    format: json
+    operations:
+      rename: false
+    filename: '{fields.id}.json'
+    fields:
+      - name: id
+        label: Permanent replay ID
+        type: string
+        required: true
+        description: 'A unique lowercase ID using letters, numbers and hyphens.'
+      - name: title_en
+        label: English title
+        type: string
+        required: true
+      - name: title_zh
+        label: Chinese title
+        type: string
+        required: true
+      - name: type
+        label: Playback format
+        type: select
+        required: true
+        options:
+          values: [replay, video]
+        description: 'replay = interactive .rep with game audio; video = .mp4 or .webm.'
+      - name: file
+        label: Replay or video file
+        type: file
+        required: true
+        options:
+          media: room-media
+          extensions: [rep, mp4, webm]
+      - name: visible
+        label: Show in replay room
+        type: boolean
+      - name: map
+        label: Map (optional)
+        type: string
+      - name: bot_version
+        label: Bot version (optional)
+        type: string
+      - name: player1
+        label: Player / bot 1 (optional)
+        type: string
+      - name: player2
+        label: Player / bot 2 (optional)
+        type: string
+      - name: replay_player1
+        label: Original replay nickname for player 1 (optional)
+        type: string
+      - name: replay_player2
+        label: Original replay nickname for player 2 (optional)
+        type: string
+      - name: description_en
+        label: English notes (optional)
+        type: text
+      - name: description_zh
+        label: Chinese notes (optional)
+        type: text
+    view:
+      primary: title_en
+      fields: [title_en, type, map, visible]

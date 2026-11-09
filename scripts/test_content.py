@@ -20,7 +20,7 @@ class ContentTests(unittest.TestCase):
         for folder in ('scripts','content/matches','site/replays','site/game-data'):
             (self.root / folder).mkdir(parents=True)
         shutil.copyfile(ROOT / 'scripts/build.py', self.root / 'scripts/build.py')
-        self.record = json.loads((ROOT / 'content/matches/01-win-heartbreak.json').read_text())
+        self.record = json.loads((ROOT / 'content/matches/01-win-heartbreak.json').read_text(encoding='utf-8'))
         self.record['visible'] = True
         shutil.copyfile(ROOT / 'site/replays/01-win-heartbreak.rep', self.root / 'site/replays/01-win-heartbreak.rep')
         manifest = {'files': {}}
@@ -31,7 +31,7 @@ class ContentTests(unittest.TestCase):
 
     def build(self):
         (self.root / 'content/matches/01-win-heartbreak.json').write_text(json.dumps(self.record))
-        return subprocess.run([sys.executable,str(self.root / 'scripts/build.py')],env=os.environ | {'REPLAY_VALIDATOR':VALIDATOR},capture_output=True,text=True)
+        return subprocess.run([sys.executable,str(self.root / 'scripts/build.py')],env=os.environ | {'REPLAY_VALIDATOR':VALIDATOR},capture_output=True,encoding='utf-8')
 
     def test_unpublish_removes_catalog_and_replay_and_stale_output(self):
         self.assertEqual(self.build().returncode,0)
@@ -71,5 +71,58 @@ class ContentTests(unittest.TestCase):
     def test_replay_path_must_stay_in_replay_directory(self):
         self.record['replay']='/replays/../../private.rep'
         self.assertNotEqual(self.build().returncode,0)
+
+    def room_item(self, **changes):
+        (self.root / 'content/replay-room').mkdir(exist_ok=True)
+        (self.root / 'site/room-media').mkdir(exist_ok=True)
+        shutil.copyfile(ROOT / 'site/replays/01-win-heartbreak.rep', self.root / 'site/room-media/sample.rep')
+        item = {'id':'sample', 'title_en':'Test match', 'title_zh':'Test match',
+                'type':'replay', 'file':'/room-media/sample.rep', 'visible':True} | changes
+        (self.root / 'content/replay-room/sample.json').write_text(json.dumps(item), encoding='utf-8')
+
+    def test_empty_room_preserves_existing_catalog(self):
+        self.assertEqual(self.build().returncode, 0)
+        self.assertEqual(json.loads((self.root / 'dist/room-catalog.json').read_text())['items'], [])
+        self.assertEqual(len(json.loads((self.root / 'dist/catalog.json').read_text())['matches']), 1)
+
+    def test_room_replay_publishes_separately_and_unpublishes(self):
+        self.room_item()
+        self.assertEqual(self.build().returncode, 0)
+        items = json.loads((self.root / 'dist/room-catalog.json').read_text())['items']
+        self.assertEqual(items[0]['id'], 'sample')
+        self.assertGreater(items[0]['replay_frames'], 0)
+        self.assertTrue((self.root / 'dist/room-media/sample.rep').exists())
+        self.room_item(visible=False)
+        self.assertEqual(self.build().returncode, 0)
+        self.assertEqual(json.loads((self.root / 'dist/room-catalog.json').read_text())['items'], [])
+        self.assertFalse((self.root / 'dist/room-media/sample.rep').exists())
+
+    def test_unreferenced_room_media_is_not_published(self):
+        self.room_item()
+        (self.root / 'site/room-media/unreferenced.mp4').write_bytes(b'not published')
+        self.assertEqual(self.build().returncode, 0)
+        self.assertFalse((self.root / 'dist/room-media/unreferenced.mp4').exists())
+
+    def test_room_path_escape_and_wrong_format_are_rejected(self):
+        for changes in ({'file':'/room-media/../replays/01-win-heartbreak.rep'}, {'type':'video'}, {'id':'renamed'}):
+            with self.subTest(changes=changes):
+                self.room_item(**changes)
+                self.assertNotEqual(self.build().returncode, 0)
+
+    def test_room_video_header_is_checked(self):
+        self.room_item(type='video', file='/room-media/sample.mp4')
+        video = self.root / 'site/room-media/sample.mp4'
+        video.write_bytes(b'bad video header' * 4)
+        self.assertNotEqual(self.build().returncode, 0)
+        video.write_bytes(b'\x00\x00\x00\x20ftypisom' + bytes(64))
+        self.assertEqual(self.build().returncode, 0)
+        self.assertEqual(json.loads((self.root / 'dist/room-catalog.json').read_text())['items'][0]['type'], 'video')
+
+    def test_room_media_paths_are_normalized_before_copying(self):
+        self.room_item(file='/room-media/../../site/room-media/sample.rep')
+        self.assertEqual(self.build().returncode, 0)
+        item = json.loads((self.root / 'dist/room-catalog.json').read_text())['items'][0]
+        self.assertEqual(item['file'], '/room-media/sample.rep')
+        self.assertTrue((self.root / 'dist/room-media/sample.rep').exists())
 
 if __name__ == '__main__': unittest.main()

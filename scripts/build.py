@@ -42,16 +42,59 @@ for entry in sorted((ROOT / 'content' / 'matches').glob('*.json')):
     if len(data) < 32:
         raise ValueError(f'{entry.name}: replay is empty or truncated')
     validator = os.environ.get('REPLAY_VALIDATOR', str(ROOT / 'build/validate-replay'))
-    parsed = json.loads(subprocess.check_output([validator, str(replay)], text=True, timeout=30))
+    parsed = json.loads(subprocess.check_output([validator, str(replay)], encoding='utf-8', timeout=30))
     record['replay_frames'] = parsed['frames']
     record['sha256'] = hashlib.sha256(data).hexdigest()
     record['replay_bytes'] = len(data)
     if record.get('visible', False):
         records.append(record)
         published_files.append((replay, relative))
+room_records = []
+room_ids = set()
+for entry in sorted((ROOT / 'content' / 'replay-room').glob('*.json')):
+    record = json.loads(entry.read_text(encoding='utf-8'))
+    for key in ('id', 'title_en', 'title_zh', 'type', 'file'):
+        if not isinstance(record.get(key), str) or not record[key].strip():
+            raise ValueError(f'{entry.name}: missing {key}')
+    if not re.fullmatch(r'[a-z0-9][a-z0-9-]*', record['id']) or record['id'] in room_ids or entry.stem != record['id']:
+        raise ValueError(f'{entry.name}: invalid, duplicate or renamed replay room ID')
+    room_ids.add(record['id'])
+    if type(record.get('visible')) is not bool:
+        raise ValueError(f'{entry.name}: visible must be a boolean')
+    if record['type'] not in ('replay', 'video'):
+        raise ValueError(f'{entry.name}: unsupported replay room format')
+    for key in ('map', 'bot_version', 'player1', 'player2', 'replay_player1', 'replay_player2', 'description_en', 'description_zh'):
+        if key in record and not isinstance(record[key], str):
+            raise ValueError(f'{entry.name}: {key} must be a string')
+    relative = record['file'].lstrip('/')
+    media = (SITE / relative).resolve()
+    extensions = ('.rep',) if record['type'] == 'replay' else ('.mp4', '.webm')
+    if not media.is_relative_to((SITE / 'room-media').resolve()) or media.suffix.lower() not in extensions:
+        raise ValueError(f'{entry.name}: media must have the right format and stay in /room-media/')
+    relative = media.relative_to(SITE.resolve()).as_posix()
+    record['file'] = '/' + relative
+    if not media.is_file() or media.stat().st_size < 32:
+        raise ValueError(f'{entry.name}: missing, empty or truncated media')
+    digest = hashlib.sha256()
+    with media.open('rb') as stream:
+        header = stream.read(32)
+        digest.update(header)
+        for block in iter(lambda: stream.read(1024 * 1024), b''):
+            digest.update(block)
+    if record['type'] == 'replay':
+        validator = os.environ.get('REPLAY_VALIDATOR', str(ROOT / 'build/validate-replay'))
+        parsed = json.loads(subprocess.check_output([validator, str(media)], encoding='utf-8', timeout=30))
+        record['replay_frames'] = parsed['frames']
+    elif (media.suffix.lower() == '.mp4' and header[4:8] != b'ftyp') or (media.suffix.lower() == '.webm' and header[:4] != b'\x1aE\xdf\xa3'):
+        raise ValueError(f'{entry.name}: invalid video file header')
+    record['sha256'] = digest.hexdigest()
+    record['bytes'] = media.stat().st_size
+    if record['visible']:
+        room_records.append(record)
+        published_files.append((media, relative))
 if OUT.exists():
     shutil.rmtree(OUT)
-shutil.copytree(SITE, OUT, ignore=shutil.ignore_patterns('replays', 'pilot.js', 'pilot.css'))
+shutil.copytree(SITE, OUT, ignore=shutil.ignore_patterns('replays', 'room-media', 'pilot.js', 'pilot.css'))
 (OUT / 'replays').mkdir()
 for replay, relative in published_files:
     target = OUT / relative
@@ -72,5 +115,6 @@ for page in OUT.rglob('*.html'):
 catalog = {'matches': records, 'revision': os.environ.get('GITHUB_SHA', 'local'),
            'built_at': datetime.now(timezone.utc).isoformat()}
 (OUT / 'catalog.json').write_text(json.dumps(catalog, ensure_ascii=False, indent=2), encoding='utf-8')
+(OUT / 'room-catalog.json').write_text(json.dumps({'items': room_records, 'revision': catalog['revision'], 'built_at': catalog['built_at']}, ensure_ascii=False, indent=2), encoding='utf-8')
 (OUT / '.nojekyll').touch()
-print(f'Validated {len(records)} published match(es). Output: {OUT}')
+print(f'Validated {len(records)} published match(es), {len(room_records)} replay room item(s). Output: {OUT}')
