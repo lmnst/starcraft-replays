@@ -1,0 +1,20 @@
+{
+  "id": "v6-150-m146-destination-pylonpuller-loss",
+  "title_en": "m146 · v6 vs PylonPuller · Destination (loss)",
+  "title_zh": "m146 · v6 对 PylonPuller · Destination（负局）",
+  "type": "replay",
+  "file": "/room-media/v6-150-m146-destination-pylonpuller-loss.rep",
+  "visible": true,
+  "map": "Destination",
+  "bot_version": "v6",
+  "player1": "v6",
+  "player2": "PylonPuller",
+  "replay_player1": "compat1",
+  "replay_player2": "compat2",
+  "result": "loss",
+  "description_en": "m146 from the frozen v6 150-game experiment, replicate 5. v6 lost to PylonPuller on Destination. Original server replay; 14,386 replay frames. v6 is compat1; PylonPuller is compat2.",
+  "description_zh": "v6 150 局实验的 m146，第 5 次重复：v6 在 Destination 对阵 PylonPuller 的负局。来自服务器原始回放，共 14,386 帧。v6 对应 compat1，PylonPuller 对应 compat2。",
+  "source_batch": "v6-150games-20261109T022703Z",
+  "source_match": "m146",
+  "source_replay_sha256": "0a2c533930878e8e41c2845fda703a972e1d932e4cfed188048839bb97a8fc4c"
+}
