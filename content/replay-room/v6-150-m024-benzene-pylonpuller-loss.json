@@ -1,0 +1,20 @@
+{
+  "id": "v6-150-m024-benzene-pylonpuller-loss",
+  "title_en": "m024 · v6 vs PylonPuller · Benzene (loss)",
+  "title_zh": "m024 · v6 对 PylonPuller · Benzene（负局）",
+  "type": "replay",
+  "file": "/room-media/v6-150-m024-benzene-pylonpuller-loss.rep",
+  "visible": true,
+  "map": "Benzene",
+  "bot_version": "v6",
+  "player1": "v6",
+  "player2": "PylonPuller",
+  "replay_player1": "compat1",
+  "replay_player2": "compat2",
+  "result": "loss",
+  "description_en": "m024 from the frozen v6 150-game experiment. The only loss against PylonPuller on Benzene in this batch. Original server replay; 15,781 replay frames. v6 is compat1; PylonPuller is compat2.",
+  "description_zh": "v6 150 局实验的 m024：本轮在 Benzene 对阵 PylonPuller 的唯一负局。来自服务器原始回放，共 15,781 帧。v6 对应 compat1，PylonPuller 对应 compat2。",
+  "source_batch": "v6-150games-20261109T022703Z",
+  "source_match": "m024",
+  "source_replay_sha256": "5aa23d4efad55bbd50ee081aa345df4bea559b63283528bf6c8f9ecf122ce618"
+}
