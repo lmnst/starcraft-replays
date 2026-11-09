@@ -1,0 +1,20 @@
+{
+  "id": "v6-150-m026-destination-pylonpuller-win",
+  "title_en": "m026 · v6 vs PylonPuller · Destination (win)",
+  "title_zh": "m026 · v6 对 PylonPuller · Destination（胜局）",
+  "type": "replay",
+  "file": "/room-media/v6-150-m026-destination-pylonpuller-win.rep",
+  "visible": true,
+  "map": "Destination",
+  "bot_version": "v6",
+  "player1": "v6",
+  "player2": "PylonPuller",
+  "replay_player1": "compat1",
+  "replay_player2": "compat2",
+  "result": "win",
+  "description_en": "m026 from the frozen v6 150-game experiment, replicate 1. v6 defeated PylonPuller on Destination. Original server replay; 11,813 replay frames. v6 is compat1; PylonPuller is compat2.",
+  "description_zh": "v6 150 局实验的 m026，第 1 次重复：v6 在 Destination 战胜 PylonPuller 的胜局。来自服务器原始回放，共 11,813 帧。v6 对应 compat1，PylonPuller 对应 compat2。",
+  "source_batch": "v6-150games-20261109T022703Z",
+  "source_match": "m026",
+  "source_replay_sha256": "d0f8711121984e7e9cd0d665b2fd3bfa36328f3d52a2b468d0e8d82e7d6f9c86"
+}
