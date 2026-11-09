@@ -1,0 +1,21 @@
+{
+  "id": "v6-150-m045-benzene-steamhammer-loss",
+  "title_en": "m045 · v6 vs Steamhammer · Benzene (loss)",
+  "title_zh": "m045 · v6 对 Steamhammer · Benzene（负局）",
+  "type": "replay",
+  "file": "/room-media/v6-150-m045-benzene-steamhammer-loss.rep",
+  "visible": true,
+  "map": "Benzene",
+  "bot_version": "v6",
+  "player1": "v6",
+  "player2": "Steamhammer",
+  "replay_player1": "compat1",
+  "replay_player2": "compat2",
+  "result": "loss",
+  "description_en": "m045 from the frozen v6 150-game experiment, randomly selected from the loss group for a two-win, two-loss Steamhammer sample. Original server replay; 14,975 frames. v6 is compat1; Steamhammer is compat2.",
+  "description_zh": "从 v6 150 局实验中按胜负分组随机抽取的 Steamhammer 两胜两负样本。m045 为 v6 负局，来自服务器原始回放，共 14,975 帧。v6 对应 compat1，Steamhammer 对应 compat2。",
+  "source_batch": "v6-150games-20261109T022703Z",
+  "source_match": "m045",
+  "source_replay_sha256": "0717dd170c65e1b4991c212deca2289d8af4dc7e3b63bb8bb3f0a29be7be195b",
+  "selection_method": "SystemRandom.sample: 2 verified wins from 6 and 2 verified losses from 9; selection fixed before upload"
+}

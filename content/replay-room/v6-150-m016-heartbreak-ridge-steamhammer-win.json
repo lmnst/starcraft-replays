@@ -1,0 +1,21 @@
+{
+  "id": "v6-150-m016-heartbreak-ridge-steamhammer-win",
+  "title_en": "m016 · v6 vs Steamhammer · Heartbreak Ridge (win)",
+  "title_zh": "m016 · v6 对 Steamhammer · Heartbreak Ridge（胜局）",
+  "type": "replay",
+  "file": "/room-media/v6-150-m016-heartbreak-ridge-steamhammer-win.rep",
+  "visible": true,
+  "map": "Heartbreak Ridge",
+  "bot_version": "v6",
+  "player1": "v6",
+  "player2": "Steamhammer",
+  "replay_player1": "compat1",
+  "replay_player2": "compat2",
+  "result": "win",
+  "description_en": "m016 from the frozen v6 150-game experiment, randomly selected from the win group for a two-win, two-loss Steamhammer sample. Original server replay; 12,774 frames. v6 is compat1; Steamhammer is compat2.",
+  "description_zh": "从 v6 150 局实验中按胜负分组随机抽取的 Steamhammer 两胜两负样本。m016 为 v6 胜局，来自服务器原始回放，共 12,774 帧。v6 对应 compat1，Steamhammer 对应 compat2。",
+  "source_batch": "v6-150games-20261109T022703Z",
+  "source_match": "m016",
+  "source_replay_sha256": "d7f680d93b5b916a9eb961fbd50d35c3a65108fc38de7f25613b4fbe4df1cc6d",
+  "selection_method": "SystemRandom.sample: 2 verified wins from 6 and 2 verified losses from 9; selection fixed before upload"
+}
