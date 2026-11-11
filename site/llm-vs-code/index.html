@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="三局对战：同一个 bot 的内置策略与 LLM 高层指挥对比，含回放和 LLM 每一步决策。">
+<title>LLM 指挥对比 · Replay Archive</title><link rel="icon" href="data:,">
+<link rel="stylesheet" href="../app.css"><link rel="stylesheet" href="compare.css"><script src="compare.js" defer></script></head>
+<body><a href="#main" class="skip">跳到正文</a>
+<header><a class="brand" href="../">REPLAY ARCHIVE<span>STARCRAFT / BROOD WAR</span></a><nav><a href="../">回放库</a><a href="./" aria-current="page">LLM 指挥对比</a></nav></header>
+<main id="main">
+
+<section class="hero">
+  <h1>内置策略 vs LLM 高层指挥</h1>
+  <p class="lede">同一个 bot、同样的对手和地图，分两组各打一局：<b>代码组</b>完全由 bot 自己决定；<b>LLM 组</b>由大模型定期查看局面，决定要不要接管部队姿态、发展重点、兵种和侦察，没接管的部分仍由 bot 自己打。下面三局各有回放、数据和 LLM 的每一步决策。</p>
+  <div class="highlights" id="games"></div>
+</section>
+
+<section id="detail" hidden>
+  <div class="detail-head"><div><p class="eyebrow" id="d-eyebrow"></p><h2 id="d-title"></h2><p id="d-sub" class="muted"></p></div><div class="result-chips" id="d-results"></div></div>
+  <p class="reading" id="d-reading" hidden></p>
+  <div class="replay-card" id="replay" hidden>
+    <div class="replay-head"><h3>回放</h3><div class="arm-switch" role="group" aria-label="选择哪一组的回放"><button data-arm="llm" aria-pressed="true">LLM 组</button><button data-arm="code" aria-pressed="false">代码组</button></div><div class="arm-switch" id="mode-switch" role="group" aria-label="画面"><button data-mode="video" aria-pressed="true">游戏画面</button><button data-mode="map" aria-pressed="false">全图战术图</button></div><span class="muted small" id="replay-clock"></span></div>
+    <div class="replay-screen" id="replay-screen"><video id="replay-video" preload="auto" playsinline muted></video><canvas id="replay-canvas" width="1024" height="896" aria-label="对局俯视战术图" hidden></canvas><div class="replay-loading" id="replay-loading" hidden></div></div>
+    <div class="replay-hud" id="replay-hud"></div>
+    <div class="replay-controls"><button id="replay-play" aria-pressed="false">播放</button><input type="range" id="replay-seek" min="0" max="1" step="1" value="0" aria-label="回放进度"><label class="muted small">速度 <select id="replay-speed"><option value="1">1×</option><option value="2">2×</option><option value="4">4×</option><option value="8">8×</option><option value="16">16×</option><option value="32">32×</option></select></label><button id="replay-full">全屏</button></div>
+    <div class="replay-legend" id="replay-legend"></div>
+    <div class="caption" id="replay-caption" aria-live="polite"></div>
+    <p class="muted small">游戏画面：用打这一局的同一个引擎（OpenBWData.dll，和服务器对局逐字节相同）重放录像并渲染成视频，镜头自动跟随交战，无战争迷雾。全图战术图：同一引擎导出的所有单位位置。两者都和对局日志逐 240 帧核对过双方各兵种数量。1× 等于"最快"游戏速度。切换两组时停在同一时刻；点图表或下面任意一条 LLM 决策，回放跳到那一刻。</p>
+  </div>
+  <div class="legend" id="d-legend"></div>
+  <div class="chart-card"><h3>兵力（作战单位数）</h3><div class="chart" id="c-army"></div></div>
+  <div class="chart-card"><h3>部队姿态时间线 <small>谁在决定：浅色 = bot 自己，亮色 = LLM 指令，描边 = 家里受威胁时 bot 接管</small></h3><div class="bands" id="c-bands"></div></div>
+  <div class="two-col">
+    <div class="chart-card"><h3>农民数</h3><div class="chart" id="c-workers"></div></div>
+    <div class="chart-card"><h3>LLM 组：我方战力 vs 已见敌军战力</h3><div class="chart" id="c-strength"></div></div>
+  </div>
+  <div class="log-head"><h3>LLM 决策记录</h3><label class="toggle"><input type="checkbox" id="show-keep"> 同时显示"不干预"的判断</label></div>
+  <p class="muted small" id="log-note"></p>
+  <ol class="log" id="d-log"></ol>
+  <p class="muted small">时间按"最快"游戏速度换算（每帧 0.042 秒），和回放播放器的时钟一致；看回放时可以直接跳到这里写的时间点。回放文件（.rep）只记录单位操作，不记录 LLM 的决策，所以这里的决策记录要配合回放一起看。</p>
+</section>
+
+</main>
+<footer><span>LLM 指挥实验 · 数据来自服务器对局日志</span><a href="../">返回回放库</a></footer>
+</body></html>
