@@ -32,6 +32,12 @@ const replay = {game: null, arm: 'llm', frame: 0, playing: false, speed: 8, trac
 const VIDEO_FRAMES_PER_SECOND = 48;
 const video = () => $('replay-video');
 const videoRate = () => Math.min(16, replay.speed * FPS / VIDEO_FRAMES_PER_SECOND);
+// Interactive mode embeds the site's web viewer (calling into it before its main() has run aborts its runtime). Its OpenBW build reproduces the match engine's gas-exit lookup,
+// and replaying these files in it matched the match engine's minerals and gas at every 240-frame sample.
+const viewerWindow = () => {
+  try { const w = $('replay-frame').contentWindow; return w && w.main_has_been_called && typeof w._replay_get_value === 'function' && w._replay_get_value(4) > 0 ? w : null; }
+  catch { return null; }
+};
 
 
 async function main() {
@@ -100,7 +106,7 @@ function setupReplay(g) {
   const has = REPLAYS.has(g.id);
   $('replay').hidden = !has;
   if (!has) return;
-  replay.game = g; replay.frame = 0;
+  replay.game = g; replay.frame = 0; replay.arm = 'llm'; replay.liveKey = null; replay.liveSeek = null;
   $('replay').querySelector('.arm-switch').onclick = e => {
     const b = e.target.closest('[data-arm]');
     if (b && b.dataset.arm !== replay.arm) loadReplay(b.dataset.arm);
@@ -124,6 +130,12 @@ const GAME_COLOR = {0: ['红色', '#e0382c'], 1: ['蓝色', '#3d6ee0']};
 function updateLegend() {
   const T = replay.tracks, g = replay.game; if (!T || !g) return;
   const own = replay.arm === 'llm' ? 'LLM 组' : '代码组';
+  if (replay.mode === 'live') {
+    const ours = GAME_COLOR[T.meta.players.find(p => p.name === 'compat1').color], theirs = GAME_COLOR[T.meta.players.find(p => p.name !== 'compat1').color];
+    $('replay-legend').innerHTML = `<span><i style="background:${ours[1]}"></i><b>我方 bot（${own}）= ${ours[0]}</b></span><span><i style="background:${theirs[1]}"></i><b>对手 ${esc(g.opponent)} = ${theirs[0]}</b></span>` +
+      '<span>可以点小地图、拖动画面、调速，用画面下方的控制条播放和跳转</span><span>首次打开要下载约 90 MB 游戏数据</span>';
+    return;
+  }
   if (replay.mode === 'video') {
     const ours = GAME_COLOR[T.meta.players.find(p => p.name === 'compat1').color], theirs = GAME_COLOR[T.meta.players.find(p => p.name !== 'compat1').color];
     $('replay-legend').innerHTML = `<span><i style="background:${ours[1]}"></i><b>我方 bot（${own}）= ${ours[0]}</b></span><span><i style="background:${theirs[1]}"></i><b>对手 ${esc(g.opponent)} = ${theirs[0]}</b></span>` +
@@ -139,15 +151,34 @@ function setMode(mode) {
   setPlaying(false);
   replay.mode = mode;
   for (const b of $('mode-switch').querySelectorAll('[data-mode]')) b.setAttribute('aria-pressed', b.dataset.mode === mode);
-  video().hidden = mode !== 'video'; $('replay-canvas').hidden = mode !== 'map';
+  const w = viewerWindow();
+  if (mode !== 'live' && w) w._replay_set_value(1, 1);
+  video().hidden = mode !== 'video'; $('replay-canvas').hidden = mode !== 'map'; $('replay-frame').hidden = mode !== 'live';
+  $('replay-controls').hidden = mode === 'live';
+  if (mode === 'live') { loadLive(); seekReplay(replay.frame); }
   updateLegend();
   if (mode === 'video' && video().readyState) video().currentTime = replay.frame / VIDEO_FRAMES_PER_SECOND;
   replay.dirty = true; renderReplay();
-  if (wasPlaying) setPlaying(true);
+  if (wasPlaying && mode !== 'live') setPlaying(true);
+}
+
+function loadLive() {
+  const g = replay.game, key = `${g.id}-${replay.arm}`;
+  if (replay.liveKey === key) return;
+  replay.liveKey = key; replay.liveSeek = null;
+  replay.liveTarget = {frame: Math.round(replay.frame), since: performance.now()};
+  const v = new URL('../viewer/index.html', location.href);
+  v.searchParams.set('rep', new URL(`reps/${key}.rep`, location.href).href);
+  v.searchParams.set('lang', 'zh');
+  v.searchParams.set('frame', Math.round(replay.frame));
+  v.searchParams.set('nick1', 'compat1'); v.searchParams.set('name1', replay.arm === 'llm' ? '我方 bot · LLM 组' : '我方 bot · 代码组');
+  v.searchParams.set('nick2', 'compat2'); v.searchParams.set('name2', g.opponent);
+  $('replay-frame').src = v.href;
 }
 
 function stopReplay() {
   video().pause();
+  $('replay-frame').removeAttribute('src'); replay.liveKey = null;
   cancelAnimationFrame(replay.raf); replay.raf = 0;
   replay.game = null; replay.tracks = null; replay.lastFrame = null; replay.token++;
   setPlaying(false);
@@ -160,6 +191,7 @@ async function loadReplay(arm) {
   $('replay-loading').hidden = false; $('replay-loading').textContent = '正在载入回放…';
   const wasPlaying = replay.playing;
   setPlaying(false);
+  if (replay.mode === 'live') loadLive();
   const v = video();
   v.src = `videos/${g.id}-${arm}.mp4`;
   v.onloadedmetadata = () => {
@@ -295,7 +327,7 @@ function drawReplay() {
     return `农民 <b>${us.filter(u => u.type.worker).length}</b> · 部队 <b>${us.filter(u => !u.type.worker && !u.type.building).length}</b> · 建筑 <b>${us.filter(u => u.type.building).length}</b>`;
   };
   const enemyId = T.meta.players.find(p => p.id !== T.ownId).id;
-  const hue = id => replay.mode === 'video' ? GAME_COLOR[T.meta.players.find(p => p.id === id).color][1] : (id === T.ownId ? T.colors.own : T.colors.enemy);
+  const hue = id => replay.mode !== 'map' ? GAME_COLOR[T.meta.players.find(p => p.id === id).color][1] : (id === T.ownId ? T.colors.own : T.colors.enemy);
   $('replay-hud').innerHTML = `<span><span style="color:${hue(T.ownId)}">我方</span> ${side(T.ownId)}</span><span><span style="color:${hue(enemyId)}">对手</span> ${side(enemyId)}</span>`;
 }
 
@@ -303,7 +335,19 @@ function tick(ts) {
   replay.raf = requestAnimationFrame(tick);
   const T = replay.tracks;
   if (!T) { replay.lastTs = ts; return; }
-  if (replay.mode === 'video') {
+  if (replay.mode === 'live') {
+    const w = viewerWindow();
+    if (w && replay.liveSeek != null) {
+      w.pendingRequestedReplayFrame = replay.liveSeek;
+      replay.liveTarget = {frame: replay.liveSeek, since: ts}; replay.liveSeek = null;
+    } else if (w && w.pendingRequestedReplayFrame == null) {
+      const f = Math.min(T.end, w._replay_get_value(2)), target = replay.liveTarget;
+      // A seek fast-forwards through intermediate frames; keep showing the target until the viewer gets there.
+      if (target && f < target.frame - 24 && ts - target.since < 20000) return;
+      replay.liveTarget = null;
+      if (f !== Math.round(replay.frame)) { replay.frame = f; replay.dirty = true; }
+    }
+  } else if (replay.mode === 'video') {
     const v = video();
     if (v.readyState && !v.seeking) {
       const f = Math.min(T.end, v.currentTime * VIDEO_FRAMES_PER_SECOND);
@@ -345,6 +389,7 @@ function seekReplay(frame) {
   if ($('replay').hidden || !replay.game) return;
   replay.frame = Math.max(0, Math.min(replay.tracks ? replay.tracks.end : frame, frame));
   if (replay.mode === 'video' && video().readyState) video().currentTime = replay.frame / VIDEO_FRAMES_PER_SECOND;
+  if (replay.mode === 'live') replay.liveSeek = Math.round(replay.frame);
   replay.dirty = true;
   renderReplay();
 }

@@ -78,3 +78,4 @@ main section{margin-bottom:56px}
 .replay-screen video{display:block;width:100%;max-height:72vh;background:#000;cursor:pointer}
 .replay-screen:fullscreen{border:0;border-radius:0;align-items:center}
 .replay-screen:fullscreen video,.replay-screen:fullscreen canvas{max-height:100vh;height:100vh;width:auto;max-width:100vw}
+.replay-screen iframe{display:block;width:100%;aspect-ratio:16/10;max-height:78vh;border:0;background:#000}
