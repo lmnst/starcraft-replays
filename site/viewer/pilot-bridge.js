@@ -18,7 +18,8 @@
   C_MUSIC_TRACKS_BY_RACE = {0:[],1:[],2:[]};
   var runtimeReady = false;
   Module.locateFile = function (path, prefix) {
-    return prefix + path + (path.endsWith('.wasm') ? '?v=0f4f7c9df799' : '');
+    // native.html loads upstream OpenBW (c86c582, with player vision) in v1.4/native/ for matches recorded on original StarCraft 1.16.1.
+    return prefix + path + (path.endsWith('.wasm') ? (/\/native\/$/.test(prefix) ? '?v=56c81ed70f6b' : '?v=0f4f7c9df799') : '');
   };
   var pendingRead = false;
   var runtimeInitialized = Module.onRuntimeInitialized;

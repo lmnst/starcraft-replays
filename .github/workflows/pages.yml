@@ -29,6 +29,7 @@ jobs:
           node --check site/app.js
           node --check site/replay-room.js
           node --check site/credits.js
+          node --check site/human-commander/hc.js
           node --check site/viewer/pilot-bridge.js
           node --check site/viewer/archive-ui.js
           python scripts/build.py

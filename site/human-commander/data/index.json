@@ -1,0 +1,22 @@
+{
+ "matches": [
+  {
+   "id": "benzene-hladhammer-win",
+   "map": "Benzene",
+   "opponent": "HladHammer",
+   "result": "win",
+   "end_frame": 15378,
+   "commands": 40,
+   "started_at": "2026-11-17T20:23:16.542597+08:00"
+  },
+  {
+   "id": "benzene-purplewave-loss",
+   "map": "Benzene",
+   "opponent": "PurpleWave",
+   "result": "loss",
+   "end_frame": 15750,
+   "commands": 48,
+   "started_at": "2026-11-17T20:34:43.517469+08:00"
+  }
+ ]
+}
