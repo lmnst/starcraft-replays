@@ -30,15 +30,19 @@ class HumanCommanderTests(unittest.TestCase):
             self.assertEqual(hashlib.sha256(replay.read_bytes()).hexdigest(), data['hashes']['replay'])
             self.assertTrue((PAGE / data['files']['package']).is_file())
             self.assertEqual(len(data['commands']), match['commands'])
+            if data.get('terrain'):
+                self.assertTrue((PAGE / data['terrain']).is_file())
 
     def test_append_order_and_historical_data(self):
         matches = json.loads((PAGE / 'data/index.json').read_text(encoding='utf-8'))['matches']
         self.assertEqual([m['id'] for m in matches[:2]], ['benzene-hladhammer-win', 'benzene-purplewave-loss'])
-        self.assertEqual(len(matches), 19)
-        self.assertEqual(len({m['id'] for m in matches}), 19)
-        self.assertEqual([m['started_at'] for m in matches[2:]], sorted(m['started_at'] for m in matches[2:]))
+        self.assertEqual(len(matches), 30)
+        self.assertEqual(len({m['id'] for m in matches}), 30)
+        local = matches[2:19]
+        self.assertTrue(all(m['id'].startswith('hc-') for m in local))
+        self.assertEqual([m['started_at'] for m in local], sorted(m['started_at'] for m in local))
         versions = set()
-        for m in matches[2:]:
+        for m in local:
             d = json.loads((PAGE / 'data' / f"{m['id']}.json").read_text(encoding='utf-8'))
             versions.add(d['keymap_id'])
             terrain = json.loads((PAGE / d['terrain_file']).read_text(encoding='utf-8'))

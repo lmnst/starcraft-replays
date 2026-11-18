@@ -1,6 +1,6 @@
 """Export native StarCraft-Commander matches for site/human-commander/.
 
-Usage: python scripts/human_commander.py <id>=<match dir> [<id>=<match dir> ...]
+Usage: python scripts/human_commander.py <matches dir | match dir | id=match dir> ...
 
 Each match dir is a StarCraft-Commander `matches/<timestamp>` folder. The page
 data comes only from that folder's own logs; nothing is re-simulated. Besides
@@ -133,11 +133,44 @@ def export(match_id, folder):
             'end_frame': end_frame, 'commands': len(commands), 'started_at': data['started_at'], 'record_note': data['record_note']}
 
 
+def slug(text):
+    return ''.join(c if c.isalnum() else '-' for c in text.lower()).strip('-')
+
+
+def finished_human_match(folder):
+    path = folder / 'match.json'
+    if not path.is_file():
+        return False
+    match = json.loads(path.read_text(encoding='utf-8-sig'))
+    return match.get('control') == 'human' and 'winner' in match and (folder / match['replay']).is_file()
+
+
 def main(args):
     if not args:
         sys.exit(__doc__)
     existing = json.loads((PAGE / 'data/index.json').read_text(encoding='utf-8'))['matches']
-    incoming = [export(*(lambda a: (a[0], Path(a[1])))(arg.split('=', 1))) for arg in args]
+    by_source = {}
+    for file in (PAGE / 'data').glob('*.json'):
+        data = json.loads(file.read_text(encoding='utf-8'))
+        if 'source_folder' in data:
+            by_source[data['source_folder']] = data['id']
+    jobs = {}
+    for arg in args:
+        match_id, _, path = arg.rpartition('=') if '=' in arg else ('', '', arg)
+        folder = Path(path)
+        folders = [folder] if (folder / 'match.json').is_file() else sorted(p for p in folder.iterdir() if p.is_dir())
+        if match_id and len(folders) != 1:
+            raise ValueError('An explicit ID must name exactly one match folder')
+        for match_folder in folders:
+            if not finished_human_match(match_folder):
+                print(f'skip {match_folder.name}: not a finished human-commander match')
+                continue
+            if not match_id and match_folder.name not in by_source:
+                match = json.loads((match_folder / 'match.json').read_text(encoding='utf-8-sig'))
+                stamp = match_folder.name[4:8] + '-' + match_folder.name[9:13]
+                by_source[match_folder.name] = f"{slug(match['map'])}-{slug(match['opponent'])}-{'win' if match['winner'] else 'loss'}-{stamp}"
+            jobs[match_folder.name] = (match_id or by_source[match_folder.name], match_folder)
+    incoming = [export(match_id, folder) for match_id, folder in jobs.values()]
     known = {m['id']:i for i,m in enumerate(existing)}
     for match in incoming:
         if match['id'] in known:

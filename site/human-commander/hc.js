@@ -25,7 +25,7 @@ const UNIT_ZH = {'Protoss Probe': '探机', 'Protoss Zealot': '狂热者', 'Prot
   'Protoss Stargate': '星门', 'Protoss Fleet Beacon': '舰队航标', 'Protoss Arbiter Tribunal': '仲裁者法庭',
   'Singularity Charge': '龙骑射程', 'Leg Enhancements': '狂热者速度', 'Protoss Ground Weapons': '地面武器', 'Protoss Ground Armor': '地面护甲',
   'Protoss Plasma Shields': '护盾', 'Protoss Air Weapons': '空中武器', 'Protoss Air Armor': '空中护甲', 'Psionic Storm': '灵能风暴'};
-const REASON = {depot_destroyed: '目标建筑已摧毁', frontline_withdrawal: '前线撤离', cover_entrance: '守住路口'};
+const REASON = {depot_destroyed: '目标建筑已摧毁', frontline_withdrawal: '前线撤离', cover_entrance: '守住路口', protect_threatened_assets:'保护受威胁的建筑', occupied_point:'集结点改到已占领位置'};
 Object.assign(NOTICE, {main_target_selected:'选择区域清场目标', main_building_cleared:'确认建筑清除', patrol_reanchored:'更新警戒岗位', assembly_refuge:'调整共同避险点', assembly_post_adjusted:'调整堵路岗位', detection_resumed:'恢复原任务', scout_evade_lost:'避险探机损失'});
 Object.assign(REASON, {main_area_cleared:'主基地区域已确认清完', site_confirmed_empty:'原址已确认清空', destroyed:'已确认被毁', footprint_checked:'原址已检查', relocated_outside:'建筑已移出区域', friendly_blockage:'友军堵路，调整单个岗位'});
 
@@ -57,7 +57,8 @@ async function main() {
   const [list, definitions] = await Promise.all([get('data/index.json'), get('data/keymaps.json')]);
   index = list; profiles = Object.fromEntries(Object.entries(definitions.profiles).map(([id,p]) => [id, {...p, id}]));
   $('games').innerHTML = index.matches.map((m,i) => `<button class="hl" data-id="${m.id}"><span class="tag">第 ${i+1} 局 · ${esc(m.map)} · ${m.started_at.slice(0, 16).replace('T', ' ')}</span><h3>对 ${esc(m.opponent)}</h3><p class="chips"><span class="chip ${m.result}">${m.result === 'win' ? '胜' : m.result === 'loss' ? '负' : '结果未确认'}</span><span class="chip">${clock(m.end_frame)}</span><span class="chip">${m.commands} 次按键</span>${m.record_note?'<span class="chip">短局·见记录说明</span>':''}</p></button>`).join('');
-  $('games').addEventListener('click', e => { const b = e.target.closest('[data-id]'); if (b) { history.pushState(null, '', `?match=${b.dataset.id}`); route(); } });
+  $('summary').textContent = `共 ${index.matches.length} 局 · 原有两局在前，本地17局按时间顺序追加，另保留并行上传的11局`;
+  $('games').addEventListener('click', e => { const b = e.target.closest('[data-id]'); if (b) { history.pushState(null, '', `?match=${b.dataset.id}`); route().then(() => $('detail').scrollIntoView({block:'start'})); } });
   window.addEventListener('popstate', route);
   wireControls();
   st.raf = requestAnimationFrame(tick);
@@ -73,10 +74,12 @@ async function route() {
   const incoming = await fetch(`data/${encodeURIComponent(id)}.json`).then(r => r.ok ? r.json() : null);
   if (serial !== routeSerial) return;
   if (!incoming) { $('detail').hidden = true; return; }
-  const mapData = await fetch(incoming.terrain_file || 'data/benzene-terrain.json').then(r => {if(!r.ok)throw new Error('地图地形缺失');return r.json();});
+  const mapFile = incoming.terrain_file || incoming.terrain || {'Benzene':'data/terrain/benzene.json','Heartbreak Ridge':'data/terrain/heartbreak-ridge.json','Destination':'data/destination-terrain.json'}[incoming.map];
+  const mapData = await fetch(mapFile).then(r => {if(!r.ok)throw new Error('地图地形缺失');return r.json();});
   if (serial !== routeSerial) return;
   game = incoming; terrain = mapData; terrainImg = null;
   $('map').width=terrain.width*PX; $('map').height=terrain.height*PX;
+  $('map').style.aspectRatio = `${terrain.width} / ${terrain.height}`;
   $('map').setAttribute('aria-label', `${game.map} 俯视示意图：镜头位置和我方部队`);
   col = Object.fromEntries(game.state_fields.map((k, i) => [k, i]));
   eco = Object.fromEntries(game.economy_fields.map((k, i) => [k, i]));
@@ -104,7 +107,13 @@ function renderDetail() {
 
 // ---------- web viewer ----------
 const viewerWindow = () => {
-  try { const w = $('viewer').contentWindow; return w && w.main_has_been_called && typeof w._replay_get_value === 'function' && w._replay_get_value(4) > 0 ? w : null; }
+  try {
+    const frame = $('viewer'), w = frame.contentWindow;
+    // iframe navigation leaves the preceding document alive briefly.
+    const loadedReplay = w && new URL(w.location.href).searchParams.get('rep');
+    const wantedReplay = frame.src && new URL(frame.src).searchParams.get('rep');
+    return w && loadedReplay && loadedReplay === wantedReplay && w.main_has_been_called && typeof w._replay_get_value === 'function' && w._replay_get_value(4) > 0 ? w : null;
+  }
   catch { return null; }
 };
 function loadLive() {
@@ -365,7 +374,7 @@ function renderLog() {
 }
 function renderEvents() {
   $('events').innerHTML = game.notices.map(n => {
-    const detail = n.message || (n.reason ? REASON[n.reason] || n.reason : '') || (n.event === 'end' ? (n.winner ? '我方胜' : '我方负') : '');
+    const detail = n.message || (n.event === 'scout_probe_seen' ? `单位 #${n.reason}` : n.reason ? REASON[n.reason] || n.reason : '') || (n.event === 'end' ? (n.winner ? '我方胜' : '我方负') : '');
     return `<li class="entry keep" data-f="${n.frame}"><time>${clock(n.frame)}<small>帧 ${n.frame}</small></time><div class="what"><b>${esc(NOTICE[n.event] || n.event)}</b>${n.task_id != null ? `<span class="k">任务 #${n.task_id}</span>` : ''}</div>${detail ? `<p class="effect">${esc(detail)}</p>` : ''}</li>`;
   }).join('');
   $('events').onclick = e => { const li = e.target.closest('.entry'); if (li) { seek(+li.dataset.f, true); toScreen(); } };
