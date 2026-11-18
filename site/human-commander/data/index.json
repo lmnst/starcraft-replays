@@ -1,13 +1,253 @@
 {
  "matches": [
   {
+   "id": "benzene-pylonpuller-win",
+   "map": "Benzene",
+   "opponent": "PylonPuller",
+   "result": "win",
+   "end_frame": 17238,
+   "commands": 96,
+   "record_note": ""
+  },
+  {
+   "id": "benzene-pylonpuller-loss",
+   "map": "Benzene",
+   "opponent": "PylonPuller",
+   "result": "loss",
+   "end_frame": 14324,
+   "commands": 31,
+   "record_note": ""
+  },
+  {
+   "id": "heartbreak-ridge-pylonpuller-win",
+   "map": "Heartbreak Ridge",
+   "opponent": "PylonPuller",
+   "result": "win",
+   "end_frame": 26941,
+   "commands": 73,
+   "record_note": ""
+  },
+  {
+   "id": "destination-pylonpuller-win",
+   "map": "Destination",
+   "opponent": "PylonPuller",
+   "result": "win",
+   "end_frame": 19780,
+   "commands": 96,
+   "record_note": ""
+  },
+  {
+   "id": "destination-pylonpuller-win-2",
+   "map": "Destination",
+   "opponent": "PylonPuller",
+   "result": "win",
+   "end_frame": 14169,
+   "commands": 22,
+   "record_note": ""
+  },
+  {
+   "id": "destination-skynet-loss",
+   "map": "Destination",
+   "opponent": "Skynet",
+   "result": "loss",
+   "end_frame": 10854,
+   "commands": 48,
+   "record_note": ""
+  },
+  {
+   "id": "destination-steamhammer-loss",
+   "map": "Destination",
+   "opponent": "Steamhammer",
+   "result": "loss",
+   "end_frame": 6856,
+   "commands": 60,
+   "record_note": ""
+  },
+  {
+   "id": "benzene-steamhammer-loss",
+   "map": "Benzene",
+   "opponent": "Steamhammer",
+   "result": "loss",
+   "end_frame": 15745,
+   "commands": 76,
+   "record_note": ""
+  },
+  {
+   "id": "benzene-steamhammer-loss-2",
+   "map": "Benzene",
+   "opponent": "Steamhammer",
+   "result": "loss",
+   "end_frame": 16742,
+   "commands": 89,
+   "record_note": ""
+  },
+  {
+   "id": "destination-steamhammer-win",
+   "map": "Destination",
+   "opponent": "Steamhammer",
+   "result": "win",
+   "end_frame": 374,
+   "commands": 0,
+   "record_note": "短局：胜负沿用原始对局记录，结束原因尚未核实。"
+  },
+  {
+   "id": "heartbreak-ridge-steamhammer-loss",
+   "map": "Heartbreak Ridge",
+   "opponent": "Steamhammer",
+   "result": "loss",
+   "end_frame": 14138,
+   "commands": 70,
+   "record_note": ""
+  },
+  {
+   "id": "destination-steamhammer-loss-2",
+   "map": "Destination",
+   "opponent": "Steamhammer",
+   "result": "loss",
+   "end_frame": 7721,
+   "commands": 14,
+   "record_note": ""
+  },
+  {
+   "id": "destination-hladhammer-win",
+   "map": "Destination",
+   "opponent": "HladHammer",
+   "result": "win",
+   "end_frame": 13425,
+   "commands": 31,
+   "record_note": ""
+  },
+  {
+   "id": "destination-hladhammer-win-2",
+   "map": "Destination",
+   "opponent": "HladHammer",
+   "result": "win",
+   "end_frame": 17269,
+   "commands": 59,
+   "record_note": ""
+  },
+  {
+   "id": "destination-skynet-loss-2",
+   "map": "Destination",
+   "opponent": "Skynet",
+   "result": "loss",
+   "end_frame": 20555,
+   "commands": 54,
+   "record_note": ""
+  },
+  {
+   "id": "destination-skynet-loss-3",
+   "map": "Destination",
+   "opponent": "Skynet",
+   "result": "loss",
+   "end_frame": 15564,
+   "commands": 51,
+   "record_note": ""
+  },
+  {
+   "id": "destination-steamhammer-loss-3",
+   "map": "Destination",
+   "opponent": "Steamhammer",
+   "result": "loss",
+   "end_frame": 16556,
+   "commands": 69,
+   "record_note": ""
+  },
+  {
+   "id": "heartbreak-ridge-steamhammer-loss-2",
+   "map": "Heartbreak Ridge",
+   "opponent": "Steamhammer",
+   "result": "loss",
+   "end_frame": 13533,
+   "commands": 20
+  },
+  {
+   "id": "destination-steamhammer-loss-4",
+   "map": "Destination",
+   "opponent": "Steamhammer",
+   "result": "loss",
+   "end_frame": 9097,
+   "commands": 11
+  },
+  {
+   "id": "destination-steamhammer-loss-5",
+   "map": "Destination",
+   "opponent": "Steamhammer",
+   "result": "loss",
+   "end_frame": 13273,
+   "commands": 33
+  },
+  {
+   "id": "destination-steamhammer-loss-6",
+   "map": "Destination",
+   "opponent": "Steamhammer",
+   "result": "loss",
+   "end_frame": 19710,
+   "commands": 43
+  },
+  {
+   "id": "destination-pylonpuller-win-3",
+   "map": "Destination",
+   "opponent": "PylonPuller",
+   "result": "win",
+   "end_frame": 29917,
+   "commands": 107
+  },
+  {
+   "id": "destination-hladhammer-win-3",
+   "map": "Destination",
+   "opponent": "HladHammer",
+   "result": "win",
+   "end_frame": 18656,
+   "commands": 52
+  },
+  {
+   "id": "heartbreak-ridge-pylonpuller-win-2",
+   "map": "Heartbreak Ridge",
+   "opponent": "PylonPuller",
+   "result": "win",
+   "end_frame": 11007,
+   "commands": 13
+  },
+  {
+   "id": "benzene-skynet-loss",
+   "map": "Benzene",
+   "opponent": "Skynet",
+   "result": "loss",
+   "end_frame": 12604,
+   "commands": 23
+  },
+  {
+   "id": "destination-steamhammer-loss-7",
+   "map": "Destination",
+   "opponent": "Steamhammer",
+   "result": "loss",
+   "end_frame": 12015,
+   "commands": 31
+  },
+  {
+   "id": "destination-tscmoo-authorcandidate-win",
+   "map": "Destination",
+   "opponent": "tscmoo-AuthorCandidate",
+   "result": "win",
+   "end_frame": 11410,
+   "commands": 9
+  },
+  {
+   "id": "destination-steamhammer-win-2",
+   "map": "Destination",
+   "opponent": "Steamhammer",
+   "result": "win",
+   "end_frame": 19842,
+   "commands": 6
+  },
+  {
    "id": "benzene-hladhammer-win",
    "map": "Benzene",
    "opponent": "HladHammer",
    "result": "win",
    "end_frame": 15378,
-   "commands": 40,
-   "started_at": "2026-11-17T20:23:16.542597+08:00"
+   "commands": 40
   },
   {
    "id": "benzene-purplewave-loss",
@@ -15,277 +255,7 @@
    "opponent": "PurpleWave",
    "result": "loss",
    "end_frame": 15750,
-   "commands": 48,
-   "started_at": "2026-11-17T20:34:43.517469+08:00"
-  },
-  {
-   "id": "hc-20261116-111814-787864",
-   "map": "Benzene",
-   "opponent": "PylonPuller",
-   "result": "win",
-   "end_frame": 17238,
-   "commands": 96,
-   "started_at": "2026-11-16T11:18:15.214550+08:00",
-   "record_note": ""
-  },
-  {
-   "id": "hc-20261116-174408-154175",
-   "map": "Benzene",
-   "opponent": "PylonPuller",
-   "result": "loss",
-   "end_frame": 14324,
-   "commands": 31,
-   "started_at": "2026-11-16T17:44:08.581542+08:00",
-   "record_note": ""
-  },
-  {
-   "id": "hc-20261116-200923-779837",
-   "map": "Heartbreak Ridge",
-   "opponent": "PylonPuller",
-   "result": "win",
-   "end_frame": 26941,
-   "commands": 73,
-   "started_at": "2026-11-16T20:09:24.251921+08:00",
-   "record_note": ""
-  },
-  {
-   "id": "hc-20261117-100706-524905",
-   "map": "Destination",
-   "opponent": "PylonPuller",
-   "result": "win",
-   "end_frame": 19780,
-   "commands": 96,
-   "started_at": "2026-11-17T10:07:07.131157+08:00",
-   "record_note": ""
-  },
-  {
-   "id": "hc-20261117-114507-389681",
-   "map": "Destination",
-   "opponent": "PylonPuller",
-   "result": "win",
-   "end_frame": 14169,
-   "commands": 22,
-   "started_at": "2026-11-17T11:45:07.602000+08:00",
-   "record_note": ""
-  },
-  {
-   "id": "hc-20261117-135031-741483",
-   "map": "Destination",
-   "opponent": "Skynet",
-   "result": "loss",
-   "end_frame": 10854,
-   "commands": 48,
-   "started_at": "2026-11-17T13:50:32.268000+08:00",
-   "record_note": ""
-  },
-  {
-   "id": "hc-20261117-140044-930195",
-   "map": "Destination",
-   "opponent": "Steamhammer",
-   "result": "loss",
-   "end_frame": 6856,
-   "commands": 60,
-   "started_at": "2026-11-17T14:00:45.573845+08:00",
-   "record_note": ""
-  },
-  {
-   "id": "hc-20261117-171942-613116",
-   "map": "Benzene",
-   "opponent": "Steamhammer",
-   "result": "loss",
-   "end_frame": 15745,
-   "commands": 76,
-   "started_at": "2026-11-17T17:19:43.086014+08:00",
-   "record_note": ""
-  },
-  {
-   "id": "hc-20261117-193432-891497",
-   "map": "Benzene",
-   "opponent": "Steamhammer",
-   "result": "loss",
-   "end_frame": 16742,
-   "commands": 89,
-   "started_at": "2026-11-17T19:34:33.522583+08:00",
-   "record_note": ""
-  },
-  {
-   "id": "hc-20261117-211337-542862",
-   "map": "Destination",
-   "opponent": "Steamhammer",
-   "result": "win",
-   "end_frame": 374,
-   "commands": 0,
-   "started_at": "2026-11-17T21:13:38.119652+08:00",
-   "record_note": "短局：胜负沿用原始对局记录，结束原因尚未核实。"
-  },
-  {
-   "id": "hc-20261117-234246-366513",
-   "map": "Heartbreak Ridge",
-   "opponent": "Steamhammer",
-   "result": "loss",
-   "end_frame": 14138,
-   "commands": 70,
-   "started_at": "2026-11-17T23:42:46.629749+08:00",
-   "record_note": ""
-  },
-  {
-   "id": "hc-20261118-100224-667368",
-   "map": "Destination",
-   "opponent": "Steamhammer",
-   "result": "loss",
-   "end_frame": 7721,
-   "commands": 14,
-   "started_at": "2026-11-18T10:02:25.102974+08:00",
-   "record_note": ""
-  },
-  {
-   "id": "hc-20261118-100855-983859",
-   "map": "Destination",
-   "opponent": "HladHammer",
-   "result": "win",
-   "end_frame": 13425,
-   "commands": 31,
-   "started_at": "2026-11-18T10:08:56.442195+08:00",
-   "record_note": ""
-  },
-  {
-   "id": "hc-20261118-102251-798307",
-   "map": "Destination",
-   "opponent": "HladHammer",
-   "result": "win",
-   "end_frame": 17269,
-   "commands": 59,
-   "started_at": "2026-11-18T10:22:52.277763+08:00",
-   "record_note": ""
-  },
-  {
-   "id": "hc-20261118-103530-156119",
-   "map": "Destination",
-   "opponent": "Skynet",
-   "result": "loss",
-   "end_frame": 20555,
-   "commands": 54,
-   "started_at": "2026-11-18T10:35:30.596195+08:00",
-   "record_note": ""
-  },
-  {
-   "id": "hc-20261118-105028-907777",
-   "map": "Destination",
-   "opponent": "Skynet",
-   "result": "loss",
-   "end_frame": 15564,
-   "commands": 51,
-   "started_at": "2026-11-18T10:50:29.384216+08:00",
-   "record_note": ""
-  },
-  {
-   "id": "hc-20261118-110303-949216",
-   "map": "Destination",
-   "opponent": "Steamhammer",
-   "result": "loss",
-   "end_frame": 16556,
-   "commands": 69,
-   "started_at": "2026-11-18T11:03:04.407724+08:00",
-   "record_note": ""
-  },
-  {
-   "id": "heartbreak-ridge-steamhammer-loss-1117-2208",
-   "map": "Heartbreak Ridge",
-   "opponent": "Steamhammer",
-   "result": "loss",
-   "end_frame": 13533,
-   "commands": 20,
-   "started_at": "2026-11-17T22:08:07.107685+08:00"
-  },
-  {
-   "id": "destination-steamhammer-loss-1117-2227",
-   "map": "Destination",
-   "opponent": "Steamhammer",
-   "result": "loss",
-   "end_frame": 9097,
-   "commands": 11,
-   "started_at": "2026-11-17T22:27:36.930737+08:00"
-  },
-  {
-   "id": "destination-steamhammer-loss-1117-2235",
-   "map": "Destination",
-   "opponent": "Steamhammer",
-   "result": "loss",
-   "end_frame": 13273,
-   "commands": 33,
-   "started_at": "2026-11-17T22:35:26.334740+08:00"
-  },
-  {
-   "id": "destination-steamhammer-loss-1118-0938",
-   "map": "Destination",
-   "opponent": "Steamhammer",
-   "result": "loss",
-   "end_frame": 19710,
-   "commands": 43,
-   "started_at": "2026-11-18T09:38:00.056801+08:00"
-  },
-  {
-   "id": "destination-pylonpuller-win-1118-0952",
-   "map": "Destination",
-   "opponent": "PylonPuller",
-   "result": "win",
-   "end_frame": 29917,
-   "commands": 107,
-   "started_at": "2026-11-18T09:52:47.748161+08:00"
-  },
-  {
-   "id": "destination-hladhammer-win-1118-1022",
-   "map": "Destination",
-   "opponent": "HladHammer",
-   "result": "win",
-   "end_frame": 18656,
-   "commands": 52,
-   "started_at": "2026-11-18T10:22:39.778247+08:00"
-  },
-  {
-   "id": "heartbreak-ridge-pylonpuller-win-1118-1044",
-   "map": "Heartbreak Ridge",
-   "opponent": "PylonPuller",
-   "result": "win",
-   "end_frame": 11007,
-   "commands": 13,
-   "started_at": "2026-11-18T10:44:59.988599+08:00"
-  },
-  {
-   "id": "benzene-skynet-loss-1118-1055",
-   "map": "Benzene",
-   "opponent": "Skynet",
-   "result": "loss",
-   "end_frame": 12604,
-   "commands": 23,
-   "started_at": "2026-11-18T10:55:47.112481+08:00"
-  },
-  {
-   "id": "destination-steamhammer-loss-1118-1105",
-   "map": "Destination",
-   "opponent": "Steamhammer",
-   "result": "loss",
-   "end_frame": 12015,
-   "commands": 31,
-   "started_at": "2026-11-18T11:05:27.129288+08:00"
-  },
-  {
-   "id": "destination-tscmoo-authorcandidate-win-1118-1115",
-   "map": "Destination",
-   "opponent": "tscmoo-AuthorCandidate",
-   "result": "win",
-   "end_frame": 11410,
-   "commands": 9,
-   "started_at": "2026-11-18T11:15:05.148925+08:00"
-  },
-  {
-   "id": "destination-steamhammer-win-1118-1124",
-   "map": "Destination",
-   "opponent": "Steamhammer",
-   "result": "win",
-   "end_frame": 19842,
-   "commands": 6,
-   "started_at": "2026-11-18T11:24:36.923573+08:00"
+   "commands": 48
   }
  ]
 }

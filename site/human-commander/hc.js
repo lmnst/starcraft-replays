@@ -56,8 +56,7 @@ async function main() {
   const get = url => fetch(url).then(r => { if (!r.ok) throw new Error(`${r.status} ${url}`); return r.json(); });
   const [list, definitions] = await Promise.all([get('data/index.json'), get('data/keymaps.json')]);
   index = list; profiles = Object.fromEntries(Object.entries(definitions.profiles).map(([id,p]) => [id, {...p, id}]));
-  $('games').innerHTML = index.matches.map((m,i) => `<button class="hl" data-id="${m.id}"><span class="tag">第 ${i+1} 局 · ${esc(m.map)} · ${m.started_at.slice(0, 16).replace('T', ' ')}</span><h3>对 ${esc(m.opponent)}</h3><p class="chips"><span class="chip ${m.result}">${m.result === 'win' ? '胜' : m.result === 'loss' ? '负' : '结果未确认'}</span><span class="chip">${clock(m.end_frame)}</span><span class="chip">${m.commands} 次按键</span>${m.record_note?'<span class="chip">短局·见记录说明</span>':''}</p></button>`).join('');
-  $('summary').textContent = `共 ${index.matches.length} 局 · 原有两局在前，本地17局按时间顺序追加，另保留并行上传的11局`;
+  $('games').innerHTML = index.matches.map((m,i) => `<button class="hl" data-id="${m.id}"><span class="tag">第 ${i+1} 局 · ${esc(m.map)}</span><h3>对 ${esc(m.opponent)}</h3><p class="chips"><span class="chip ${m.result}">${m.result === 'win' ? '胜' : m.result === 'loss' ? '负' : '结果未确认'}</span><span class="chip">${clock(m.end_frame)}</span><span class="chip">${m.commands} 次按键</span>${m.record_note?'<span class="chip">短局·见记录说明</span>':''}</p></button>`).join('');
   $('games').addEventListener('click', e => { const b = e.target.closest('[data-id]'); if (b) { history.pushState(null, '', `?match=${b.dataset.id}`); route().then(() => $('detail').scrollIntoView({block:'start'})); } });
   window.addEventListener('popstate', route);
   wireControls();
@@ -91,7 +90,7 @@ async function route() {
 function renderDetail() {
   const g = game, me = g.players.find(p => p.id === g.self_player_id), foe = g.players.find(p => p.id !== g.self_player_id);
   $('detail').hidden = false;
-  $('d-eyebrow').textContent = `${g.map} · ${g.started_at.slice(0, 19).replace('T', ' ')} · ${g.source_folder}`;
+  $('d-eyebrow').textContent = g.map;
   $('d-title').textContent = `人类指挥 vs ${g.opponent}`;
   $('d-sub').textContent = `我方 ${me.race}（录像内名 ${me.name}）· 对手 ${g.opponent} ${foe.race}（录像内名 ${foe.name}）· 键位 ${g.keymap} · 时长 ${clock(g.end_frame)}（${g.end_frame} 帧）`;
   $('d-results').innerHTML = `<span class="chip ${g.result}">${g.result === 'win' ? '我方胜' : '我方负'}</span><span class="chip">${g.commands.length} 次按键</span>`;

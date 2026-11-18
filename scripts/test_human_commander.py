@@ -30,17 +30,19 @@ class HumanCommanderTests(unittest.TestCase):
             self.assertEqual(hashlib.sha256(replay.read_bytes()).hexdigest(), data['hashes']['replay'])
             self.assertTrue((PAGE / data['files']['package']).is_file())
             self.assertEqual(len(data['commands']), match['commands'])
+            for key in ('started_at', 'ended_at', 'source_folder'):
+                self.assertNotIn(key, data)
+                self.assertNotIn(key, match)
+            self.assertNotRegex(match['id'], r'20\d{6}|\d{4}-\d{4}$')
             if data.get('terrain'):
                 self.assertTrue((PAGE / data['terrain']).is_file())
 
     def test_append_order_and_historical_data(self):
         matches = json.loads((PAGE / 'data/index.json').read_text(encoding='utf-8'))['matches']
-        self.assertEqual([m['id'] for m in matches[:2]], ['benzene-hladhammer-win', 'benzene-purplewave-loss'])
+        self.assertEqual([m['id'] for m in matches[-2:]], ['benzene-hladhammer-win', 'benzene-purplewave-loss'])
         self.assertEqual(len(matches), 30)
         self.assertEqual(len({m['id'] for m in matches}), 30)
-        local = matches[2:19]
-        self.assertTrue(all(m['id'].startswith('hc-') for m in local))
-        self.assertEqual([m['started_at'] for m in local], sorted(m['started_at'] for m in local))
+        local = matches[:17]
         versions = set()
         for m in local:
             d = json.loads((PAGE / 'data' / f"{m['id']}.json").read_text(encoding='utf-8'))
@@ -55,8 +57,9 @@ class HumanCommanderTests(unittest.TestCase):
                 replays = [n for n in z.namelist() if n.endswith('.rep')]
                 self.assertEqual(len(replays), 1)
                 self.assertEqual(hashlib.sha256(z.read(replays[0])).hexdigest(), d['hashes']['replay'])
-                self.assertIn(d['source_folder'] + '/match.json', z.namelist())
-                self.assertIn(d['source_folder'] + '/bwapi-data/write/commander-layer.jsonl', z.namelist())
+                folder = replays[0].split('/')[0]
+                self.assertIn(folder + '/match.json', z.namelist())
+                self.assertIn(folder + '/bwapi-data/write/commander-layer.jsonl', z.namelist())
         self.assertEqual(len(versions), 7)
 
     def test_keys_change_meaning_and_unknown_version_rejected(self):
@@ -72,11 +75,11 @@ class HumanCommanderTests(unittest.TestCase):
             exporter.profile_for('unrecorded-version')
 
     def test_legacy_missing_fields_and_short_match_are_explicit(self):
-        legacy=json.loads((PAGE/'data/hc-20261116-111814-787864.json').read_text(encoding='utf-8'))
+        legacy=json.loads((PAGE/'data/benzene-pylonpuller-win.json').read_text(encoding='utf-8'))
         self.assertEqual(legacy['hud'], [])
         self.assertEqual(legacy['tasks'], [])
         self.assertTrue(all(r[legacy['state_fields'].index('healthy_army')] is None for r in legacy['states']))
-        short=json.loads((PAGE/'data/hc-20261117-211337-542862.json').read_text(encoding='utf-8'))
+        short=json.loads((PAGE/'data/destination-steamhammer-win.json').read_text(encoding='utf-8'))
         self.assertIn('结束原因尚未核实', short['record_note'])
 
 

@@ -6,6 +6,9 @@ Each match dir is a StarCraft-Commander `matches/<timestamp>` folder. The page
 data comes only from that folder's own logs; nothing is re-simulated. Besides
 the page JSON, the script copies the original .rep and packs every log needed
 by the local commander replay tool into packages/<id>.zip so no field is lost.
+Published page data and ids carry no play date or time: a match id is
+<map>-<opponent>-<result>[-N], and a re-export is matched to its existing id by
+replay SHA256. New matches are appended to the end of data/index.json.
 """
 import collections
 import hashlib
@@ -106,10 +109,10 @@ def export(match_id, folder):
 
     players = [{k: p.get(k) for k in ('id', 'name', 'race', 'color_rgb')} for p in match['players']]
     data = {
-        'id': match_id, 'source_folder': stamp, 'map': match['map'], 'opponent': match['opponent'],
+        'id': match_id, 'map': match['map'], 'opponent': match['opponent'],
         'baseline': match['baseline'], 'control': match['control'], 'keymap': version, 'keymap_id': keymap_id,
         'keymap_label': profile['label'], 'key_labels': profile['keys'], 'version_rule': profile['rule'],
-        'started_at': match['started_at'], 'ended_at': match['ended_at'], 'end_frame': end_frame,
+        'end_frame': end_frame,
         'result': 'win' if match['winner'] else 'loss', 'self_player_id': match['self_player_id'], 'players': players,
         'record_note': '短局：胜负沿用原始对局记录，结束原因尚未核实。' if end_frame < 1200 else '',
         'render_size': match.get('render_size'), 'self_replay_camera': match.get('self_replay_camera'),
@@ -130,7 +133,7 @@ def export(match_id, folder):
     print(f'{match_id}: {len(commands)} commands, {len(hud)} HUD changes, {len(states)} states, '
           f'{out.stat().st_size // 1024} KB data, {package.stat().st_size // 1024} KB package')
     return {'id': match_id, 'map': data['map'], 'opponent': data['opponent'], 'result': data['result'],
-            'end_frame': end_frame, 'commands': len(commands), 'started_at': data['started_at'], 'record_note': data['record_note']}
+            'end_frame': end_frame, 'commands': len(commands), 'record_note': data['record_note']}
 
 
 def slug(text):
@@ -149,11 +152,12 @@ def main(args):
     if not args:
         sys.exit(__doc__)
     existing = json.loads((PAGE / 'data/index.json').read_text(encoding='utf-8'))['matches']
-    by_source = {}
+    by_replay = {}
     for file in (PAGE / 'data').glob('*.json'):
         data = json.loads(file.read_text(encoding='utf-8'))
-        if 'source_folder' in data:
-            by_source[data['source_folder']] = data['id']
+        if isinstance(data, dict) and 'hashes' in data:
+            by_replay[data['hashes']['replay']] = data['id']
+    used = set(by_replay.values())
     jobs = {}
     for arg in args:
         match_id, _, path = arg.rpartition('=') if '=' in arg else ('', '', arg)
@@ -165,11 +169,17 @@ def main(args):
             if not finished_human_match(match_folder):
                 print(f'skip {match_folder.name}: not a finished human-commander match')
                 continue
-            if not match_id and match_folder.name not in by_source:
-                match = json.loads((match_folder / 'match.json').read_text(encoding='utf-8-sig'))
-                stamp = match_folder.name[4:8] + '-' + match_folder.name[9:13]
-                by_source[match_folder.name] = f"{slug(match['map'])}-{slug(match['opponent'])}-{'win' if match['winner'] else 'loss'}-{stamp}"
-            jobs[match_folder.name] = (match_id or by_source[match_folder.name], match_folder)
+            match = json.loads((match_folder / 'match.json').read_text(encoding='utf-8-sig'))
+            replay_hash = sha256(match_folder / match['replay'])
+            if not match_id and replay_hash not in by_replay:
+                base = f"{slug(match['map'])}-{slug(match['opponent'])}-{'win' if match['winner'] else 'loss'}"
+                new_id, n = base, 1
+                while new_id in used:
+                    n += 1
+                    new_id = f'{base}-{n}'
+                used.add(new_id)
+                by_replay[replay_hash] = new_id
+            jobs[match_folder.name] = (match_id or by_replay[replay_hash], match_folder)
     incoming = [export(match_id, folder) for match_id, folder in jobs.values()]
     known = {m['id']:i for i,m in enumerate(existing)}
     for match in incoming:
