@@ -1,0 +1,1217 @@
+{
+  "base": "http://127.0.0.1:8876/human-commander/",
+  "started_at": "2026-11-18T04:04:02.246Z",
+  "capture": false,
+  "matches": [
+    {
+      "id": "benzene-hladhammer-win",
+      "map": "Benzene",
+      "end": 15378,
+      "engine_end": 15424,
+      "keymap": "tenkeys_combat_v12",
+      "commands": 40,
+      "version": "0 全局重置　1 探机避险　2 强制采矿　3 小队模式　4 全队模式　5 近敌／分矿建筑　6 进攻主基地　7 持续区域警戒　8 安全集结　9 全军回防",
+      "canvas": [
+        512,
+        448
+      ],
+      "views": {
+        "all": {
+          "frame": 0,
+          "fog": 0,
+          "players": [
+            {
+              "name": "StarterBot",
+              "vision": 1
+            },
+            {
+              "name": "UAlbertaBot",
+              "vision": 1
+            }
+          ],
+          "selfName": "StarterBot"
+        },
+        "self": {
+          "frame": 0,
+          "fog": 1,
+          "players": [
+            {
+              "name": "StarterBot",
+              "vision": 1
+            },
+            {
+              "name": "UAlbertaBot",
+              "vision": 0
+            }
+          ],
+          "selfName": "StarterBot"
+        }
+      },
+      "playback": {
+        "frame": 6,
+        "paused": 1
+      },
+      "last_command": {
+        "expected": 12842,
+        "actual": 12842,
+        "paused": 1,
+        "label": "0全局重置 8:59 · 帧 12842 · 0 秒前已交回 bot · 范围 全队 · 涉及 17 个单位反馈：已全部重置：探机采矿锁及人工任务解除，交回Bot。",
+        "key": "0",
+        "name": "全局重置"
+      },
+      "first_command": {
+        "expected": 1856,
+        "actual": 1856
+      },
+      "end_seek": 15378,
+      "errors": [],
+      "pass": true
+    },
+    {
+      "id": "benzene-purplewave-loss",
+      "map": "Benzene",
+      "end": 15750,
+      "engine_end": 15827,
+      "keymap": "tenkeys_combat_v12",
+      "commands": 48,
+      "version": "0 全局重置　1 探机避险　2 强制采矿　3 小队模式　4 全队模式　5 近敌／分矿建筑　6 进攻主基地　7 持续区域警戒　8 安全集结　9 全军回防",
+      "canvas": [
+        512,
+        448
+      ],
+      "views": {
+        "all": {
+          "frame": 0,
+          "fog": 0,
+          "players": [
+            {
+              "name": "StarterBot",
+              "vision": 1
+            },
+            {
+              "name": "UAlbertaBot",
+              "vision": 1
+            }
+          ],
+          "selfName": "StarterBot"
+        },
+        "self": {
+          "frame": 0,
+          "fog": 1,
+          "players": [
+            {
+              "name": "StarterBot",
+              "vision": 1
+            },
+            {
+              "name": "UAlbertaBot",
+              "vision": 0
+            }
+          ],
+          "selfName": "StarterBot"
+        }
+      },
+      "playback": {
+        "frame": 13,
+        "paused": 1
+      },
+      "last_command": {
+        "expected": 13329,
+        "actual": 13329,
+        "paused": 1,
+        "label": "0全局重置 9:19 · 帧 13329 · 0 秒前已交回 bot · 范围 全队 · 涉及 9 个单位反馈：已全部重置：探机采矿锁及人工任务解除，交回Bot。",
+        "key": "0",
+        "name": "全局重置"
+      },
+      "first_command": {
+        "expected": 4057,
+        "actual": 4057
+      },
+      "end_seek": 15750,
+      "errors": [],
+      "pass": true
+    },
+    {
+      "id": "hc-20261116-111814-787864",
+      "map": "Benzene",
+      "end": 17238,
+      "engine_end": 17284,
+      "keymap": "eight-key-top-row-v1",
+      "commands": 96,
+      "version": "1 侦察　2 小队骚扰　3 攻分矿　4 就地固守　5 攻主基地　6 保卫基地　7 就地集结　8 脱战后撤",
+      "canvas": [
+        512,
+        448
+      ],
+      "views": {
+        "all": {
+          "frame": 0,
+          "fog": 0,
+          "players": [
+            {
+              "name": "StarterBot",
+              "vision": 1
+            },
+            {
+              "name": "UAlbertaBot",
+              "vision": 1
+            }
+          ],
+          "selfName": "StarterBot"
+        },
+        "self": {
+          "frame": 0,
+          "fog": 1,
+          "players": [
+            {
+              "name": "StarterBot",
+              "vision": 1
+            },
+            {
+              "name": "UAlbertaBot",
+              "vision": 0
+            }
+          ],
+          "selfName": "StarterBot"
+        }
+      },
+      "playback": {
+        "frame": 18,
+        "paused": 1
+      },
+      "last_command": {
+        "expected": 15198,
+        "actual": 15198,
+        "paused": 1,
+        "label": "5攻主基地 10:38 · 帧 15198 · 0 秒前已下令 · 范围 该版未记录 · 涉及 未记录 个单位反馈：本次提示未记录",
+        "key": "5",
+        "name": "攻主基地"
+      },
+      "first_command": {
+        "expected": 1253,
+        "actual": 1253
+      },
+      "end_seek": 17238,
+      "errors": [],
+      "pass": true
+    },
+    {
+      "id": "hc-20261116-174408-154175",
+      "map": "Benzene",
+      "end": 14324,
+      "engine_end": 14401,
+      "keymap": "scope-actions-v8-clear-global-reset",
+      "commands": 31,
+      "version": "0 全部恢复自动作战　1 侦察避险　2 小队模式　3 全队模式　4 进攻分矿　5 进攻主基地　6 安全集结　7 安全撤退　8 回防基地　9 清理敌军",
+      "canvas": [
+        512,
+        448
+      ],
+      "views": {
+        "all": {
+          "frame": 0,
+          "fog": 0,
+          "players": [
+            {
+              "name": "StarterBot",
+              "vision": 1
+            },
+            {
+              "name": "UAlbertaBot",
+              "vision": 1
+            }
+          ],
+          "selfName": "StarterBot"
+        },
+        "self": {
+          "frame": 0,
+          "fog": 1,
+          "players": [
+            {
+              "name": "StarterBot",
+              "vision": 1
+            },
+            {
+              "name": "UAlbertaBot",
+              "vision": 0
+            }
+          ],
+          "selfName": "StarterBot"
+        }
+      },
+      "playback": {
+        "frame": 6,
+        "paused": 1
+      },
+      "last_command": {
+        "expected": 9768,
+        "actual": 9768,
+        "paused": 1,
+        "label": "1侦察避险 6:50 · 帧 9768 · 0 秒前未执行：没有侦察探机 · 范围 全队 · 涉及 0 个单位反馈：没有可接管的侦察探机，本次未执行。",
+        "key": "1",
+        "name": "侦察避险"
+      },
+      "first_command": {
+        "expected": 3400,
+        "actual": 3400
+      },
+      "end_seek": 14324,
+      "errors": [],
+      "pass": true
+    },
+    {
+      "id": "hc-20261116-200923-779837",
+      "map": "Heartbreak Ridge",
+      "end": 26941,
+      "engine_end": 26987,
+      "keymap": "scope-actions-v10-retreat-rendezvous",
+      "commands": 73,
+      "version": "0 全部恢复自动作战　1 侦察避险　2 小队模式　3 全队模式　4 进攻分矿　5 进攻主基地　6 安全集结　7 撤离集结等援兵　8 回防基地　9 清理敌军",
+      "canvas": [
+        512,
+        384
+      ],
+      "views": {
+        "all": {
+          "frame": 0,
+          "fog": 0,
+          "players": [
+            {
+              "name": "StarterBot",
+              "vision": 1
+            },
+            {
+              "name": "UAlbertaBot",
+              "vision": 1
+            }
+          ],
+          "selfName": "StarterBot"
+        },
+        "self": {
+          "frame": 0,
+          "fog": 1,
+          "players": [
+            {
+              "name": "StarterBot",
+              "vision": 1
+            },
+            {
+              "name": "UAlbertaBot",
+              "vision": 0
+            }
+          ],
+          "selfName": "StarterBot"
+        }
+      },
+      "playback": {
+        "frame": 18,
+        "paused": 1
+      },
+      "last_command": {
+        "expected": 26032,
+        "actual": 26032,
+        "paused": 1,
+        "label": "5进攻主基地 18:13 · 帧 26032 · 0 秒前已下令 · 范围 全队 · 涉及 46 个单位反馈：已下令：全队 · 进攻主基地（46 名）。",
+        "key": "5",
+        "name": "进攻主基地"
+      },
+      "first_command": {
+        "expected": 593,
+        "actual": 593
+      },
+      "end_seek": 26941,
+      "errors": [],
+      "pass": true
+    },
+    {
+      "id": "hc-20261117-100706-524905",
+      "map": "Destination",
+      "end": 19780,
+      "engine_end": 19826,
+      "keymap": "scope-actions-v10-retreat-rendezvous",
+      "commands": 96,
+      "version": "0 全部恢复自动作战　1 侦察避险　2 小队模式　3 全队模式　4 进攻分矿　5 进攻主基地　6 安全集结　7 撤离集结等援兵　8 回防基地　9 清理敌军",
+      "canvas": [
+        384,
+        512
+      ],
+      "views": {
+        "all": {
+          "frame": 0,
+          "fog": 0,
+          "players": [
+            {
+              "name": "StarterBot",
+              "vision": 1
+            },
+            {
+              "name": "UAlbertaBot",
+              "vision": 1
+            }
+          ],
+          "selfName": "StarterBot"
+        },
+        "self": {
+          "frame": 0,
+          "fog": 1,
+          "players": [
+            {
+              "name": "StarterBot",
+              "vision": 1
+            },
+            {
+              "name": "UAlbertaBot",
+              "vision": 0
+            }
+          ],
+          "selfName": "StarterBot"
+        }
+      },
+      "playback": {
+        "frame": 12,
+        "paused": 1
+      },
+      "last_command": {
+        "expected": 18026,
+        "actual": 18026,
+        "paused": 1,
+        "label": "5进攻主基地 12:37 · 帧 18026 · 0 秒前已下令 · 范围 全队 · 涉及 23 个单位反馈：已下令：全队 · 进攻主基地（23 名）。",
+        "key": "5",
+        "name": "进攻主基地"
+      },
+      "first_command": {
+        "expected": 3129,
+        "actual": 3129
+      },
+      "end_seek": 19780,
+      "errors": [],
+      "pass": true
+    },
+    {
+      "id": "hc-20261117-114507-389681",
+      "map": "Destination",
+      "end": 14169,
+      "engine_end": 14215,
+      "keymap": "scope-actions-v10-retreat-rendezvous",
+      "commands": 22,
+      "version": "0 全部恢复自动作战　1 侦察避险　2 小队模式　3 全队模式　4 进攻分矿　5 进攻主基地　6 安全集结　7 撤离集结等援兵　8 回防基地　9 清理敌军",
+      "canvas": [
+        384,
+        512
+      ],
+      "views": {
+        "all": {
+          "frame": 0,
+          "fog": 0,
+          "players": [
+            {
+              "name": "UAlbertaBot",
+              "vision": 1
+            },
+            {
+              "name": "StarterBot",
+              "vision": 1
+            }
+          ],
+          "selfName": "StarterBot"
+        },
+        "self": {
+          "frame": 0,
+          "fog": 1,
+          "players": [
+            {
+              "name": "UAlbertaBot",
+              "vision": 0
+            },
+            {
+              "name": "StarterBot",
+              "vision": 1
+            }
+          ],
+          "selfName": "StarterBot"
+        }
+      },
+      "playback": {
+        "frame": 12,
+        "paused": 1
+      },
+      "last_command": {
+        "expected": 10950,
+        "actual": 10950,
+        "paused": 1,
+        "label": "5进攻主基地 7:39 · 帧 10950 · 0 秒前已下令 · 范围 全队 · 涉及 11 个单位反馈：已下令：全队 · 进攻主基地（11 名）。",
+        "key": "5",
+        "name": "进攻主基地"
+      },
+      "first_command": {
+        "expected": 3384,
+        "actual": 3384
+      },
+      "end_seek": 14169,
+      "errors": [],
+      "pass": true
+    },
+    {
+      "id": "hc-20261117-135031-741483",
+      "map": "Destination",
+      "end": 10854,
+      "engine_end": 10854,
+      "keymap": "scope-actions-v10-retreat-rendezvous",
+      "commands": 48,
+      "version": "0 全部恢复自动作战　1 侦察避险　2 小队模式　3 全队模式　4 进攻分矿　5 进攻主基地　6 安全集结　7 撤离集结等援兵　8 回防基地　9 清理敌军",
+      "canvas": [
+        384,
+        512
+      ],
+      "views": {
+        "all": {
+          "frame": 0,
+          "fog": 0,
+          "players": [
+            {
+              "name": "StarterBot",
+              "vision": 1
+            },
+            {
+              "name": "StarterBot",
+              "vision": 1
+            }
+          ],
+          "selfName": "StarterBot"
+        },
+        "self": {
+          "frame": 0,
+          "fog": 1,
+          "players": [
+            {
+              "name": "StarterBot",
+              "vision": 1
+            },
+            {
+              "name": "StarterBot",
+              "vision": 1
+            }
+          ],
+          "selfName": "StarterBot"
+        }
+      },
+      "playback": {
+        "frame": 18,
+        "paused": 1
+      },
+      "last_command": {
+        "expected": 10012,
+        "actual": 10012,
+        "paused": 1,
+        "label": "5进攻主基地 7:00 · 帧 10012 · 0 秒前已下令 · 范围 全队 · 涉及 6 个单位反馈：已下令：全队 · 进攻主基地（6 名）。",
+        "key": "5",
+        "name": "进攻主基地"
+      },
+      "first_command": {
+        "expected": 268,
+        "actual": 268
+      },
+      "end_seek": 10854,
+      "errors": [],
+      "pass": true
+    },
+    {
+      "id": "hc-20261117-140044-930195",
+      "map": "Destination",
+      "end": 6856,
+      "engine_end": 6856,
+      "keymap": "scope-actions-v10-retreat-rendezvous",
+      "commands": 60,
+      "version": "0 全部恢复自动作战　1 侦察避险　2 小队模式　3 全队模式　4 进攻分矿　5 进攻主基地　6 安全集结　7 撤离集结等援兵　8 回防基地　9 清理敌军",
+      "canvas": [
+        384,
+        512
+      ],
+      "views": {
+        "all": {
+          "frame": 0,
+          "fog": 0,
+          "players": [
+            {
+              "name": "UAlbertaBot",
+              "vision": 1
+            },
+            {
+              "name": "StarterBot",
+              "vision": 1
+            }
+          ],
+          "selfName": "StarterBot"
+        },
+        "self": {
+          "frame": 0,
+          "fog": 1,
+          "players": [
+            {
+              "name": "UAlbertaBot",
+              "vision": 0
+            },
+            {
+              "name": "StarterBot",
+              "vision": 1
+            }
+          ],
+          "selfName": "StarterBot"
+        }
+      },
+      "playback": {
+        "frame": 12,
+        "paused": 1
+      },
+      "last_command": {
+        "expected": 6338,
+        "actual": 6338,
+        "paused": 1,
+        "label": "9清理敌军 4:26 · 帧 6338 · 0 秒前已下令 · 范围 全队 · 涉及 2 个单位反馈：已下令：全队清理敌军；结束后空地待命，避开建筑和矿路。",
+        "key": "9",
+        "name": "清理敌军"
+      },
+      "first_command": {
+        "expected": 2972,
+        "actual": 2972
+      },
+      "end_seek": 6856,
+      "errors": [],
+      "pass": true
+    },
+    {
+      "id": "hc-20261117-171942-613116",
+      "map": "Benzene",
+      "end": 15745,
+      "engine_end": 15745,
+      "keymap": "tenkeys_economy_v11",
+      "commands": 76,
+      "version": "0 全局重置　1 探机避险　2 强制采矿　3 小队模式　4 全队模式　5 近敌／分矿建筑　6 主建筑　7 兵和炮台　8 安全集结　9 全军回防",
+      "canvas": [
+        512,
+        448
+      ],
+      "views": {
+        "all": {
+          "frame": 0,
+          "fog": 0,
+          "players": [
+            {
+              "name": "UAlbertaBot",
+              "vision": 1
+            },
+            {
+              "name": "StarterBot",
+              "vision": 1
+            }
+          ],
+          "selfName": "StarterBot"
+        },
+        "self": {
+          "frame": 0,
+          "fog": 1,
+          "players": [
+            {
+              "name": "UAlbertaBot",
+              "vision": 0
+            },
+            {
+              "name": "StarterBot",
+              "vision": 1
+            }
+          ],
+          "selfName": "StarterBot"
+        }
+      },
+      "playback": {
+        "frame": 7,
+        "paused": 1
+      },
+      "last_command": {
+        "expected": 14839,
+        "actual": 14839,
+        "paused": 1,
+        "label": "0全局重置 10:23 · 帧 14839 · 0 秒前已交回 bot · 范围 全队 · 涉及 0 个单位反馈：已全部重置：探机采矿锁及人工任务解除，交回Bot。",
+        "key": "0",
+        "name": "全局重置"
+      },
+      "first_command": {
+        "expected": 3388,
+        "actual": 3388
+      },
+      "end_seek": 15745,
+      "errors": [],
+      "pass": true
+    },
+    {
+      "id": "hc-20261117-193432-891497",
+      "map": "Benzene",
+      "end": 16742,
+      "engine_end": 16742,
+      "keymap": "tenkeys_combat_v12",
+      "commands": 89,
+      "version": "0 全局重置　1 探机避险　2 强制采矿　3 小队模式　4 全队模式　5 近敌／分矿建筑　6 进攻主基地　7 持续区域警戒　8 安全集结　9 全军回防",
+      "canvas": [
+        512,
+        448
+      ],
+      "views": {
+        "all": {
+          "frame": 0,
+          "fog": 0,
+          "players": [
+            {
+              "name": "StarterBot",
+              "vision": 1
+            },
+            {
+              "name": "UAlbertaBot",
+              "vision": 1
+            }
+          ],
+          "selfName": "StarterBot"
+        },
+        "self": {
+          "frame": 0,
+          "fog": 1,
+          "players": [
+            {
+              "name": "StarterBot",
+              "vision": 1
+            },
+            {
+              "name": "UAlbertaBot",
+              "vision": 0
+            }
+          ],
+          "selfName": "StarterBot"
+        }
+      },
+      "playback": {
+        "frame": 14,
+        "paused": 1
+      },
+      "last_command": {
+        "expected": 14611,
+        "actual": 14611,
+        "paused": 1,
+        "label": "2强制采矿 10:13 · 帧 14611 · 0 秒前矿锁开启 · 范围 全队 · 涉及 25 个单位反馈：分矿1受袭：按9全军回防。",
+        "key": "2",
+        "name": "强制采矿"
+      },
+      "first_command": {
+        "expected": 1562,
+        "actual": 1562
+      },
+      "end_seek": 16742,
+      "errors": [],
+      "pass": true
+    },
+    {
+      "id": "hc-20261117-211337-542862",
+      "map": "Destination",
+      "end": 374,
+      "engine_end": 420,
+      "keymap": "tenkeys_assembly_v14",
+      "commands": 0,
+      "version": "0 全局重置　1 探机避险　2 强制采矿　3 小队模式　4 全队模式　5 近敌／分矿建筑　6 进攻主基地　7 持续区域警戒　8 原地集结等援兵　9 全军回防　Alt+8 安全撤离集结",
+      "canvas": [
+        384,
+        512
+      ],
+      "views": {
+        "all": {
+          "frame": 0,
+          "fog": 0,
+          "players": [
+            {
+              "name": "StarterBot",
+              "vision": 1
+            },
+            {
+              "name": "UAlbertaBot",
+              "vision": 1
+            }
+          ],
+          "selfName": "StarterBot"
+        },
+        "self": {
+          "frame": 0,
+          "fog": 1,
+          "players": [
+            {
+              "name": "StarterBot",
+              "vision": 1
+            },
+            {
+              "name": "UAlbertaBot",
+              "vision": 0
+            }
+          ],
+          "selfName": "StarterBot"
+        }
+      },
+      "playback": {
+        "frame": 12,
+        "paused": 1
+      },
+      "end_seek": 374,
+      "errors": [],
+      "pass": true
+    },
+    {
+      "id": "hc-20261117-234246-366513",
+      "map": "Heartbreak Ridge",
+      "end": 14138,
+      "engine_end": 14215,
+      "keymap": "tenkeys_assembly_v14",
+      "commands": 70,
+      "version": "0 全局重置　1 探机避险　2 强制采矿　3 小队模式　4 全队模式　5 近敌／分矿建筑　6 进攻主基地　7 持续区域警戒　8 原地集结等援兵　9 全军回防　Alt+8 安全撤离集结",
+      "canvas": [
+        512,
+        384
+      ],
+      "views": {
+        "all": {
+          "frame": 0,
+          "fog": 0,
+          "players": [
+            {
+              "name": "UAlbertaBot",
+              "vision": 1
+            },
+            {
+              "name": "StarterBot",
+              "vision": 1
+            }
+          ],
+          "selfName": "StarterBot"
+        },
+        "self": {
+          "frame": 0,
+          "fog": 1,
+          "players": [
+            {
+              "name": "UAlbertaBot",
+              "vision": 0
+            },
+            {
+              "name": "StarterBot",
+              "vision": 1
+            }
+          ],
+          "selfName": "StarterBot"
+        }
+      },
+      "playback": {
+        "frame": 18,
+        "paused": 1
+      },
+      "last_command": {
+        "expected": 13830,
+        "actual": 13830,
+        "paused": 1,
+        "label": "7持续区域警戒 9:40 · 帧 13830 · 0 秒前重复按键，保留原任务 · 范围 全队 · 涉及 4 个单位反馈：原任务继续：保留集火、追击边界和警戒区域。",
+        "key": "7",
+        "name": "持续区域警戒"
+      },
+      "first_command": {
+        "expected": 3541,
+        "actual": 3541
+      },
+      "alt8": "Alt+8安全撤离集结 3:44 · 帧 5335 · 0 秒前已下令 · 范围 全队 · 涉及 4 个单位反馈：已下令：全队安全撤离集结；先脱险再汇合，等待下一条指令。",
+      "end_seek": 14138,
+      "errors": [],
+      "pass": true
+    },
+    {
+      "id": "hc-20261118-100224-667368",
+      "map": "Destination",
+      "end": 7721,
+      "engine_end": 7798,
+      "keymap": "tenkeys_main_area_v16",
+      "commands": 14,
+      "version": "0 全局重置　1 探机避险　2 强制采矿　3 小队模式　4 全队模式　5 近敌／分矿建筑　6 主基地区域清场　7 就近警戒迎敌　8 原地集结等援兵　9 全军回防　Alt+8 安全撤离集结",
+      "canvas": [
+        384,
+        512
+      ],
+      "views": {
+        "all": {
+          "frame": 0,
+          "fog": 0,
+          "players": [
+            {
+              "name": "UAlbertaBot",
+              "vision": 1
+            },
+            {
+              "name": "StarterBot",
+              "vision": 1
+            }
+          ],
+          "selfName": "StarterBot"
+        },
+        "self": {
+          "frame": 0,
+          "fog": 1,
+          "players": [
+            {
+              "name": "UAlbertaBot",
+              "vision": 0
+            },
+            {
+              "name": "StarterBot",
+              "vision": 1
+            }
+          ],
+          "selfName": "StarterBot"
+        }
+      },
+      "playback": {
+        "frame": 12,
+        "paused": 1
+      },
+      "last_command": {
+        "expected": 4965,
+        "actual": 4965,
+        "paused": 1,
+        "label": "2强制采矿 3:28 · 帧 4965 · 0 秒前矿锁开启 · 范围 全队 · 涉及 16 个单位反馈：强制采矿已开启：屏蔽追击和侦察，保留采气、建造；0解除。",
+        "key": "2",
+        "name": "强制采矿"
+      },
+      "first_command": {
+        "expected": 3608,
+        "actual": 3608
+      },
+      "end_seek": 7721,
+      "errors": [],
+      "pass": true
+    },
+    {
+      "id": "hc-20261118-100855-983859",
+      "map": "Destination",
+      "end": 13425,
+      "engine_end": 13471,
+      "keymap": "tenkeys_main_area_v16",
+      "commands": 31,
+      "version": "0 全局重置　1 探机避险　2 强制采矿　3 小队模式　4 全队模式　5 近敌／分矿建筑　6 主基地区域清场　7 就近警戒迎敌　8 原地集结等援兵　9 全军回防　Alt+8 安全撤离集结",
+      "canvas": [
+        384,
+        512
+      ],
+      "views": {
+        "all": {
+          "frame": 0,
+          "fog": 0,
+          "players": [
+            {
+              "name": "UAlbertaBot",
+              "vision": 1
+            },
+            {
+              "name": "StarterBot",
+              "vision": 1
+            }
+          ],
+          "selfName": "StarterBot"
+        },
+        "self": {
+          "frame": 0,
+          "fog": 1,
+          "players": [
+            {
+              "name": "UAlbertaBot",
+              "vision": 0
+            },
+            {
+              "name": "StarterBot",
+              "vision": 1
+            }
+          ],
+          "selfName": "StarterBot"
+        }
+      },
+      "playback": {
+        "frame": 19,
+        "paused": 1
+      },
+      "last_command": {
+        "expected": 10400,
+        "actual": 10400,
+        "paused": 1,
+        "label": "0全局重置 7:16 · 帧 10400 · 0 秒前已交回 bot · 范围 全队 · 涉及 13 个单位反馈：已全部重置：探机采矿锁及人工任务解除，交回Bot。",
+        "key": "0",
+        "name": "全局重置"
+      },
+      "first_command": {
+        "expected": 3550,
+        "actual": 3550
+      },
+      "alt8": "Alt+8安全撤离集结 5:43 · 帧 8170 · 0 秒前已下令 · 范围 全队 · 涉及 5 个单位反馈：已下令：全队安全撤离集结；先脱险再汇合，等待下一条指令。",
+      "end_seek": 13425,
+      "errors": [],
+      "pass": true
+    },
+    {
+      "id": "hc-20261118-102251-798307",
+      "map": "Destination",
+      "end": 17269,
+      "engine_end": 17315,
+      "keymap": "tenkeys_main_area_v16",
+      "commands": 59,
+      "version": "0 全局重置　1 探机避险　2 强制采矿　3 小队模式　4 全队模式　5 近敌／分矿建筑　6 主基地区域清场　7 就近警戒迎敌　8 原地集结等援兵　9 全军回防　Alt+8 安全撤离集结",
+      "canvas": [
+        384,
+        512
+      ],
+      "views": {
+        "all": {
+          "frame": 0,
+          "fog": 0,
+          "players": [
+            {
+              "name": "UAlbertaBot",
+              "vision": 1
+            },
+            {
+              "name": "StarterBot",
+              "vision": 1
+            }
+          ],
+          "selfName": "StarterBot"
+        },
+        "self": {
+          "frame": 0,
+          "fog": 1,
+          "players": [
+            {
+              "name": "UAlbertaBot",
+              "vision": 0
+            },
+            {
+              "name": "StarterBot",
+              "vision": 1
+            }
+          ],
+          "selfName": "StarterBot"
+        }
+      },
+      "playback": {
+        "frame": 18,
+        "paused": 1
+      },
+      "last_command": {
+        "expected": 16552,
+        "actual": 16552,
+        "paused": 1,
+        "label": "6主基地区域清场 11:35 · 帧 16552 · 0 秒前已下令 · 范围 全队 · 涉及 38 个单位反馈：已下令：全队清主基地区域；先敌军炮台，再外围水晶等建筑，清完后安全集结。",
+        "key": "6",
+        "name": "主基地区域清场"
+      },
+      "first_command": {
+        "expected": 3055,
+        "actual": 3055
+      },
+      "alt8": "Alt+8安全撤离集结 5:46 · 帧 8253 · 0 秒前已下令 · 范围 全队 · 涉及 5 个单位反馈：已下令：全队安全撤离集结；先脱险再汇合，等待下一条指令。",
+      "end_seek": 17269,
+      "errors": [],
+      "pass": true
+    },
+    {
+      "id": "hc-20261118-103530-156119",
+      "map": "Destination",
+      "end": 20555,
+      "engine_end": 20632,
+      "keymap": "tenkeys_main_area_v16",
+      "commands": 54,
+      "version": "0 全局重置　1 探机避险　2 强制采矿　3 小队模式　4 全队模式　5 近敌／分矿建筑　6 主基地区域清场　7 就近警戒迎敌　8 原地集结等援兵　9 全军回防　Alt+8 安全撤离集结",
+      "canvas": [
+        384,
+        512
+      ],
+      "views": {
+        "all": {
+          "frame": 0,
+          "fog": 0,
+          "players": [
+            {
+              "name": "StarterBot",
+              "vision": 1
+            },
+            {
+              "name": "StarterBot",
+              "vision": 1
+            }
+          ],
+          "selfName": "StarterBot"
+        },
+        "self": {
+          "frame": 0,
+          "fog": 1,
+          "players": [
+            {
+              "name": "StarterBot",
+              "vision": 1
+            },
+            {
+              "name": "StarterBot",
+              "vision": 1
+            }
+          ],
+          "selfName": "StarterBot"
+        }
+      },
+      "playback": {
+        "frame": 18,
+        "paused": 1
+      },
+      "last_command": {
+        "expected": 16375,
+        "actual": 16375,
+        "paused": 1,
+        "label": "2强制采矿 11:27 · 帧 16375 · 0 秒前矿锁开启 · 范围 全队 · 涉及 33 个单位反馈：强制采矿已开启：屏蔽追击和侦察，保留采气、建造；0解除。",
+        "key": "2",
+        "name": "强制采矿"
+      },
+      "first_command": {
+        "expected": 3183,
+        "actual": 3183
+      },
+      "end_seek": 20555,
+      "errors": [],
+      "pass": true
+    },
+    {
+      "id": "hc-20261118-105028-907777",
+      "map": "Destination",
+      "end": 15564,
+      "engine_end": 15641,
+      "keymap": "tenkeys_main_area_v16",
+      "commands": 51,
+      "version": "0 全局重置　1 探机避险　2 强制采矿　3 小队模式　4 全队模式　5 近敌／分矿建筑　6 主基地区域清场　7 就近警戒迎敌　8 原地集结等援兵　9 全军回防　Alt+8 安全撤离集结",
+      "canvas": [
+        384,
+        512
+      ],
+      "views": {
+        "all": {
+          "frame": 0,
+          "fog": 0,
+          "players": [
+            {
+              "name": "StarterBot",
+              "vision": 1
+            },
+            {
+              "name": "StarterBot",
+              "vision": 1
+            }
+          ],
+          "selfName": "StarterBot"
+        },
+        "self": {
+          "frame": 0,
+          "fog": 1,
+          "players": [
+            {
+              "name": "StarterBot",
+              "vision": 1
+            },
+            {
+              "name": "StarterBot",
+              "vision": 1
+            }
+          ],
+          "selfName": "StarterBot"
+        }
+      },
+      "playback": {
+        "frame": 6,
+        "paused": 1
+      },
+      "last_command": {
+        "expected": 13649,
+        "actual": 13649,
+        "paused": 1,
+        "label": "0全局重置 9:33 · 帧 13649 · 0 秒前已交回 bot · 范围 全队 · 涉及 1 个单位反馈：已全部重置：探机采矿锁及人工任务解除，交回Bot。",
+        "key": "0",
+        "name": "全局重置"
+      },
+      "first_command": {
+        "expected": 2557,
+        "actual": 2557
+      },
+      "end_seek": 15564,
+      "errors": [],
+      "pass": true
+    },
+    {
+      "id": "hc-20261118-110303-949216",
+      "map": "Destination",
+      "end": 16556,
+      "engine_end": 16633,
+      "keymap": "tenkeys_main_area_v16",
+      "commands": 69,
+      "version": "0 全局重置　1 探机避险　2 强制采矿　3 小队模式　4 全队模式　5 近敌／分矿建筑　6 主基地区域清场　7 就近警戒迎敌　8 原地集结等援兵　9 全军回防　Alt+8 安全撤离集结",
+      "canvas": [
+        384,
+        512
+      ],
+      "views": {
+        "all": {
+          "frame": 0,
+          "fog": 0,
+          "players": [
+            {
+              "name": "StarterBot",
+              "vision": 1
+            },
+            {
+              "name": "UAlbertaBot",
+              "vision": 1
+            }
+          ],
+          "selfName": "StarterBot"
+        },
+        "self": {
+          "frame": 0,
+          "fog": 1,
+          "players": [
+            {
+              "name": "StarterBot",
+              "vision": 1
+            },
+            {
+              "name": "UAlbertaBot",
+              "vision": 0
+            }
+          ],
+          "selfName": "StarterBot"
+        }
+      },
+      "playback": {
+        "frame": 18,
+        "paused": 1
+      },
+      "last_command": {
+        "expected": 12772,
+        "actual": 12772,
+        "paused": 1,
+        "label": "0全局重置 8:56 · 帧 12772 · 0 秒前已交回 bot · 范围 全队 · 涉及 7 个单位反馈：已全部重置：探机采矿锁及人工任务解除，交回Bot。",
+        "key": "0",
+        "name": "全局重置"
+      },
+      "first_command": {
+        "expected": 3507,
+        "actual": 3507
+      },
+      "end_seek": 16556,
+      "errors": [],
+      "pass": true
+    }
+  ],
+  "pass": true,
+  "finished_at": "2026-11-18T04:05:29.445Z",
+  "errors": []
+}

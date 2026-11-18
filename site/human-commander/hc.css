@@ -40,3 +40,5 @@
 .hc-pill{position:relative;display:inline-block;margin:2px 4px 2px 0;padding:1px 7px;border:1px solid var(--line);border-radius:3px;overflow:hidden;white-space:nowrap}
 .hc-pill{isolation:isolate}
 .hc-pill i{position:absolute;left:0;top:0;bottom:0;background:rgba(196,219,145,.18);z-index:-1}
+
+.hc-version{border:1px solid var(--line,#34413b);border-radius:12px;padding:18px 22px;margin:18px 0 24px}.hc-version h3{margin:0 0 12px}.hc-version p{line-height:1.9}.hc-version p:empty{display:none}.hc-key{white-space:nowrap}#map{max-width:100%;height:auto}

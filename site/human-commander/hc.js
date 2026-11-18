@@ -1,12 +1,19 @@
 'use strict';
 const SEC_PER_FRAME = 0.042, FPS = 1 / SEC_PER_FRAME, TILE = 32, PX = 4;
-const KEY = {1: '探机避险', 2: '强制采矿', 3: '小队模式', 4: '全队模式', 5: '近敌/分矿建筑', 6: '进攻主基地', 7: '区域警戒', 8: '安全集结', 9: '全军回防', 0: '全局重置'};
 const KEY_COLOR = {1: '#9aa7a0', 2: '#e0c46b', 3: '#7fc8c0', 4: '#7fc8c0', 5: '#e8a06b', 6: '#e8836b', 7: '#b48be0', 8: '#8fb4d9', 9: '#c4db91', 0: '#6f7b74'};
 const STATUS = {applied: '已下令', task_confirmed: '重复按键，保留原任务', auto_restored: '已交回 bot', mining_locked: '矿锁开启',
-  mode_selected: '已选范围', expansion_unknown: '未找到目标，保持原任务', no_scout_probe: '未执行：没有侦察探机'};
+  mode_selected: '已选范围', expansion_unknown: '未找到目标，保持原任务', no_scout_probe: '未执行：没有侦察探机',
+  scout_evade_applied: '已接管探机避险', squad_split: '小队已建立', mode_unchanged: '范围保持不变',
+  not_enough_healthy_units: '健康兵力不足，未分队', waiting_units: '已记录，等待作战单位',
+  patrol_reanchored: '警戒岗位已更新，保留有效集火', mining_unavailable: '采矿接管未成功，原控制保留'};
 const ACTION = {attack: '进攻主基地', expansion: '近敌/分矿建筑', clear_enemies: '区域警戒', retreat: '撤离 / 集结', defend: '全军回防'};
 const PHASE = {engaging: '接战', advancing: '前进', patrol_waiting: '警戒待命', patrol_engaging: '警戒接战', patrol_searching: '警戒搜索',
-  rally_joining: '汇合', rally_withdrawing: '撤离中', rally_waiting: '集结待命', returning: '回防途中', reforming: '重整', waiting_units: '等待部队'};
+  rally_joining: '汇合', rally_withdrawing: '撤离中', rally_waiting: '集结待命', returning: '回防途中', reforming: '重整', waiting_units: '等待部队',
+  evading_cloak: '避让未侦测隐形威胁', waiting_detection: '等待反隐', detection_skirmishing: '等待反隐期间安全交战',
+  assembly_waiting: '原地等待援兵', assembly_joining: '援兵汇合', assembly_defending: '集结区还击', assembly_evading: '局部避险', assembly_shared_refuge: '共同局部避险',
+  main_outer_pylon: '拆外围水晶', main_outer_building: '拆外围建筑', main_core: '拆主建筑', main_combat: '优先处理敌军炮台', main_surveying: '扫查主区域迷雾', main_confirming: '确认区域清空', main_blocked: '目标暂不可达', main_advancing: '从外围推进',
+  standby_forming: '清理后展开待命', standby_waiting: '附近待命', standby_engaging: '待命区迎敌', standby_returning: '返回待命岗位', standby_blocked: '等待安全空位',
+  gathering: '正在集结', holding: '集结待命', retreating: '脱离危险', regrouping: '安全汇合', safe: '已安全撤离', guarding: '基地防守', defending: '基地交战', intercepting: '防区拦截', waiting_reinforcements: '等待自动补兵', lost: '队伍已损失'};
 const NOTICE = {base_notice: '基地提示', building_target_locked: '锁定建筑目标', building_target_confirmed: '目标确认', building_complete: '建筑目标完成',
   rendezvous_point: '设定集结点', flight_burst_start: '单位脱战', scout_probe_seen: '发现侦察探机', defence_post: '设定防守岗位', base_allocation: '多基地分兵', end: '对局结束'};
 const UNIT_ZH = {'Protoss Probe': '探机', 'Protoss Zealot': '狂热者', 'Protoss Dragoon': '龙骑', 'Protoss High Templar': '高阶圣堂武士', 'Protoss Dark Templar': '黑暗圣堂武士',
@@ -19,6 +26,8 @@ const UNIT_ZH = {'Protoss Probe': '探机', 'Protoss Zealot': '狂热者', 'Prot
   'Singularity Charge': '龙骑射程', 'Leg Enhancements': '狂热者速度', 'Protoss Ground Weapons': '地面武器', 'Protoss Ground Armor': '地面护甲',
   'Protoss Plasma Shields': '护盾', 'Protoss Air Weapons': '空中武器', 'Protoss Air Armor': '空中护甲', 'Psionic Storm': '灵能风暴'};
 const REASON = {depot_destroyed: '目标建筑已摧毁', frontline_withdrawal: '前线撤离', cover_entrance: '守住路口'};
+Object.assign(NOTICE, {main_target_selected:'选择区域清场目标', main_building_cleared:'确认建筑清除', patrol_reanchored:'更新警戒岗位', assembly_refuge:'调整共同避险点', assembly_post_adjusted:'调整堵路岗位', detection_resumed:'恢复原任务', scout_evade_lost:'避险探机损失'});
+Object.assign(REASON, {main_area_cleared:'主基地区域已确认清完', site_confirmed_empty:'原址已确认清空', destroyed:'已确认被毁', footprint_checked:'原址已检查', relocated_outside:'建筑已移出区域', friendly_blockage:'友军堵路，调整单个岗位'});
 
 const $ = id => document.getElementById(id);
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
@@ -30,12 +39,24 @@ const realGoal = g => g && g[0] < 30000 && g[1] < 30000;
 // mode 'live' = the site's web viewer (native.html: upstream OpenBW without the archived-server gas-exit patch, which
 // matches original StarCraft 1.16.1 on these matches); mode 'map' = schematic drawn from the logs only.
 const st = {mode: 'live', view: 'self', centerOn: null, prodFrame: -1, frame: 0, playing: false, raf: 0, lastTs: 0, liveKey: null, liveSeek: null, liveTarget: null, viewApplied: null, lastRendered: -1};
-let index, terrain, game, col, eco, charts = [];
+let index, terrain, game, col, eco, profiles, routeSerial = 0, charts = [];
+function profileFor(version) {
+  return Object.values(profiles).find(p => p.id === version || p.aliases.includes(version));
+}
+const commandKey = c => c.display_key || (String(c.key) === '8' && c.modifier === 'alt' ? 'Alt+8' : String(c.key));
+const commandName = c => c.display_name || profileFor(c.keymap || game.keymap)?.keys[commandKey(c)] || `按键 ${commandKey(c)}（含义未确认）`;
+const commandColor = c => KEY_COLOR[c.key] || '#9aa7a0';
+const recorded = x => x == null ? '未记录' : x;
+function taskName(action) {
+  if (action === 'attack' && (game.keymap_id === 'tenkeys_main_area_v16' || /main.area.v16/.test(game.keymap))) return '主基地区域清场';
+  return ACTION[action] || {rally:'集结', hold:'就地固守', baseline:'Bot自动控制'}[action] || action;
+}
 
 async function main() {
   const get = url => fetch(url).then(r => { if (!r.ok) throw new Error(`${r.status} ${url}`); return r.json(); });
-  [index, terrain] = await Promise.all([get('data/index.json'), get('data/benzene-terrain.json')]);
-  $('games').innerHTML = index.matches.map(m => `<button class="hl" data-id="${m.id}"><span class="tag">${esc(m.map)} · ${m.started_at.slice(0, 16).replace('T', ' ')}</span><h3>对 ${esc(m.opponent)}</h3><p class="chips"><span class="chip ${m.result}">${m.result === 'win' ? '胜' : '负'}</span><span class="chip">${clock(m.end_frame)}</span><span class="chip">${m.commands} 次按键</span></p></button>`).join('');
+  const [list, definitions] = await Promise.all([get('data/index.json'), get('data/keymaps.json')]);
+  index = list; profiles = Object.fromEntries(Object.entries(definitions.profiles).map(([id,p]) => [id, {...p, id}]));
+  $('games').innerHTML = index.matches.map((m,i) => `<button class="hl" data-id="${m.id}"><span class="tag">第 ${i+1} 局 · ${esc(m.map)} · ${m.started_at.slice(0, 16).replace('T', ' ')}</span><h3>对 ${esc(m.opponent)}</h3><p class="chips"><span class="chip ${m.result}">${m.result === 'win' ? '胜' : m.result === 'loss' ? '负' : '结果未确认'}</span><span class="chip">${clock(m.end_frame)}</span><span class="chip">${m.commands} 次按键</span>${m.record_note?'<span class="chip">短局·见记录说明</span>':''}</p></button>`).join('');
   $('games').addEventListener('click', e => { const b = e.target.closest('[data-id]'); if (b) { history.pushState(null, '', `?match=${b.dataset.id}`); route(); } });
   window.addEventListener('popstate', route);
   wireControls();
@@ -44,15 +65,22 @@ async function main() {
 }
 
 async function route() {
+  const serial = ++routeSerial;
   const id = new URLSearchParams(location.search).get('match') || index.matches[0].id;
   document.querySelectorAll('#games .hl').forEach(b => b.classList.toggle('active', b.dataset.id === id));
   if (game && game.id === id) return;
   setPlaying(false);
-  game = await fetch(`data/${encodeURIComponent(id)}.json`).then(r => r.ok ? r.json() : null);
-  if (!game) { $('detail').hidden = true; return; }
+  const incoming = await fetch(`data/${encodeURIComponent(id)}.json`).then(r => r.ok ? r.json() : null);
+  if (serial !== routeSerial) return;
+  if (!incoming) { $('detail').hidden = true; return; }
+  const mapData = await fetch(incoming.terrain_file || 'data/benzene-terrain.json').then(r => {if(!r.ok)throw new Error('地图地形缺失');return r.json();});
+  if (serial !== routeSerial) return;
+  game = incoming; terrain = mapData; terrainImg = null;
+  $('map').width=terrain.width*PX; $('map').height=terrain.height*PX;
+  $('map').setAttribute('aria-label', `${game.map} 俯视示意图：镜头位置和我方部队`);
   col = Object.fromEntries(game.state_fields.map((k, i) => [k, i]));
   eco = Object.fromEntries(game.economy_fields.map((k, i) => [k, i]));
-  st.frame = 0; st.liveKey = null;
+  st.frame = 0; st.liveKey = null; st.prodFrame = -1; st.prodView = null; st.lastRendered = -1;
   renderDetail();
   setMode(st.mode);
 }
@@ -66,6 +94,11 @@ function renderDetail() {
   $('d-results').innerHTML = `<span class="chip ${g.result}">${g.result === 'win' ? '我方胜' : '我方负'}</span><span class="chip">${g.commands.length} 次按键</span>`;
   document.title = `人类指挥 vs ${g.opponent} · Replay Archive`;
   $('seek').max = g.end_frame;
+  const profile = profileFor(g.keymap_id || g.keymap);
+  $('keymap-title').textContent = g.keymap_label || profile?.label || '历史版本未确认';
+  $('keymap-rule').textContent = g.version_rule || profile?.rule || '此版本尚无可靠释义；只展示原始记录。';
+  $('keymap-keys').textContent = Object.entries(g.key_labels || profile?.keys || {}).map(([key,name])=>`${key} ${name}`).join('　');
+  $('record-note').textContent = g.record_note || '';
   renderCharts(); renderLog(); renderEvents(); renderFiles();
 }
 
@@ -145,11 +178,12 @@ function liveSeek(f, pause) {
 function wireControls() {
   $('mode-switch').onclick = e => { const b = e.target.closest('[data-mode]'); if (b) setMode(b.dataset.mode); };
   $('view-switch').onclick = e => { const b = e.target.closest('[data-view]'); if (!b) return; st.view = b.dataset.view; st.viewApplied = null; for (const x of $('view-switch').querySelectorAll('button')) x.setAttribute('aria-pressed', x === b); };
-  $('play').onclick = () => setPlaying(!st.playing);
+  $('play').onclick = () => setPlaying(st.mode === 'live' ? !!viewerWindow()?._replay_get_value(1) : !st.playing);
   $('seek').oninput = e => seek(+e.target.value);
   $('prev-cmd').onclick = () => jumpCmd(-1);
   $('next-cmd').onclick = () => jumpCmd(1);
   $('show-repeat').onchange = renderLog;
+  $('speed').onchange = () => {const w=viewerWindow();if(st.mode==='live' && w){w._replay_set_value(0,+$('speed').value);if(typeof w.update_speed==='function')w.update_speed(+$('speed').value);}};
   $('map').onclick = () => setPlaying(!st.playing);
 }
 function setMode(mode) {
@@ -159,9 +193,9 @@ function setMode(mode) {
   const live = mode === 'live', w = viewerWindow();
   if (!live && w && typeof w.ensure_paused === 'function') w.ensure_paused();
   $('viewer').hidden = !live; $('map').hidden = live; $('map-legend').hidden = live; $('view-switch').hidden = !live;
-  document.querySelectorAll('.hc-map-only').forEach(el => { el.hidden = live; });
+  document.querySelectorAll('.hc-map-only').forEach(el => { el.hidden = false; });
   $('screen-note').textContent = live
-    ? '游戏画面由网站内的网页播放器（OpenBW）实时重放本局 .rep；这一版引擎放这两局时，我方矿、气与本局日志逐 240 帧核对一致，结局帧与实际对局相同。播放器自带暂停、倍速、时间轴、小地图点击和拖动、点选单位查看信息。我方视角只显示我方视野（有战争迷雾），全局视角显示全部。右侧面板随播放器当前帧更新，内容取自本局指挥层日志。'
+    ? '网页播放器实时重放本局原始 .rep。播放、暂停、倍速、进度条、上一／下一操作和按键记录都与播放器帧号联动。我方视角开启我方战争迷雾，全局视角显示全部；切换视角不会改变回放内容。右侧数据来自该局自己的日志，按该局操作版本解释；未记录的数据如实标注。'
     : '战术示意图只用本局日志绘制：镜头框取自本局记录的玩家镜头轨迹，单位点取自指挥层的作战采样，不是完整单位画面。时间按"最快"游戏速度换算（每帧 0.042 秒）。';
   if (live) { loadLive(); st.liveSeek = Math.round(st.frame); }
   render();
@@ -174,6 +208,15 @@ function jumpCmd(dir) {
   st.centerOn = cmds[i].origin;
 }
 function setPlaying(on) {
+  if (st.mode === 'live') {
+    const w=viewerWindow();if(!w)return;
+    if(on && st.frame>=game.end_frame)liveSeek(0,false);
+    w._replay_set_value(1,on?0:1);
+    if(typeof w.sync_viewer_runtime_state==='function')w.sync_viewer_runtime_state();
+    if(on && typeof w.hold_viewer_main_loop_awake==='function')w.hold_viewer_main_loop_awake(2000);
+    if(on && typeof w.resume_viewer_main_loop==='function')w.resume_viewer_main_loop();
+    st.playing=!!on;return;
+  }
   st.playing = on && !!game && st.mode === 'map';
   $('play').textContent = st.playing ? '暂停' : '播放'; $('play').setAttribute('aria-pressed', st.playing);
   if (st.playing && st.frame >= game.end_frame) st.frame = 0;
@@ -191,6 +234,7 @@ function tick(ts) {
   if (st.mode === 'live') {
     const w = viewerWindow();
     if (!w) return;
+    st.playing=!w._replay_get_value(1); $('play').textContent=st.playing?'暂停':'播放'; $('play').setAttribute('aria-pressed',st.playing);
     if (st.viewApplied !== st.view) applyView(w);
     if (st.liveSeek != null) {
       w.pendingRequestedReplayFrame = st.liveSeek;
@@ -221,22 +265,22 @@ function render() {
   $('seek').value = f;
   $('clock').textContent = `${clock(f)} / ${clock(g.end_frame)} · 帧 ${f}`;
   const h = g.hud[lastAt(g.hud, f)];
-  $('hud').textContent = h ? h[3].join('\n') : '（开局前）';
+  $('hud').textContent = h ? h[3].join('\n') : g.hud.length ? '（尚无提示记录）' : '该版日志未保存游戏内提示文字，按键释义见本局版本说明。';
   const ci = lastAt(g.commands, f, c => c.frame), c = g.commands[ci];
   $('cmd-pos').textContent = `操作 ${ci + 1} / ${g.commands.length}`;
-  $('last-cmd').innerHTML = c ? `<span class="hc-key" style="background:${KEY_COLOR[c.key]}">${esc(c.key)}</span><b>${esc(KEY[c.key] || c.action)}</b> <span class="muted">${clock(c.frame)} · 帧 ${c.frame} · ${Math.round((f - c.frame) * SEC_PER_FRAME)} 秒前</span><br><span class="small">${esc(STATUS[c.status] || c.status)} · 范围 ${c.mode === 'all' ? '全队' : esc(c.mode)} · 涉及 ${c.unit_count} 个单位</span><br><span class="small muted">反馈：${esc(hudTipAfter(c.frame))}</span>` : '<span class="muted">还没有按键，全部由 bot 自己决定</span>';
+  $('last-cmd').innerHTML = c ? `<span class="hc-key" style="background:${commandColor(c)}">${esc(commandKey(c))}</span><b>${esc(commandName(c))}</b> <span class="muted">${clock(c.frame)} · 帧 ${c.frame} · ${Math.round((f - c.frame) * SEC_PER_FRAME)} 秒前</span><br><span class="small">${esc(STATUS[c.status] || c.status)} · 范围 ${c.mode === 'all' ? '全队' : c.mode==='squad'?'小队':'该版未记录'} · 涉及 ${recorded(c.unit_count)} 个单位</span><br><span class="small muted">反馈：${esc(hudTipAfter(c.frame))}</span>` : '<span class="muted">还没有按键，全部由 bot 自己决定</span>';
   const s = g.states[lastAt(g.states, f)], e = g.economy[lastAt(g.economy, f)];
   $('stats').innerHTML = s ? [
-    ['农民', s[col.workers]], ['作战单位', `${s[col.army]}（健康 ${s[col.healthy_army]}）`],
-    ['累计采矿 / 气', `${s[col.gathered_minerals]} / ${s[col.gathered_gas]}`],
+    ['农民', recorded(s[col.workers])], ['作战单位', `${recorded(s[col.army])}（健康 ${recorded(s[col.healthy_army])}）`],
+    ['累计采矿 / 气', `${recorded(s[col.gathered_minerals])} / ${recorded(s[col.gathered_gas])}`],
     e ? ['存量矿 / 气', `${e[eco.minerals]} / ${e[eco.gas]}`] : null, e ? ['基地', e[eco.nexuses]] : null,
-    ['矿锁', s[col.mining_lock] ? '开' : '关'],
+    ['矿锁', s[col.mining_lock] == null ? '该版未记录' : s[col.mining_lock] ? '开' : '关'],
   ].filter(Boolean).map(([k, v]) => `<dt>${k}</dt><dd>${esc(v)}</dd>`).join('') : '';
   const t = g.tasks[lastAt(g.tasks, f)];
   // state rows come every 120 frames, so a battle_state newer than the last state row is trusted on its own.
   const active = t && (f - t[0] < 240 || (s && (s[col.main_task] === t[1] || s[col.squad_task] === t[1]) && f - t[0] < 1200));
-  $('task').innerHTML = active ? `任务 #${t[1]} · <b>${esc(ACTION[t[2]] || t[2])}</b> · ${esc(PHASE[t[3]] || t[3])}<br><span class="muted small">${t[5]} 个单位，已到位 ${t[4] ?? '–'} · 状态记录于 ${clock(t[0])}</span>` : '<span class="muted">没有人工任务，部队由 bot 自己控制</span>';
-  $('recent').innerHTML = g.commands.slice(Math.max(0, ci - 3), ci + 1).reverse().map(x => `<li><span class="hc-key" style="background:${KEY_COLOR[x.key]}">${esc(x.key)}</span>${clock(x.frame)} ${esc(KEY[x.key] || x.action)} <span class="muted">${esc(STATUS[x.status] || x.status)}</span></li>`).join('') || '<li class="muted">无</li>';
+  $('task').innerHTML = active ? `任务 #${t[1]} · <b>${esc(taskName(t[2]))}</b> · ${esc(PHASE[t[3]] || t[3])}<br><span class="muted small">${t[5]} 个单位，已到位 ${t[4] ?? '–'} · 状态记录于 ${clock(t[0])}</span>` : g.keymap==='eight-key-top-row-v1' && s ? `本局记录状态：${esc(taskName(s[col.stance]))}；该版未记录任务编号。` : '<span class="muted">没有人工任务，部队由 bot 自己控制</span>';
+  $('recent').innerHTML = g.commands.slice(Math.max(0, ci - 3), ci + 1).reverse().map(x => `<li><span class="hc-key" style="background:${commandColor(x)}">${esc(commandKey(x))}</span>${clock(x.frame)} ${esc(commandName(x))} <span class="muted">${esc(STATUS[x.status] || x.status)}</span></li>`).join('') || '<li class="muted">无</li>';
   if (st.mode === 'map') { drawMap(f, active ? t : null); $('production').innerHTML = '<span class="muted">切换到游戏画面后显示</span>'; }
   charts.forEach(ch => ch.set(f));
   document.querySelectorAll('#log .entry').forEach(el => el.classList.toggle('active', +el.dataset.i === ci));
@@ -296,7 +340,7 @@ function chart(el, {series, xmax, marks = [], bars = null, unit = ''}) {
   return {set: f => { cursor.setAttribute('x1', x(f)); cursor.setAttribute('x2', x(f)); }};
 }
 function renderCharts() {
-  const g = game, marks = g.commands.filter(c => c.status !== 'task_confirmed').map(c => ({x: c.frame, color: KEY_COLOR[c.key], label: `${c.key} ${KEY[c.key]} · ${STATUS[c.status] || c.status}`}));
+  const g = game, marks = g.commands.filter(c => c.status !== 'task_confirmed').map(c => ({x: c.frame, color: commandColor(c), label: `${commandKey(c)} ${commandName(c)} · ${STATUS[c.status] || c.status}`}));
   charts = [
     chart($('c-units'), {xmax: g.end_frame, marks, series: [
       {name: '农民', color: '#e0c46b', rows: g.states, get: r => r[col.workers]},
@@ -307,14 +351,15 @@ function renderCharts() {
 
 // ---------- logs ----------
 function hudTipAfter(f) {
-  const r = game.hud.find(x => x[0] >= f);
-  return r ? (r[3][3] || '').replace(/^提示：/, '') : '';
+  const next=game.commands.find(c=>c.frame>f)?.frame ?? game.end_frame+1;
+  const r = game.hud.find(x => x[0] >= f && x[0]<next);
+  return r ? (r[3].find(s=>s.startsWith('提示')) || '').replace(/^提示：/, '') || '本次提示未记录' : '本次提示未记录';
 }
 const toScreen = () => $('hc-screen').scrollIntoView({behavior: 'smooth', block: 'center'});
 function renderLog() {
   const g = game, showRepeat = $('show-repeat').checked, repeats = g.commands.filter(c => c.status === 'task_confirmed').length;
   $('log-note').textContent = `共 ${g.commands.length} 次按键，其中 ${repeats} 次是对同一任务的重复确认${showRepeat ? '' : '（已折叠）'}。"游戏反馈"是按键后游戏内提示栏显示的原文。帧号是指挥层记录指令生效的帧。点任意一条，回放跳到那一刻并暂停。`;
-  $('log').innerHTML = g.commands.map((c, i) => (showRepeat || c.status !== 'task_confirmed') ? `<li class="entry${c.status === 'task_confirmed' ? ' keep' : ''}" data-i="${i}" data-f="${c.frame}"><time>${clock(c.frame)}<small>帧 ${c.frame}</small></time><div class="what"><span class="hc-key" style="background:${KEY_COLOR[c.key]}">${esc(c.key)}</span><b>${esc(KEY[c.key] || c.action)}</b><span class="k">涉及 <b>${c.unit_count}</b> 个单位${c.mining_lock ? ' · 矿锁开' : ''}</span><span class="status${/unknown|no_/.test(c.status) ? ' bad' : ''}">${esc(STATUS[c.status] || c.status)}</span></div><p class="effect">游戏反馈：${esc(hudTipAfter(c.frame))}</p></li>` : '').join('');
+  $('log').innerHTML = g.commands.map((c, i) => (showRepeat || c.status !== 'task_confirmed') ? `<li class="entry${c.status === 'task_confirmed' ? ' keep' : ''}" data-i="${i}" data-f="${c.frame}"><time>${clock(c.frame)}<small>帧 ${c.frame}</small></time><div class="what"><span class="hc-key" style="background:${commandColor(c)}">${esc(commandKey(c))}</span><b>${esc(commandName(c))}</b><span class="k">涉及 <b>${recorded(c.unit_count)}</b> 个单位${c.mining_lock ? ' · 矿锁开' : ''}</span><span class="status${/unknown|no_|not_enough/.test(c.status) ? ' bad' : ''}">${esc(STATUS[c.status] || c.status)}</span></div><p class="effect">游戏反馈：${esc(hudTipAfter(c.frame))}</p></li>` : '').join('');
   $('log').onclick = e => { const li = e.target.closest('.entry'); if (li) { seek(+li.dataset.f, true); st.centerOn = g.commands[+li.dataset.i].origin; toScreen(); } };
   render();
 }

@@ -1,0 +1,12 @@
+{
+  "matches": 19,
+  "appended": 17,
+  "existing_2_assets_unchanged": true,
+  "capture": false,
+  "unit_tests": 19,
+  "local_browser_pass": true,
+  "baseline_hashes": {
+    "Bot.cpp": "8ef8ae16cf2f0bbc474b8b2b4cbc23ad7239a3ab1a6551c58a397e4a438fca00",
+    "Baseline.dll": "4528078cda6d98d202559aea4d9fbf6e401c64c15fb2703b6a8de38f1a54e468"
+  }
+}
