@@ -28,6 +28,8 @@ class HumanCommanderTests(unittest.TestCase):
             self.assertEqual(hashlib.sha256(replay.read_bytes()).hexdigest(), data['hashes']['replay'])
             self.assertTrue((PAGE / data['files']['package']).is_file())
             self.assertEqual(len(data['commands']), match['commands'])
+            if data['terrain']:
+                self.assertTrue((PAGE / data['terrain']).is_file())
 
 
 if __name__ == '__main__':

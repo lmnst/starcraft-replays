@@ -3,10 +3,11 @@ const SEC_PER_FRAME = 0.042, FPS = 1 / SEC_PER_FRAME, TILE = 32, PX = 4;
 const KEY = {1: '探机避险', 2: '强制采矿', 3: '小队模式', 4: '全队模式', 5: '近敌/分矿建筑', 6: '进攻主基地', 7: '区域警戒', 8: '安全集结', 9: '全军回防', 0: '全局重置'};
 const KEY_COLOR = {1: '#9aa7a0', 2: '#e0c46b', 3: '#7fc8c0', 4: '#7fc8c0', 5: '#e8a06b', 6: '#e8836b', 7: '#b48be0', 8: '#8fb4d9', 9: '#c4db91', 0: '#6f7b74'};
 const STATUS = {applied: '已下令', task_confirmed: '重复按键，保留原任务', auto_restored: '已交回 bot', mining_locked: '矿锁开启',
-  mode_selected: '已选范围', expansion_unknown: '未找到目标，保持原任务', no_scout_probe: '未执行：没有侦察探机'};
+  mode_selected: '已选范围', expansion_unknown: '未找到目标，保持原任务', no_scout_probe: '未执行：没有侦察探机',
+  scout_evade_applied: '侦察探机开始避险', not_enough_healthy_units: '未执行：健康部队不足', waiting_units: '已下令，等待部队'};
 const ACTION = {attack: '进攻主基地', expansion: '近敌/分矿建筑', clear_enemies: '区域警戒', retreat: '撤离 / 集结', defend: '全军回防'};
 const PHASE = {engaging: '接战', advancing: '前进', patrol_waiting: '警戒待命', patrol_engaging: '警戒接战', patrol_searching: '警戒搜索',
-  rally_joining: '汇合', rally_withdrawing: '撤离中', rally_waiting: '集结待命', returning: '回防途中', reforming: '重整', waiting_units: '等待部队'};
+  rally_joining: '汇合', rally_withdrawing: '撤离中', rally_waiting: '集结待命', returning: '回防途中', reforming: '重整', waiting_units: '等待部队', guarding: '驻守', intercepting: '拦截'};
 const NOTICE = {base_notice: '基地提示', building_target_locked: '锁定建筑目标', building_target_confirmed: '目标确认', building_complete: '建筑目标完成',
   rendezvous_point: '设定集结点', flight_burst_start: '单位脱战', scout_probe_seen: '发现侦察探机', defence_post: '设定防守岗位', base_allocation: '多基地分兵', end: '对局结束'};
 const UNIT_ZH = {'Protoss Probe': '探机', 'Protoss Zealot': '狂热者', 'Protoss Dragoon': '龙骑', 'Protoss High Templar': '高阶圣堂武士', 'Protoss Dark Templar': '黑暗圣堂武士',
@@ -18,7 +19,8 @@ const UNIT_ZH = {'Protoss Probe': '探机', 'Protoss Zealot': '狂热者', 'Prot
   'Protoss Stargate': '星门', 'Protoss Fleet Beacon': '舰队航标', 'Protoss Arbiter Tribunal': '仲裁者法庭',
   'Singularity Charge': '龙骑射程', 'Leg Enhancements': '狂热者速度', 'Protoss Ground Weapons': '地面武器', 'Protoss Ground Armor': '地面护甲',
   'Protoss Plasma Shields': '护盾', 'Protoss Air Weapons': '空中武器', 'Protoss Air Armor': '空中护甲', 'Psionic Storm': '灵能风暴'};
-const REASON = {depot_destroyed: '目标建筑已摧毁', frontline_withdrawal: '前线撤离', cover_entrance: '守住路口'};
+const REASON = {depot_destroyed: '目标建筑已摧毁', frontline_withdrawal: '前线撤离', cover_entrance: '守住路口',
+  protect_threatened_assets: '保护受威胁的建筑', site_confirmed_empty: '目标点已确认为空', occupied_point: '集结点改到已占领位置'};
 
 const $ = id => document.getElementById(id);
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
@@ -31,11 +33,14 @@ const realGoal = g => g && g[0] < 30000 && g[1] < 30000;
 // matches original StarCraft 1.16.1 on these matches); mode 'map' = schematic drawn from the logs only.
 const st = {mode: 'live', view: 'self', centerOn: null, prodFrame: -1, frame: 0, playing: false, raf: 0, lastTs: 0, liveKey: null, liveSeek: null, liveTarget: null, viewApplied: null, lastRendered: -1};
 let index, terrain, game, col, eco, charts = [];
+const terrains = {};
 
 async function main() {
   const get = url => fetch(url).then(r => { if (!r.ok) throw new Error(`${r.status} ${url}`); return r.json(); });
-  [index, terrain] = await Promise.all([get('data/index.json'), get('data/benzene-terrain.json')]);
+  index = await get('data/index.json');
   $('games').innerHTML = index.matches.map(m => `<button class="hl" data-id="${m.id}"><span class="tag">${esc(m.map)} · ${m.started_at.slice(0, 16).replace('T', ' ')}</span><h3>对 ${esc(m.opponent)}</h3><p class="chips"><span class="chip ${m.result}">${m.result === 'win' ? '胜' : '负'}</span><span class="chip">${clock(m.end_frame)}</span><span class="chip">${m.commands} 次按键</span></p></button>`).join('');
+  const maps = [...new Set(index.matches.map(m => m.map))].join('、'), wins = index.matches.filter(m => m.result === 'win').length;
+  $('summary').textContent = `共 ${index.matches.length} 局（${wins} 胜 ${index.matches.length - wins} 负）· 地图 ${maps} · 按开局时间排列`;
   $('games').addEventListener('click', e => { const b = e.target.closest('[data-id]'); if (b) { history.pushState(null, '', `?match=${b.dataset.id}`); route(); } });
   window.addEventListener('popstate', route);
   wireControls();
@@ -50,6 +55,12 @@ async function route() {
   setPlaying(false);
   game = await fetch(`data/${encodeURIComponent(id)}.json`).then(r => r.ok ? r.json() : null);
   if (!game) { $('detail').hidden = true; return; }
+  terrain = game.terrain ? (terrains[game.terrain] = terrains[game.terrain] || await fetch(game.terrain).then(r => r.ok ? r.json() : null)) : null;
+  terrainImg = null;
+  if (terrain) { $('map').width = terrain.width * PX; $('map').height = terrain.height * PX; $('map').style.aspectRatio = `${terrain.width} / ${terrain.height}`; }
+  const mapBtn = $('mode-switch').querySelector('[data-mode=map]');
+  mapBtn.disabled = !terrain; mapBtn.title = terrain ? '' : '这张地图还没有地形数据，暂时只能看游戏画面';
+  if (!terrain) st.mode = 'live';
   col = Object.fromEntries(game.state_fields.map((k, i) => [k, i]));
   eco = Object.fromEntries(game.economy_fields.map((k, i) => [k, i]));
   st.frame = 0; st.liveKey = null;
@@ -161,7 +172,7 @@ function setMode(mode) {
   $('viewer').hidden = !live; $('map').hidden = live; $('map-legend').hidden = live; $('view-switch').hidden = !live;
   document.querySelectorAll('.hc-map-only').forEach(el => { el.hidden = live; });
   $('screen-note').textContent = live
-    ? '游戏画面由网站内的网页播放器（OpenBW）实时重放本局 .rep；这一版引擎放这两局时，我方矿、气与本局日志逐 240 帧核对一致，结局帧与实际对局相同。播放器自带暂停、倍速、时间轴、小地图点击和拖动、点选单位查看信息。我方视角只显示我方视野（有战争迷雾），全局视角显示全部。右侧面板随播放器当前帧更新，内容取自本局指挥层日志。'
+    ? '游戏画面由网站内的网页播放器（OpenBW）实时重放本局 .rep；这一版引擎放本页全部对局时，我方矿、气与各局日志逐 240 帧核对：836 个采样点中 754 个完全一致，其余基本是同一笔建造花费早晚一帧入账（另有两处差 15 矿未查明）；每局的胜负结局与实际对局相同。播放器自带暂停、倍速、时间轴、小地图点击和拖动、点选单位查看信息。我方视角只显示我方视野（有战争迷雾），全局视角显示全部。右侧面板随播放器当前帧更新，内容取自本局指挥层日志。'
     : '战术示意图只用本局日志绘制：镜头框取自本局记录的玩家镜头轨迹，单位点取自指挥层的作战采样，不是完整单位画面。时间按"最快"游戏速度换算（每帧 0.042 秒）。';
   if (live) { loadLive(); st.liveSeek = Math.round(st.frame); }
   render();
@@ -320,7 +331,7 @@ function renderLog() {
 }
 function renderEvents() {
   $('events').innerHTML = game.notices.map(n => {
-    const detail = n.message || (n.reason ? REASON[n.reason] || n.reason : '') || (n.event === 'end' ? (n.winner ? '我方胜' : '我方负') : '');
+    const detail = n.message || (n.event === 'scout_probe_seen' ? `单位 #${n.reason}` : n.reason ? REASON[n.reason] || n.reason : '') || (n.event === 'end' ? (n.winner ? '我方胜' : '我方负') : '');
     return `<li class="entry keep" data-f="${n.frame}"><time>${clock(n.frame)}<small>帧 ${n.frame}</small></time><div class="what"><b>${esc(NOTICE[n.event] || n.event)}</b>${n.task_id != null ? `<span class="k">任务 #${n.task_id}</span>` : ''}</div>${detail ? `<p class="effect">${esc(detail)}</p>` : ''}</li>`;
   }).join('');
   $('events').onclick = e => { const li = e.target.closest('.entry'); if (li) { seek(+li.dataset.f, true); toScreen(); } };
