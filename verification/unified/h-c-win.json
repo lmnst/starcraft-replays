@@ -67,7 +67,7 @@
   "outcome": "win",
   "requested_seed": 8613102,
   "candidate_sha256": "8a555ff516f444ef37c843db330ac5fa3bff483d93863de8e9ad75cb09ab1a44",
-  "id": "h-c-v6-win",
+  "id": "h-c-win",
   "natural_end": true,
   "replay_sha256": "ae0a716627204aff6a9cb451f6504feceb6ae4407c806a8548c981460d66f381",
   "replay_check": {

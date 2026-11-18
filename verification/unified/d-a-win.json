@@ -67,7 +67,7 @@
   "outcome": "win",
   "requested_seed": 8613101,
   "candidate_sha256": "8a555ff516f444ef37c843db330ac5fa3bff483d93863de8e9ad75cb09ab1a44",
-  "id": "d-a-v6-win",
+  "id": "d-a-win",
   "natural_end": true,
   "replay_sha256": "9985e35e59d99d2942218cdf5eff8cdf03ccd2965ab4e7a6f84cb067bd4dad7a",
   "replay_check": {

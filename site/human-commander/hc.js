@@ -92,7 +92,7 @@ function renderDetail() {
   $('detail').hidden = false;
   $('d-eyebrow').textContent = g.map;
   $('d-title').textContent = `人类指挥 vs ${g.opponent}`;
-  $('d-sub').textContent = `我方 ${me.race}（录像内名 ${me.name}）· 对手 ${g.opponent} ${foe.race}（录像内名 ${foe.name}）· 键位 ${g.keymap} · 时长 ${clock(g.end_frame)}（${g.end_frame} 帧）`;
+  $('d-sub').textContent = `我方 ${me.race}（录像内名 ${me.name}）· 对手 ${g.opponent} ${foe.race}（录像内名 ${foe.name}）· 时长 ${clock(g.end_frame)}（${g.end_frame} 帧）`;
   $('d-results').innerHTML = `<span class="chip ${g.result}">${g.result === 'win' ? '我方胜' : '我方负'}</span><span class="chip">${g.commands.length} 次按键</span>`;
   document.title = `人类指挥 vs ${g.opponent} · Replay Archive`;
   $('seek').max = g.end_frame;

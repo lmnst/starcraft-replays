@@ -4,7 +4,7 @@
 
 管理后台：https://app.pagescms.org/lmnst/starcraft-replays/main/collection/matches
 
-独立于 `starcraft-replay-pilot` 和 `starcraft-replay-viewer`。英文默认，`?lang=zh` 使用中文。比赛链接示例：`?match=h-c-v6-win`。
+独立于 `starcraft-replay-pilot` 和 `starcraft-replay-viewer`。英文默认，`?lang=zh` 使用中文。比赛链接示例：`?match=h-c-win`。
 
 当前六场保留原始胜负与 bot：H / Heartbreak Ridge（PylonPuller，v6 胜 / v3 负），B / Benzene（Steamhammer，v5 胜 / v3 负），D / Destination（Locutus，v6 胜 / v3 负）。原始回放完整，升级网页播放核心后重新验证，未以补跑败局替换原有胜局。
 

@@ -3,7 +3,7 @@
   "selection_policy": "Three maps, same opponent within each pair, one verified natural win and one verified natural loss; display opponent tier only. Not a controlled proof of version improvement.",
   "matches": [
     {
-      "id": "h-c-v6-win",
+      "id": "h-c-win",
       "map_code": "H",
       "opponent_tier": "C",
       "bot_version": "v6",
@@ -67,7 +67,7 @@
       "natural_end": true
     },
     {
-      "id": "h-c-v3-loss",
+      "id": "h-c-loss",
       "map_code": "H",
       "opponent_tier": "C",
       "bot_version": "v3",
@@ -131,7 +131,7 @@
       "natural_end": true
     },
     {
-      "id": "b-b-v5-win",
+      "id": "b-b-win",
       "map_code": "B",
       "opponent_tier": "B",
       "bot_version": "v5",
@@ -195,7 +195,7 @@
       "natural_end": true
     },
     {
-      "id": "b-b-v3-loss",
+      "id": "b-b-loss",
       "map_code": "B",
       "opponent_tier": "B",
       "bot_version": "v3",
@@ -259,7 +259,7 @@
       "natural_end": true
     },
     {
-      "id": "d-a-v6-win",
+      "id": "d-a-win",
       "map_code": "D",
       "opponent_tier": "A",
       "bot_version": "v6",
@@ -323,7 +323,7 @@
       "natural_end": true
     },
     {
-      "id": "d-a-v3-loss",
+      "id": "d-a-loss",
       "map_code": "D",
       "opponent_tier": "A",
       "bot_version": "v3",

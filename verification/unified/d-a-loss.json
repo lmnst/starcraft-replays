@@ -67,7 +67,7 @@
   "outcome": "loss",
   "requested_seed": 8613101,
   "candidate_sha256": "e60e307cfab9a0607c0d70ad1baee3b717d062b19363f82700aa17d40b5bc33b",
-  "id": "d-a-v3-loss",
+  "id": "d-a-loss",
   "natural_end": true,
   "replay_sha256": "b42c0122c6129d871ac8d254a4c1543617da3338563c7593fc0c6e9ebd0dedb4",
   "replay_check": {

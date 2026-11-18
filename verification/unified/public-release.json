@@ -34,37 +34,37 @@
         "passed": true
       },
       {
-        "path": "replays/b-b-v3-loss.rep",
+        "path": "replays/b-b-loss.rep",
         "bytes": 591543,
         "sha256": "1dbc04ecd09920aeef9da971d0487e272e54d305bd04b8b42b63aef4b0ba1881",
         "passed": true
       },
       {
-        "path": "replays/b-b-v5-win.rep",
+        "path": "replays/b-b-win.rep",
         "bytes": 81333,
         "sha256": "a160a5a2c3f18c0f165818a950e05fb4f6c7c61fcb99eb19fc71a834b4f7f591",
         "passed": true
       },
       {
-        "path": "replays/d-a-v3-loss.rep",
+        "path": "replays/d-a-loss.rep",
         "bytes": 140558,
         "sha256": "b42c0122c6129d871ac8d254a4c1543617da3338563c7593fc0c6e9ebd0dedb4",
         "passed": true
       },
       {
-        "path": "replays/d-a-v6-win.rep",
+        "path": "replays/d-a-win.rep",
         "bytes": 233481,
         "sha256": "9985e35e59d99d2942218cdf5eff8cdf03ccd2965ab4e7a6f84cb067bd4dad7a",
         "passed": true
       },
       {
-        "path": "replays/h-c-v3-loss.rep",
+        "path": "replays/h-c-loss.rep",
         "bytes": 128610,
         "sha256": "5dcc3b695b441f01a1c432da1519ae0c499f70ad8f6062eb37a19377b1f8120d",
         "passed": true
       },
       {
-        "path": "replays/h-c-v6-win.rep",
+        "path": "replays/h-c-win.rep",
         "bytes": 143116,
         "sha256": "ae0a716627204aff6a9cb451f6504feceb6ae4407c806a8548c981460d66f381",
         "passed": true
