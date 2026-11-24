@@ -9,7 +9,7 @@
     },
     zh: {
       library: '比赛库', room: '对战效果', llm: 'LLM 指挥对比',
-      human: '人类指挥', model: '模型指挥', skip: '跳到正文',
+      human: '人类指挥', model: '模型指挥迭代', skip: '跳到正文',
       navigation: '主导航', switchTo: 'English', switchLang: 'en'
     }
   };
