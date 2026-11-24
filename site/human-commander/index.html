@@ -1,11 +1,19 @@
 <!doctype html>
 <html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="人类指挥对局档案：原版 StarCraft 1.16.1 本地对战，含双视角回放、历史按键释义和指挥层日志。">
-<title>人类指挥 · Replay Archive</title><link rel="icon" href="data:,">
-<link rel="stylesheet" href="../app.css"><link rel="stylesheet" href="../llm-vs-code/compare.css"><link rel="stylesheet" href="hc.css"><script src="hc.js" defer></script></head>
+<title data-nav-title="human">人类指挥 · Replay Archive</title><link rel="icon" href="data:,">
+<link rel="stylesheet" href="../app.css"><link rel="stylesheet" href="../llm-vs-code/compare.css"><link rel="stylesheet" href="hc.css"><script src="../navigation.js" defer></script><script src="hc.js?v=navigation" defer></script></head>
 <body><a href="#main" class="skip">跳到正文</a>
-<header><a class="brand" href="../?lang=zh">REPLAY ARCHIVE<span>STARCRAFT / BROOD WAR</span></a><nav><a href="../?lang=zh">比赛库</a><a href="../replay-room.html?lang=zh">对战效果</a><a href="../llm-vs-code/">LLM 指挥对比</a><a href="./" aria-current="page">人类指挥</a><a href="../model-commander/">模型指挥</a></nav></header>
-<main id="main">
+<header><a class="brand" href="../?lang=zh" data-nav>REPLAY ARCHIVE<span>STARCRAFT / BROOD WAR</span></a>
+<nav>
+  <a href="../?lang=zh" data-nav="library">比赛库</a>
+  <a href="../replay-room.html?lang=zh" data-nav="room">对战效果</a>
+  <a href="../llm-vs-code/?lang=zh" data-nav="llm">LLM 指挥对比</a>
+  <a href="./?lang=zh" data-nav="human" aria-current="page">人类指挥</a>
+  <a href="../model-commander/?lang=zh" data-nav="model">模型指挥</a>
+  <button id="language" type="button" lang="en">English</button>
+</nav></header>
+<main id="main" lang="zh-CN">
 
 <section class="hero">
   <h1>人类指挥对局</h1>
@@ -71,5 +79,5 @@
 </section>
 
 </main>
-<footer><span>人类指挥实验 · 数据来自本地原版对局日志</span><a href="../?lang=zh">返回回放库</a></footer>
+<footer lang="zh-CN"><span>人类指挥实验 · 数据来自本地原版对局日志</span><a href="../?lang=zh" data-nav>返回回放库</a></footer>
 </body></html>

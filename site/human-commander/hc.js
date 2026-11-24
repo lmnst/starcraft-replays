@@ -57,7 +57,14 @@ async function main() {
   const [list, definitions] = await Promise.all([get('data/index.json'), get('data/keymaps.json')]);
   index = list; profiles = Object.fromEntries(Object.entries(definitions.profiles).map(([id,p]) => [id, {...p, id}]));
   $('games').innerHTML = index.matches.map((m,i) => `<button class="hl" data-id="${m.id}"><span class="tag">第 ${i+1} 局 · ${esc(m.map)}</span><h3>对 ${esc(m.opponent)}</h3><p class="chips"><span class="chip ${m.result}">${m.result === 'win' ? '胜' : m.result === 'loss' ? '负' : '结果未确认'}</span><span class="chip">${clock(m.end_frame)}</span><span class="chip">${m.commands} 次按键</span>${m.record_note?'<span class="chip">短局·见记录说明</span>':''}</p></button>`).join('');
-  $('games').addEventListener('click', e => { const b = e.target.closest('[data-id]'); if (b) { history.pushState(null, '', `?match=${b.dataset.id}`); route().then(() => $('detail').scrollIntoView({block:'start'})); } });
+  $('games').addEventListener('click', e => {
+    const button = e.target.closest('[data-id]');
+    if (!button) return;
+    const url = new URL(location.href);
+    url.searchParams.set('match', button.dataset.id);
+    history.pushState(null, '', url);
+    route().then(() => $('detail').scrollIntoView({block:'start'}));
+  });
   window.addEventListener('popstate', route);
   wireControls();
   st.raf = requestAnimationFrame(tick);
@@ -87,6 +94,12 @@ async function route() {
   setMode(st.mode);
 }
 
+function updateTitle() {
+  const label = document.querySelector('nav [data-nav=human]').textContent;
+  document.title = `${label}${game ? ` vs ${game.opponent}` : ''} · Replay Archive`;
+}
+document.addEventListener('site-language-change', updateTitle);
+
 function renderDetail() {
   const g = game, me = g.players.find(p => p.id === g.self_player_id), foe = g.players.find(p => p.id !== g.self_player_id);
   $('detail').hidden = false;
@@ -94,7 +107,7 @@ function renderDetail() {
   $('d-title').textContent = `人类指挥 vs ${g.opponent}`;
   $('d-sub').textContent = `我方 ${me.race}（录像内名 ${me.name}）· 对手 ${g.opponent} ${foe.race}（录像内名 ${foe.name}）· 时长 ${clock(g.end_frame)}（${g.end_frame} 帧）`;
   $('d-results').innerHTML = `<span class="chip ${g.result}">${g.result === 'win' ? '我方胜' : '我方负'}</span><span class="chip">${g.commands.length} 次按键</span>`;
-  document.title = `人类指挥 vs ${g.opponent} · Replay Archive`;
+  updateTitle();
   $('seek').max = g.end_frame;
   const profile = profileFor(g.keymap_id || g.keymap);
   $('keymap-title').textContent = g.keymap_label || profile?.label || '历史版本未确认';

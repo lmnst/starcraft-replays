@@ -5,11 +5,19 @@
  <meta name="description" content="A separate room for StarCraft test replays and match videos.">
  <title>Replay room · Replay Archive</title><link rel="icon" href="data:,">
  <link rel="stylesheet" href="app.css"><link rel="stylesheet" href="replay-room.css">
- <script src="replay-room.js" defer></script>
+ <script src="navigation.js" defer></script><script src="replay-room.js?v=navigation" defer></script>
 </head>
 <body>
-<a href="#main" class="skip" data-i18n="skip">Skip to content</a>
-<header><a class="brand" href="./" data-library>REPLAY ARCHIVE<span>STARCRAFT / BROOD WAR</span></a><nav><a href="./" data-library data-i18n="library">Match library</a><a class="button" href="replay-room.html" data-room aria-current="page" data-i18n="room">Replay room</a><a href="llm-vs-code/" data-i18n="llm">LLM commander</a><a href="human-commander/" data-i18n="human">Human commander</a><a href="model-commander/" data-i18n="model">Model commander</a><button id="language">中文</button></nav></header>
+<a href="#main" class="skip">Skip to content</a>
+<header><a class="brand" href="./" data-nav>REPLAY ARCHIVE<span>STARCRAFT / BROOD WAR</span></a>
+<nav>
+  <a href="./" data-nav="library">Match library</a>
+  <a href="replay-room.html" data-nav="room" data-room aria-current="page">Replay room</a>
+  <a href="llm-vs-code/" data-nav="llm">LLM commander</a>
+  <a href="human-commander/" data-nav="human">Human commander</a>
+  <a href="model-commander/" data-nav="model">Model commander</a>
+  <button id="language" type="button" lang="zh-CN">中文</button>
+</nav></header>
 <main id="main">
  <section id="room-library">
   <div class="room-heading"><div><p class="room-eyebrow" data-i18n="eyebrow">WATCH / EXPLORE / REVIEW</p><h1 data-i18n="room">Replay room</h1><p class="room-intro" data-i18n="intro">A place for test matches, interesting moments, and a closer look at how the bots play.</p></div><span class="room-tag" data-i18n="tag">MATCH NOTES IN MOTION</span></div>
