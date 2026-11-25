@@ -1,10 +1,11 @@
-"""Export model-commander self-iteration replays for site/model-commander/.
+"""Export model-commander self-iteration replays and action timelines for site/model-commander/.
 
 Usage: python scripts/model_commander.py
 
 One replay is published per iteration round. The page data comes only from each
 run's own batch.json / evolution-log.jsonl / experiment-ledger.json and each
-match's match.json; nothing is re-simulated. The original .rep is copied as-is.
+match's match.json / timeline.json / commander-layer.jsonl; nothing is re-simulated.
+The original .rep is copied as-is.
 
 Selection inside a round (only matches played by the version under test):
   natural win > highest L0 score (when recorded) > natural finish > longest game.
@@ -73,8 +74,96 @@ def match_record(run_path, number, m):
         'result': result, 'end': end, 'frame': m['frame'], 'seconds': round(m['frame'] / FPS),
         'l0_score': m.get('l0_score'),
         'self_name': me['name'], 'opponent_name': foe['name'], 'race': me['race'], 'opponent_race': foe['race'],
-        '_replay': replay,
+        '_replay': replay, '_folder': folder,
     }
+
+
+def extract_activity(folder, end_frame):
+    """Extract chronological model/rule actions and compact battle_state transitions."""
+    events = []
+    tl_path = folder / 'timeline.json'
+    if tl_path.is_file():
+        for row in load(tl_path):
+            status = row.get('status') or ''
+            source = row.get('source') or 'llm'
+            dec = row.get('decision') or {}
+            receipt = row.get('receipt') or {}
+            act_type = row.get('action_type') or dec.get('action_type')
+            if status == 'cutoff' or source == 'engine':
+                events.append({
+                    'frame': int(row.get('frame') or end_frame),
+                    'kind': 'cutoff',
+                    'source': 'engine',
+                    'reason': row.get('reason') or 'cutoff',
+                })
+                continue
+            if status == 'invalid_or_failed_model_turn':
+                events.append({
+                    'frame': int(row.get('frame') or 0),
+                    'kind': 'failed',
+                    'source': source,
+                    'trigger': row.get('trigger') or '',
+                    'reason': row.get('error') or 'invalid_or_failed_model_turn',
+                })
+                continue
+            if act_type == 'key':
+                key = str(receipt.get('key') or row.get('key') or row.get('target') or dec.get('target') or '')
+                frame = int(receipt.get('frame') if receipt.get('frame') is not None else (row.get('dispatch_frame') or row.get('frame') or 0))
+                ev = {
+                    'frame': frame,
+                    'kind': 'key',
+                    'source': source,
+                    'key': key,
+                    'action': receipt.get('action') or '',
+                    'mode': receipt.get('mode') or '',
+                    'status': receipt.get('status') or status,
+                    'trigger': row.get('trigger') or '',
+                    'reason': (row.get('reason') or dec.get('reason') or '').strip(),
+                }
+                if receipt.get('unit_count') is not None:
+                    ev['units'] = int(receipt['unit_count'])
+                elif isinstance(receipt.get('units'), list):
+                    ev['units'] = len(receipt['units'])
+                events.append(ev)
+            else:
+                events.append({
+                    'frame': int(row.get('frame') or 0),
+                    'kind': 'keep',
+                    'source': source,
+                    'status': status,
+                    'trigger': row.get('trigger') or '',
+                    'reason': (row.get('reason') or dec.get('reason') or '').strip(),
+                })
+    events.sort(key=lambda e: (e['frame'], 0 if e['kind'] == 'key' else 1))
+
+    # Extract compact active task timeline from commander-layer.jsonl
+    tasks = []
+    layer_path = folder / 'bwapi-data' / 'write' / 'commander-layer.jsonl'
+    if layer_path.is_file():
+        last_sig = None
+        last_frame = -9999
+        with layer_path.open(encoding='utf-8') as stream:
+            for line in stream:
+                if '"battle_state"' in line:
+                    r = json.loads(line)
+                    if r.get('event') != 'battle_state':
+                        continue
+                    f = int(r['frame'])
+                    units = len(r.get('units') or [])
+                    arrived = r.get('arrived')
+                    sig = (r.get('task_id'), r.get('action'), r.get('phase'), units)
+                    if sig != last_sig or f - last_frame >= 240:
+                        tasks.append([f, r.get('task_id'), r.get('action') or '', r.get('phase') or '', units, arrived])
+                        last_sig = sig
+                        last_frame = f
+                elif '"command"' in line and '"-"' in line:
+                    r = json.loads(line)
+                    if r.get('event') == 'command' and str(r.get('key')) == '-':
+                        f = int(r['frame'])
+                        tasks.append([f, 0, 'baseline', '', 0, None])
+                        last_sig = (0, 'baseline', '', 0)
+                        last_frame = f
+    return {'end_frame': end_frame, 'events': events, 'tasks': tasks}
 
 
 def rounds_a(run):
@@ -120,8 +209,10 @@ def summary(played):
 
 def main():
     reps = PAGE / 'reps'
+    data_dir = PAGE / 'data'
     reps.mkdir(parents=True, exist_ok=True)
-    runs, keep = [], set()
+    data_dir.mkdir(parents=True, exist_ok=True)
+    runs, keep_reps, keep_data = [], set(), {'index.json'}
     for run in RUNS:
         meta_path = run['paths'][-1] if 'paths' in run else run['path']
         batch = load(meta_path / 'batch.json')
@@ -132,24 +223,33 @@ def main():
             match_id = f"{run['id']}-r{rd['round']:02d}-{slug(rd['tested'])}-{slug(pick['opponent'])}-{pick['result']}"
             target = reps / f'{match_id}.rep'
             target.write_bytes(pick['_replay'].read_bytes())
-            keep.add(target.name)
+            keep_reps.add(target.name)
+
+            activity = extract_activity(pick['_folder'], pick['frame'])
+            detail_path = data_dir / f'{match_id}.json'
+            detail_path.write_text(json.dumps(activity, ensure_ascii=False, separators=(',', ':')), encoding='utf-8')
+            keep_data.add(detail_path.name)
+            key_count = sum(1 for e in activity['events'] if e['kind'] == 'key')
+
             entry = {k: v for k, v in rd.items() if k not in ('played', 'all_played')}
             entry['round_matches'] = summary(rd.get('all_played') or rd['played'])
             entry.update({k: v for k, v in pick.items() if not k.startswith('_')})
             entry.update({'id': match_id, 'file': f'reps/{match_id}.rep', 'bytes': target.stat().st_size,
-                          'sha256': sha256(target)})
+                          'sha256': sha256(target), 'actions': key_count})
             items.append(entry)
-            print(f"{match_id}: match-{pick['match_number']} {pick['result']}/{pick['end']} frame {pick['frame']}")
+            print(f"{match_id}: {key_count} keys, {len(activity['events'])} events, {len(activity['tasks'])} tasks, {detail_path.stat().st_size // 1024} KB")
         p = batch['parameters']
         runs.append({'id': run['id'], 'rounds': len(rounds),
                      'matches_per_round': 4 if run['kind'] == 'ledger' else p['matches_per_round'],
                      'parallel': p['parallel'], 'map': p['map'], 'opponents': p.get('core_opponents') or p['opponent'].split(','),
                      'live_model': p['live_model'], 'review_model': p['review_model'], 'items': items})
     for stale in reps.glob('*.rep'):
-        if stale.name not in keep:
+        if stale.name not in keep_reps:
             stale.unlink()
-    (PAGE / 'data').mkdir(exist_ok=True)
-    (PAGE / 'data' / 'index.json').write_text(json.dumps({'runs': runs}, ensure_ascii=False, indent=1), encoding='utf-8')
+    for stale in data_dir.glob('*.json'):
+        if stale.name not in keep_data:
+            stale.unlink()
+    (data_dir / 'index.json').write_text(json.dumps({'runs': runs}, ensure_ascii=False, indent=1), encoding='utf-8')
 
 
 if __name__ == '__main__':

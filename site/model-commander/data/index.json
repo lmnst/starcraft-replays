@@ -66,7 +66,8 @@
      "id": "a-r01-v1-mcrave-loss",
      "file": "reps/a-r01-v1-mcrave-loss.rep",
      "bytes": 252880,
-     "sha256": "e227f2dd73492a758770c41d5fdc5c448367dcf18675f0c89093c0e9fc3488ef"
+     "sha256": "e227f2dd73492a758770c41d5fdc5c448367dcf18675f0c89093c0e9fc3488ef",
+     "actions": 5
     },
     {
      "round": 2,
@@ -115,7 +116,8 @@
      "id": "a-r02-v2-bananabrain-loss",
      "file": "reps/a-r02-v2-bananabrain-loss.rep",
      "bytes": 273334,
-     "sha256": "e1c333f6d040f733d2a768ec09c08d451c64166c641f48430698d5c7b0ff72fc"
+     "sha256": "e1c333f6d040f733d2a768ec09c08d451c64166c641f48430698d5c7b0ff72fc",
+     "actions": 4
     },
     {
      "round": 3,
@@ -161,7 +163,8 @@
      "id": "a-r03-v3-purplewave-win",
      "file": "reps/a-r03-v3-purplewave-win.rep",
      "bytes": 74157,
-     "sha256": "906ae5fa0f7a3c749d9c72c258b01cc2ad590bc1149bdb0a14811e41a31d435f"
+     "sha256": "906ae5fa0f7a3c749d9c72c258b01cc2ad590bc1149bdb0a14811e41a31d435f",
+     "actions": 1
     },
     {
      "round": 4,
@@ -209,7 +212,8 @@
      "id": "a-r04-v1-purplewave-loss",
      "file": "reps/a-r04-v1-purplewave-loss.rep",
      "bytes": 437221,
-     "sha256": "38a96e1e7a7e536d0b971ed0b6c483db8b04f2a41293c1edf55cc829d316473f"
+     "sha256": "38a96e1e7a7e536d0b971ed0b6c483db8b04f2a41293c1edf55cc829d316473f",
+     "actions": 5
     },
     {
      "round": 5,
@@ -255,7 +259,8 @@
      "id": "a-r05-v2-pylonpuller-win",
      "file": "reps/a-r05-v2-pylonpuller-win.rep",
      "bytes": 342770,
-     "sha256": "2b48d46f9e0122ce6a31923ca2398bb38468433fa8b1e0c9b61e747d0e21d3a6"
+     "sha256": "2b48d46f9e0122ce6a31923ca2398bb38468433fa8b1e0c9b61e747d0e21d3a6",
+     "actions": 10
     },
     {
      "round": 6,
@@ -303,7 +308,8 @@
      "id": "a-r06-v2-stardust-sourcerepaircandidate-loss",
      "file": "reps/a-r06-v2-stardust-sourcerepaircandidate-loss.rep",
      "bytes": 687413,
-     "sha256": "066845a33d61163683e9c5ae93d3a5df3d84ac830c9b1c8e02107c7f985ac381"
+     "sha256": "066845a33d61163683e9c5ae93d3a5df3d84ac830c9b1c8e02107c7f985ac381",
+     "actions": 12
     },
     {
      "round": 7,
@@ -351,7 +357,8 @@
      "id": "a-r07-v3-mcrave-loss",
      "file": "reps/a-r07-v3-mcrave-loss.rep",
      "bytes": 1490410,
-     "sha256": "bce4661407e9b249447eb4b772d4b353c3255e71770305c5d78afc7be3ce23df"
+     "sha256": "bce4661407e9b249447eb4b772d4b353c3255e71770305c5d78afc7be3ce23df",
+     "actions": 17
     },
     {
      "round": 8,
@@ -399,7 +406,8 @@
      "id": "a-r08-v4-purplewave-loss",
      "file": "reps/a-r08-v4-purplewave-loss.rep",
      "bytes": 478290,
-     "sha256": "c9b7090c29211e16a66c95f2951984754d35fde8a4f5449096ad9eaaca4e3f2d"
+     "sha256": "c9b7090c29211e16a66c95f2951984754d35fde8a4f5449096ad9eaaca4e3f2d",
+     "actions": 6
     },
     {
      "round": 9,
@@ -447,7 +455,8 @@
      "id": "a-r09-v5-tscmoo-authorcandidate-win",
      "file": "reps/a-r09-v5-tscmoo-authorcandidate-win.rep",
      "bytes": 384480,
-     "sha256": "6f0f23662aa0a85b7502282f6f7b0cbece90a9431060a338c6a07ffaf704fd98"
+     "sha256": "6f0f23662aa0a85b7502282f6f7b0cbece90a9431060a338c6a07ffaf704fd98",
+     "actions": 7
     },
     {
      "round": 10,
@@ -495,13 +504,14 @@
      "id": "a-r10-v6-locutus-loss",
      "file": "reps/a-r10-v6-locutus-loss.rep",
      "bytes": 127874,
-     "sha256": "15b26a459c00c912620a892867cba613691289860807271cedd6e3a9a73f441f"
+     "sha256": "15b26a459c00c912620a892867cba613691289860807271cedd6e3a9a73f441f",
+     "actions": 1
     }
    ]
   },
   {
    "id": "b",
-   "rounds": 23,
+   "rounds": 24,
    "matches_per_round": 4,
    "parallel": 2,
    "map": "Destination",
@@ -576,7 +586,8 @@
      "id": "b-r01-v1-pylonpuller-win",
      "file": "reps/b-r01-v1-pylonpuller-win.rep",
      "bytes": 175121,
-     "sha256": "d1100951da8c393b125d1a97e26983c1b41ea4d04525f8dd43ebc178e9a9117c"
+     "sha256": "d1100951da8c393b125d1a97e26983c1b41ea4d04525f8dd43ebc178e9a9117c",
+     "actions": 3
     },
     {
      "round": 2,
@@ -644,7 +655,8 @@
      "id": "b-r02-c1-pylonpuller-win",
      "file": "reps/b-r02-c1-pylonpuller-win.rep",
      "bytes": 235751,
-     "sha256": "0eb5884ffd93e807cdc33842f6d30f15ad3e6b474b09bb05dec472c2a2f3928a"
+     "sha256": "0eb5884ffd93e807cdc33842f6d30f15ad3e6b474b09bb05dec472c2a2f3928a",
+     "actions": 6
     },
     {
      "round": 3,
@@ -712,7 +724,8 @@
      "id": "b-r03-c2-steamhammer-loss",
      "file": "reps/b-r03-c2-steamhammer-loss.rep",
      "bytes": 227251,
-     "sha256": "eb9dc11735da5a3f25ee3af03dd0e63deae97986ee7f3d2f6bb16fc90aa24c6d"
+     "sha256": "eb9dc11735da5a3f25ee3af03dd0e63deae97986ee7f3d2f6bb16fc90aa24c6d",
+     "actions": 7
     },
     {
      "round": 4,
@@ -780,7 +793,8 @@
      "id": "b-r04-c3-pylonpuller-loss",
      "file": "reps/b-r04-c3-pylonpuller-loss.rep",
      "bytes": 146536,
-     "sha256": "835652369e44593d513f6d3964fe4584e00c76996faed18a58eaafe2ce0bab13"
+     "sha256": "835652369e44593d513f6d3964fe4584e00c76996faed18a58eaafe2ce0bab13",
+     "actions": 4
     },
     {
      "round": 5,
@@ -847,7 +861,8 @@
      "id": "b-r05-c4-pylonpuller-win",
      "file": "reps/b-r05-c4-pylonpuller-win.rep",
      "bytes": 410252,
-     "sha256": "3f823d528c75ca4c0798ba31b1ff4727ba2ac8a1780d6910d14dfa4a100aec27"
+     "sha256": "3f823d528c75ca4c0798ba31b1ff4727ba2ac8a1780d6910d14dfa4a100aec27",
+     "actions": 9
     },
     {
      "round": 6,
@@ -915,7 +930,8 @@
      "id": "b-r06-c5-steamhammer-loss",
      "file": "reps/b-r06-c5-steamhammer-loss.rep",
      "bytes": 99907,
-     "sha256": "4138020db32730613ca2f77e5362d1d55f7b73cc7a83b51a06b6f6abf5365aca"
+     "sha256": "4138020db32730613ca2f77e5362d1d55f7b73cc7a83b51a06b6f6abf5365aca",
+     "actions": 1
     },
     {
      "round": 7,
@@ -982,7 +998,8 @@
      "id": "b-r07-c6-steamhammer-win",
      "file": "reps/b-r07-c6-steamhammer-win.rep",
      "bytes": 428848,
-     "sha256": "9e2f438fee1f2a5a54d571278b5bf426e2e84dcd982412d41ec0df6aa7249979"
+     "sha256": "9e2f438fee1f2a5a54d571278b5bf426e2e84dcd982412d41ec0df6aa7249979",
+     "actions": 12
     },
     {
      "round": 8,
@@ -1049,7 +1066,8 @@
      "id": "b-r08-c7-steamhammer-win",
      "file": "reps/b-r08-c7-steamhammer-win.rep",
      "bytes": 392307,
-     "sha256": "26d0ac4567d6f907fbcdf6a1c35f90fce9f34e288281443119ea17cf9ad294b5"
+     "sha256": "26d0ac4567d6f907fbcdf6a1c35f90fce9f34e288281443119ea17cf9ad294b5",
+     "actions": 9
     },
     {
      "round": 9,
@@ -1116,7 +1134,8 @@
      "id": "b-r09-c8-steamhammer-loss",
      "file": "reps/b-r09-c8-steamhammer-loss.rep",
      "bytes": 188625,
-     "sha256": "2b3af2bfaedad20250ba7ae2262ae42ebe9f4563fc3c1b8a3eb9e37680188269"
+     "sha256": "2b3af2bfaedad20250ba7ae2262ae42ebe9f4563fc3c1b8a3eb9e37680188269",
+     "actions": 8
     },
     {
      "round": 10,
@@ -1183,7 +1202,8 @@
      "id": "b-r10-c9-pylonpuller-loss",
      "file": "reps/b-r10-c9-pylonpuller-loss.rep",
      "bytes": 135246,
-     "sha256": "b7ecdbb2a9c15a32bdcb870be30509dbcb1d2610a16b26d7ee2f0e6ac6c63c5b"
+     "sha256": "b7ecdbb2a9c15a32bdcb870be30509dbcb1d2610a16b26d7ee2f0e6ac6c63c5b",
+     "actions": 12
     },
     {
      "round": 11,
@@ -1251,7 +1271,8 @@
      "id": "b-r11-c10-steamhammer-win",
      "file": "reps/b-r11-c10-steamhammer-win.rep",
      "bytes": 232123,
-     "sha256": "562b0245224a64282c54fbf00d0cd8b7f3950e91ad46f52afeff5b2e493a1f85"
+     "sha256": "562b0245224a64282c54fbf00d0cd8b7f3950e91ad46f52afeff5b2e493a1f85",
+     "actions": 2
     },
     {
      "round": 12,
@@ -1318,7 +1339,8 @@
      "id": "b-r12-c11-pylonpuller-win",
      "file": "reps/b-r12-c11-pylonpuller-win.rep",
      "bytes": 120938,
-     "sha256": "92435315dc44780caf9647c1b29ebf2cdf0d5721a065d6eb56b3a9868432202e"
+     "sha256": "92435315dc44780caf9647c1b29ebf2cdf0d5721a065d6eb56b3a9868432202e",
+     "actions": 1
     },
     {
      "round": 13,
@@ -1385,7 +1407,8 @@
      "id": "b-r13-c12-steamhammer-win",
      "file": "reps/b-r13-c12-steamhammer-win.rep",
      "bytes": 472329,
-     "sha256": "7e8835d2e4d5b271a32a37499529b7e735cc15d0be4f1982f883cb0e74988ae5"
+     "sha256": "7e8835d2e4d5b271a32a37499529b7e735cc15d0be4f1982f883cb0e74988ae5",
+     "actions": 8
     },
     {
      "round": 14,
@@ -1453,7 +1476,8 @@
      "id": "b-r14-c13-pylonpuller-loss",
      "file": "reps/b-r14-c13-pylonpuller-loss.rep",
      "bytes": 132909,
-     "sha256": "0756bafa6bc4979f861d503b60ff25dbe32d33631335a24f759cfd636034a4c1"
+     "sha256": "0756bafa6bc4979f861d503b60ff25dbe32d33631335a24f759cfd636034a4c1",
+     "actions": 8
     },
     {
      "round": 15,
@@ -1520,7 +1544,8 @@
      "id": "b-r15-c14-pylonpuller-win",
      "file": "reps/b-r15-c14-pylonpuller-win.rep",
      "bytes": 160661,
-     "sha256": "c1e2db14bb596f545fef891be92f96ac22e580e68c591be6ef4b613e2387d36d"
+     "sha256": "c1e2db14bb596f545fef891be92f96ac22e580e68c591be6ef4b613e2387d36d",
+     "actions": 1
     },
     {
      "round": 16,
@@ -1587,7 +1612,8 @@
      "id": "b-r16-c15-pylonpuller-loss",
      "file": "reps/b-r16-c15-pylonpuller-loss.rep",
      "bytes": 136315,
-     "sha256": "da153df98424aff2af03c3074aa3df83c3915d54dd3274e592f365af77b2b826"
+     "sha256": "da153df98424aff2af03c3074aa3df83c3915d54dd3274e592f365af77b2b826",
+     "actions": 3
     },
     {
      "round": 17,
@@ -1654,7 +1680,8 @@
      "id": "b-r17-c16-pylonpuller-win",
      "file": "reps/b-r17-c16-pylonpuller-win.rep",
      "bytes": 336614,
-     "sha256": "b5fda4d7c9f7f19b1c7a677e351144a93afd8af0b1c0f04a8b14517f944366c9"
+     "sha256": "b5fda4d7c9f7f19b1c7a677e351144a93afd8af0b1c0f04a8b14517f944366c9",
+     "actions": 13
     },
     {
      "round": 18,
@@ -1721,7 +1748,8 @@
      "id": "b-r18-c17-steamhammer-draw",
      "file": "reps/b-r18-c17-steamhammer-draw.rep",
      "bytes": 1001603,
-     "sha256": "57a10627ef81bce6e39cc1e3d1be7dd672ed656784ea83ea7cb2a7547d4226bd"
+     "sha256": "57a10627ef81bce6e39cc1e3d1be7dd672ed656784ea83ea7cb2a7547d4226bd",
+     "actions": 17
     },
     {
      "round": 19,
@@ -1788,7 +1816,8 @@
      "id": "b-r19-c18-steamhammer-win",
      "file": "reps/b-r19-c18-steamhammer-win.rep",
      "bytes": 289132,
-     "sha256": "5887a3542cef3b3194d13d9cc0c2996c80bf64710fde8a4aafc578b630256880"
+     "sha256": "5887a3542cef3b3194d13d9cc0c2996c80bf64710fde8a4aafc578b630256880",
+     "actions": 6
     },
     {
      "round": 20,
@@ -1855,7 +1884,8 @@
      "id": "b-r20-c19-bananabrain-loss",
      "file": "reps/b-r20-c19-bananabrain-loss.rep",
      "bytes": 226619,
-     "sha256": "1e44b2216f3175d87c88ad750fe03250524938e28b476cd9319b1171ce778293"
+     "sha256": "1e44b2216f3175d87c88ad750fe03250524938e28b476cd9319b1171ce778293",
+     "actions": 7
     },
     {
      "round": 21,
@@ -1923,7 +1953,8 @@
      "id": "b-r21-c20-pylonpuller-win",
      "file": "reps/b-r21-c20-pylonpuller-win.rep",
      "bytes": 169486,
-     "sha256": "caf1a221e746ef2506492f9d32b553e558769eb3dbb6c9c5d78ac2e01d581ac6"
+     "sha256": "caf1a221e746ef2506492f9d32b553e558769eb3dbb6c9c5d78ac2e01d581ac6",
+     "actions": 4
     },
     {
      "round": 22,
@@ -1991,7 +2022,8 @@
      "id": "b-r22-c21-pylonpuller-win",
      "file": "reps/b-r22-c21-pylonpuller-win.rep",
      "bytes": 328569,
-     "sha256": "630878a0b8684ff814cef7e76b33fd69a9a790bc2b22591e5f96e9c5bbb8f422"
+     "sha256": "630878a0b8684ff814cef7e76b33fd69a9a790bc2b22591e5f96e9c5bbb8f422",
+     "actions": 10
     },
     {
      "round": 23,
@@ -2058,7 +2090,77 @@
      "id": "b-r23-c22-pylonpuller-loss",
      "file": "reps/b-r23-c22-pylonpuller-loss.rep",
      "bytes": 100337,
-     "sha256": "be19b64786cfd0a465d6696e5af5ef23db17a6a33f2548d1a521875b5dad3e9e"
+     "sha256": "be19b64786cfd0a465d6696e5af5ef23db17a6a33f2548d1a521875b5dad3e9e",
+     "actions": 3
+    },
+    {
+     "round": 24,
+     "tested": "c23",
+     "parent": "v8",
+     "decision": "rejected",
+     "reason": "win_rate_lower",
+     "next_version": "v8",
+     "changed_files": [
+      "MacroBot.cpp",
+      "build_config.json"
+     ],
+     "cpp_changed_lines": 13,
+     "round_matches": [
+      {
+       "match_number": 93,
+       "opponent": "PylonPuller",
+       "version": "c23",
+       "result": "loss",
+       "end": "stalemate_zero_units",
+       "l0_score": 44.1,
+       "seconds": 519
+      },
+      {
+       "match_number": 94,
+       "opponent": "Steamhammer",
+       "version": "c23",
+       "result": "loss",
+       "end": "stalemate_zero_units",
+       "l0_score": 62.91,
+       "seconds": 736
+      },
+      {
+       "match_number": 95,
+       "opponent": "BananaBrain",
+       "version": "c23",
+       "result": "loss",
+       "end": "stalemate_one_army_or_less",
+       "l0_score": 59.38,
+       "seconds": 1048
+      },
+      {
+       "match_number": 96,
+       "opponent": "BananaBrain",
+       "version": "v8",
+       "result": "loss",
+       "end": "stalemate_zero_units",
+       "l0_score": 54.79,
+       "seconds": 842
+      }
+     ],
+     "match_number": 94,
+     "opponent": "Steamhammer",
+     "map": "Destination",
+     "version": "c23",
+     "result": "loss",
+     "end": "stalemate_zero_units",
+     "frame": 17525,
+     "seconds": 736,
+     "l0_score": 62.91,
+     "self_name": "StarterBot",
+     "opponent_name": "UAlbertaBot",
+     "race": "Protoss",
+     "opponent_race": "Protoss",
+     "id": "b-r24-c23-steamhammer-loss",
+     "file": "reps/b-r24-c23-steamhammer-loss.rep",
+     "bytes": 213601,
+     "sha256": "cc2642881990cef91e0c64954f71d52421632801c6f46645f7ed5f431f7ffe7e",
+     "actions": 3
     }
    ]
   }

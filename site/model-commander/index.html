@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Model commander self-iteration: one native StarCraft 1.16.1 replay per iteration round.">
+  <meta name="description" content="Model commander self-iteration: one native StarCraft 1.16.1 replay per iteration round with live action timeline.">
   <title data-nav-title="model">Model commander · Replay Archive</title>
   <link rel="icon" href="data:,">
   <link rel="stylesheet" href="../app.css">
@@ -37,16 +37,58 @@
       <h1 id="mc-title"></h1>
       <p id="mc-meta" class="mc-meta"></p>
       <div class="mc-facts" id="mc-facts"></div>
-      <div class="player-toolbar">
-        <div class="mc-switch" id="mc-view" role="group">
-          <button type="button" data-view="all" aria-pressed="true" data-i18n="viewAll">Full map</button>
-          <button type="button" data-view="self" aria-pressed="false" data-i18n="viewSelf">Our vision</button>
+
+      <div class="mc-replay-card">
+        <div class="player-toolbar">
+          <div class="mc-switch" id="mc-view" role="group">
+            <button type="button" data-view="all" aria-pressed="true" data-i18n="viewAll">Full map</button>
+            <button type="button" data-view="self" aria-pressed="false" data-i18n="viewSelf">Our vision</button>
+          </div>
+          <span id="mc-clock" class="mc-clock"></span>
+          <span id="mc-status" role="status"></span>
+          <button id="mc-fullscreen" type="button" data-i18n="fullscreen">Fullscreen</button>
         </div>
-        <span id="mc-status" role="status"></span>
-        <button id="mc-fullscreen" type="button" data-i18n="fullscreen">Fullscreen</button>
+
+        <div class="mc-stage">
+          <div id="mc-screen"><iframe id="mc-viewer" title="Interactive replay player" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
+          <aside class="mc-panel" aria-live="polite">
+            <h4 data-i18n="panelCmd">Current action</h4>
+            <div id="mc-last-cmd" class="mc-cmd"></div>
+            <h4 data-i18n="panelTask">Active task</h4>
+            <div id="mc-task" class="mc-task"></div>
+            <h4 data-i18n="panelProd">Building / Producing</h4>
+            <div id="mc-prod" class="mc-prod"></div>
+            <h4 data-i18n="panelRecent">Recent actions</h4>
+            <ol id="mc-recent" class="mc-recent"></ol>
+          </aside>
+        </div>
+
+        <div class="mc-controls">
+          <button id="mc-prev" type="button" data-i18n="prevCmd">◀ Prev action</button>
+          <span id="mc-cmd-pos" class="mc-cmd-pos"></span>
+          <button id="mc-next" type="button" data-i18n="nextCmd">Next action ▶</button>
+          <button id="mc-play" type="button" aria-pressed="false" data-i18n="play">Play</button>
+          <input id="mc-seek" type="range" min="0" max="1" step="1" value="0" aria-label="Replay progress">
+          <label class="mc-speed"><span data-i18n="speed">Speed</span>
+            <select id="mc-speed">
+              <option value="1" selected>1×</option>
+              <option value="2">2×</option>
+              <option value="4">4×</option>
+              <option value="8">8×</option>
+              <option value="16">16×</option>
+            </select>
+          </label>
+        </div>
+        <p class="mc-help" data-i18n="controls"></p>
       </div>
-      <div id="mc-screen"><iframe id="mc-viewer" title="Interactive replay player" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
-      <p class="mc-help" data-i18n="controls"></p>
+
+      <div class="mc-log-head">
+        <h2 class="mc-h2" data-i18n="logTitle">Action timeline</h2>
+        <label class="mc-toggle"><input type="checkbox" id="mc-show-keep"> <span data-i18n="showKeep">Show "keep current" checks</span></label>
+      </div>
+      <p class="mc-help" id="mc-log-note"></p>
+      <ol class="mc-log" id="mc-log"></ol>
+
       <h2 class="mc-h2" data-i18n="roundTable">All matches in this round</h2>
       <table class="mc-table" id="mc-round"></table>
       <p class="mc-help" id="mc-files"></p>
