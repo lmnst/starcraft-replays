@@ -1,0 +1,2066 @@
+{
+ "runs": [
+  {
+   "id": "a",
+   "rounds": 10,
+   "matches_per_round": 2,
+   "parallel": 2,
+   "map": "Destination",
+   "opponents": [
+    "PurpleWave",
+    "HladHammer",
+    "tscmoo-AuthorCandidate",
+    "PylonPuller",
+    "Locutus",
+    "Stardust-SourceRepairCandidate",
+    "McRave",
+    "BananaBrain",
+    "Steamhammer"
+   ],
+   "live_model": "claude-opus-5-5",
+   "review_model": "claude-opus-5-5",
+   "items": [
+    {
+     "round": 1,
+     "tested": "v1",
+     "parent": null,
+     "decision": "revised",
+     "reason": "v2",
+     "next_version": "v2",
+     "changed_files": [
+      "rules.py"
+     ],
+     "round_matches": [
+      {
+       "match_number": 1,
+       "opponent": "Stardust-SourceRepairCandidate",
+       "version": "v1",
+       "result": "loss",
+       "end": "stalemate_zero_units",
+       "l0_score": null,
+       "seconds": 539
+      },
+      {
+       "match_number": 2,
+       "opponent": "McRave",
+       "version": "v1",
+       "result": "loss",
+       "end": "stalemate_zero_units",
+       "l0_score": null,
+       "seconds": 610
+      }
+     ],
+     "match_number": 2,
+     "opponent": "McRave",
+     "map": "Destination",
+     "version": "v1",
+     "result": "loss",
+     "end": "stalemate_zero_units",
+     "frame": 14525,
+     "seconds": 610,
+     "l0_score": null,
+     "self_name": "StarterBot",
+     "opponent_name": "UAlbertaBot",
+     "race": "Protoss",
+     "opponent_race": "Protoss",
+     "id": "a-r01-v1-mcrave-loss",
+     "file": "reps/a-r01-v1-mcrave-loss.rep",
+     "bytes": 252880,
+     "sha256": "e227f2dd73492a758770c41d5fdc5c448367dcf18675f0c89093c0e9fc3488ef"
+    },
+    {
+     "round": 2,
+     "tested": "v2",
+     "parent": null,
+     "decision": "revised",
+     "reason": "v3",
+     "next_version": "v3",
+     "changed_files": [
+      "rules.py",
+      "strategy.md"
+     ],
+     "round_matches": [
+      {
+       "match_number": 3,
+       "opponent": "BananaBrain",
+       "version": "v2",
+       "result": "loss",
+       "end": "stalemate_zero_units",
+       "l0_score": null,
+       "seconds": 570
+      },
+      {
+       "match_number": 4,
+       "opponent": "Steamhammer",
+       "version": "v2",
+       "result": "loss",
+       "end": "stalemate_one_army_or_less",
+       "l0_score": null,
+       "seconds": 539
+      }
+     ],
+     "match_number": 3,
+     "opponent": "BananaBrain",
+     "map": "Destination",
+     "version": "v2",
+     "result": "loss",
+     "end": "stalemate_zero_units",
+     "frame": 13566,
+     "seconds": 570,
+     "l0_score": null,
+     "self_name": "StarterBot",
+     "opponent_name": "UAlbertaBot",
+     "race": "Protoss",
+     "opponent_race": "Protoss",
+     "id": "a-r02-v2-bananabrain-loss",
+     "file": "reps/a-r02-v2-bananabrain-loss.rep",
+     "bytes": 273334,
+     "sha256": "e1c333f6d040f733d2a768ec09c08d451c64166c641f48430698d5c7b0ff72fc"
+    },
+    {
+     "round": 3,
+     "tested": "v3",
+     "parent": null,
+     "decision": "kept",
+     "reason": "v3",
+     "next_version": "v3",
+     "changed_files": [],
+     "round_matches": [
+      {
+       "match_number": 5,
+       "opponent": "PurpleWave",
+       "version": "v3",
+       "result": "win",
+       "end": "natural",
+       "l0_score": null,
+       "seconds": 410
+      },
+      {
+       "match_number": 6,
+       "opponent": "HladHammer",
+       "version": "v3",
+       "result": "draw",
+       "end": "manual_stop",
+       "l0_score": null,
+       "seconds": 479
+      }
+     ],
+     "match_number": 5,
+     "opponent": "PurpleWave",
+     "map": "Destination",
+     "version": "v3",
+     "result": "win",
+     "end": "natural",
+     "frame": 9767,
+     "seconds": 410,
+     "l0_score": null,
+     "self_name": "StarterBot",
+     "opponent_name": "UAlbertaBot",
+     "race": "Protoss",
+     "opponent_race": "Protoss",
+     "id": "a-r03-v3-purplewave-win",
+     "file": "reps/a-r03-v3-purplewave-win.rep",
+     "bytes": 74157,
+     "sha256": "906ae5fa0f7a3c749d9c72c258b01cc2ad590bc1149bdb0a14811e41a31d435f"
+    },
+    {
+     "round": 4,
+     "tested": "v1",
+     "parent": null,
+     "decision": "revised",
+     "reason": "v2",
+     "next_version": "v2",
+     "changed_files": [
+      "build_config.json"
+     ],
+     "round_matches": [
+      {
+       "match_number": 1,
+       "opponent": "PurpleWave",
+       "version": "v1",
+       "result": "loss",
+       "end": "natural",
+       "l0_score": null,
+       "seconds": 639
+      },
+      {
+       "match_number": 2,
+       "opponent": "HladHammer",
+       "version": "v1",
+       "result": "loss",
+       "end": "stalemate_one_army_or_less",
+       "l0_score": null,
+       "seconds": 529
+      }
+     ],
+     "match_number": 1,
+     "opponent": "PurpleWave",
+     "map": "Destination",
+     "version": "v1",
+     "result": "loss",
+     "end": "natural",
+     "frame": 15223,
+     "seconds": 639,
+     "l0_score": null,
+     "self_name": "StarterBot",
+     "opponent_name": "UAlbertaBot",
+     "race": "Protoss",
+     "opponent_race": "Protoss",
+     "id": "a-r04-v1-purplewave-loss",
+     "file": "reps/a-r04-v1-purplewave-loss.rep",
+     "bytes": 437221,
+     "sha256": "38a96e1e7a7e536d0b971ed0b6c483db8b04f2a41293c1edf55cc829d316473f"
+    },
+    {
+     "round": 5,
+     "tested": "v2",
+     "parent": null,
+     "decision": "kept",
+     "reason": "v2",
+     "next_version": "v2",
+     "changed_files": [],
+     "round_matches": [
+      {
+       "match_number": 3,
+       "opponent": "tscmoo-AuthorCandidate",
+       "version": "v2",
+       "result": "win",
+       "end": "natural",
+       "l0_score": null,
+       "seconds": 492
+      },
+      {
+       "match_number": 4,
+       "opponent": "PylonPuller",
+       "version": "v2",
+       "result": "win",
+       "end": "natural",
+       "l0_score": null,
+       "seconds": 1228
+      }
+     ],
+     "match_number": 4,
+     "opponent": "PylonPuller",
+     "map": "Destination",
+     "version": "v2",
+     "result": "win",
+     "end": "natural",
+     "frame": 29235,
+     "seconds": 1228,
+     "l0_score": null,
+     "self_name": "StarterBot",
+     "opponent_name": "UAlbertaBot",
+     "race": "Protoss",
+     "opponent_race": "Protoss",
+     "id": "a-r05-v2-pylonpuller-win",
+     "file": "reps/a-r05-v2-pylonpuller-win.rep",
+     "bytes": 342770,
+     "sha256": "2b48d46f9e0122ce6a31923ca2398bb38468433fa8b1e0c9b61e747d0e21d3a6"
+    },
+    {
+     "round": 6,
+     "tested": "v2",
+     "parent": null,
+     "decision": "revised",
+     "reason": "v3",
+     "next_version": "v3",
+     "changed_files": [
+      "build_config.json"
+     ],
+     "round_matches": [
+      {
+       "match_number": 5,
+       "opponent": "Locutus",
+       "version": "v2",
+       "result": "loss",
+       "end": "stalemate_zero_units",
+       "l0_score": null,
+       "seconds": 449
+      },
+      {
+       "match_number": 6,
+       "opponent": "Stardust-SourceRepairCandidate",
+       "version": "v2",
+       "result": "loss",
+       "end": "stalemate_zero_units",
+       "l0_score": null,
+       "seconds": 872
+      }
+     ],
+     "match_number": 6,
+     "opponent": "Stardust-SourceRepairCandidate",
+     "map": "Destination",
+     "version": "v2",
+     "result": "loss",
+     "end": "stalemate_zero_units",
+     "frame": 20763,
+     "seconds": 872,
+     "l0_score": null,
+     "self_name": "StarterBot",
+     "opponent_name": "UAlbertaBot",
+     "race": "Protoss",
+     "opponent_race": "Protoss",
+     "id": "a-r06-v2-stardust-sourcerepaircandidate-loss",
+     "file": "reps/a-r06-v2-stardust-sourcerepaircandidate-loss.rep",
+     "bytes": 687413,
+     "sha256": "066845a33d61163683e9c5ae93d3a5df3d84ac830c9b1c8e02107c7f985ac381"
+    },
+    {
+     "round": 7,
+     "tested": "v3",
+     "parent": null,
+     "decision": "revised",
+     "reason": "v4",
+     "next_version": "v4",
+     "changed_files": [
+      "rules.py"
+     ],
+     "round_matches": [
+      {
+       "match_number": 7,
+       "opponent": "McRave",
+       "version": "v3",
+       "result": "loss",
+       "end": "natural",
+       "l0_score": null,
+       "seconds": 1065
+      },
+      {
+       "match_number": 8,
+       "opponent": "BananaBrain",
+       "version": "v3",
+       "result": "loss",
+       "end": "stalemate_zero_units",
+       "l0_score": null,
+       "seconds": 756
+      }
+     ],
+     "match_number": 7,
+     "opponent": "McRave",
+     "map": "Destination",
+     "version": "v3",
+     "result": "loss",
+     "end": "natural",
+     "frame": 25360,
+     "seconds": 1065,
+     "l0_score": null,
+     "self_name": "StarterBot",
+     "opponent_name": "UAlbertaBot",
+     "race": "Protoss",
+     "opponent_race": "Protoss",
+     "id": "a-r07-v3-mcrave-loss",
+     "file": "reps/a-r07-v3-mcrave-loss.rep",
+     "bytes": 1490410,
+     "sha256": "bce4661407e9b249447eb4b772d4b353c3255e71770305c5d78afc7be3ce23df"
+    },
+    {
+     "round": 8,
+     "tested": "v4",
+     "parent": null,
+     "decision": "revised",
+     "reason": "v5",
+     "next_version": "v5",
+     "changed_files": [
+      "build_config.json"
+     ],
+     "round_matches": [
+      {
+       "match_number": 9,
+       "opponent": "Steamhammer",
+       "version": "v4",
+       "result": "loss",
+       "end": "stalemate_zero_units",
+       "l0_score": null,
+       "seconds": 544
+      },
+      {
+       "match_number": 10,
+       "opponent": "PurpleWave",
+       "version": "v4",
+       "result": "loss",
+       "end": "stalemate_one_army_or_less",
+       "l0_score": null,
+       "seconds": 706
+      }
+     ],
+     "match_number": 10,
+     "opponent": "PurpleWave",
+     "map": "Destination",
+     "version": "v4",
+     "result": "loss",
+     "end": "stalemate_one_army_or_less",
+     "frame": 16802,
+     "seconds": 706,
+     "l0_score": null,
+     "self_name": "StarterBot",
+     "opponent_name": "UAlbertaBot",
+     "race": "Protoss",
+     "opponent_race": "Protoss",
+     "id": "a-r08-v4-purplewave-loss",
+     "file": "reps/a-r08-v4-purplewave-loss.rep",
+     "bytes": 478290,
+     "sha256": "c9b7090c29211e16a66c95f2951984754d35fde8a4f5449096ad9eaaca4e3f2d"
+    },
+    {
+     "round": 9,
+     "tested": "v5",
+     "parent": null,
+     "decision": "revised",
+     "reason": "v6",
+     "next_version": "v6",
+     "changed_files": [
+      "strategy.md"
+     ],
+     "round_matches": [
+      {
+       "match_number": 11,
+       "opponent": "HladHammer",
+       "version": "v5",
+       "result": "loss",
+       "end": "stalemate_one_army_or_less",
+       "l0_score": null,
+       "seconds": 615
+      },
+      {
+       "match_number": 12,
+       "opponent": "tscmoo-AuthorCandidate",
+       "version": "v5",
+       "result": "win",
+       "end": "natural",
+       "l0_score": null,
+       "seconds": 901
+      }
+     ],
+     "match_number": 12,
+     "opponent": "tscmoo-AuthorCandidate",
+     "map": "Destination",
+     "version": "v5",
+     "result": "win",
+     "end": "natural",
+     "frame": 21454,
+     "seconds": 901,
+     "l0_score": null,
+     "self_name": "StarterBot",
+     "opponent_name": "UAlbertaBot",
+     "race": "Protoss",
+     "opponent_race": "Protoss",
+     "id": "a-r09-v5-tscmoo-authorcandidate-win",
+     "file": "reps/a-r09-v5-tscmoo-authorcandidate-win.rep",
+     "bytes": 384480,
+     "sha256": "6f0f23662aa0a85b7502282f6f7b0cbece90a9431060a338c6a07ffaf704fd98"
+    },
+    {
+     "round": 10,
+     "tested": "v6",
+     "parent": null,
+     "decision": "revised",
+     "reason": "v7",
+     "next_version": "v7",
+     "changed_files": [
+      "build_config.json"
+     ],
+     "round_matches": [
+      {
+       "match_number": 13,
+       "opponent": "PylonPuller",
+       "version": "v6",
+       "result": "loss",
+       "end": "stalemate_zero_units",
+       "l0_score": null,
+       "seconds": 474
+      },
+      {
+       "match_number": 14,
+       "opponent": "Locutus",
+       "version": "v6",
+       "result": "loss",
+       "end": "stalemate_zero_units",
+       "l0_score": null,
+       "seconds": 479
+      }
+     ],
+     "match_number": 14,
+     "opponent": "Locutus",
+     "map": "Destination",
+     "version": "v6",
+     "result": "loss",
+     "end": "stalemate_zero_units",
+     "frame": 11403,
+     "seconds": 479,
+     "l0_score": null,
+     "self_name": "StarterBot",
+     "opponent_name": "UAlbertaBot",
+     "race": "Protoss",
+     "opponent_race": "Protoss",
+     "id": "a-r10-v6-locutus-loss",
+     "file": "reps/a-r10-v6-locutus-loss.rep",
+     "bytes": 127874,
+     "sha256": "15b26a459c00c912620a892867cba613691289860807271cedd6e3a9a73f441f"
+    }
+   ]
+  },
+  {
+   "id": "b",
+   "rounds": 23,
+   "matches_per_round": 4,
+   "parallel": 2,
+   "map": "Destination",
+   "opponents": [
+    "PylonPuller",
+    "Steamhammer",
+    "BananaBrain"
+   ],
+   "live_model": "claude-opus-5-5",
+   "review_model": "claude-opus-5-5",
+   "items": [
+    {
+     "round": 1,
+     "tested": "v1",
+     "parent": null,
+     "decision": "baseline",
+     "reason": null,
+     "next_version": "v1",
+     "changed_files": [],
+     "cpp_changed_lines": 0,
+     "round_matches": [
+      {
+       "match_number": 1,
+       "opponent": "PylonPuller",
+       "version": "v1",
+       "result": "loss",
+       "end": "stalemate_one_army_or_less",
+       "l0_score": 43.32,
+       "seconds": 489
+      },
+      {
+       "match_number": 2,
+       "opponent": "Steamhammer",
+       "version": "v1",
+       "result": "loss",
+       "end": "stalemate_one_army_or_less",
+       "l0_score": 44.45,
+       "seconds": 529
+      },
+      {
+       "match_number": 3,
+       "opponent": "BananaBrain",
+       "version": "v1",
+       "result": "loss",
+       "end": "stalemate_one_army_or_less",
+       "l0_score": 49.7,
+       "seconds": 791
+      },
+      {
+       "match_number": 4,
+       "opponent": "PylonPuller",
+       "version": "v1",
+       "result": "win",
+       "end": "natural",
+       "l0_score": 93.94,
+       "seconds": 695
+      }
+     ],
+     "match_number": 4,
+     "opponent": "PylonPuller",
+     "map": "Destination",
+     "version": "v1",
+     "result": "win",
+     "end": "natural",
+     "frame": 16556,
+     "seconds": 695,
+     "l0_score": 93.94,
+     "self_name": "StarterBot",
+     "opponent_name": "UAlbertaBot",
+     "race": "Protoss",
+     "opponent_race": "Protoss",
+     "id": "b-r01-v1-pylonpuller-win",
+     "file": "reps/b-r01-v1-pylonpuller-win.rep",
+     "bytes": 175121,
+     "sha256": "d1100951da8c393b125d1a97e26983c1b41ea4d04525f8dd43ebc178e9a9117c"
+    },
+    {
+     "round": 2,
+     "tested": "c1",
+     "parent": "v1",
+     "decision": "promoted",
+     "reason": "win_rate_improved",
+     "next_version": "v2",
+     "changed_files": [
+      "MacroBot.cpp",
+      "build_config.json"
+     ],
+     "cpp_changed_lines": 34,
+     "round_matches": [
+      {
+       "match_number": 5,
+       "opponent": "PylonPuller",
+       "version": "c1",
+       "result": "win",
+       "end": "natural",
+       "l0_score": 93.25,
+       "seconds": 895
+      },
+      {
+       "match_number": 6,
+       "opponent": "Steamhammer",
+       "version": "c1",
+       "result": "loss",
+       "end": "stalemate_zero_units",
+       "l0_score": 63.69,
+       "seconds": 676
+      },
+      {
+       "match_number": 7,
+       "opponent": "BananaBrain",
+       "version": "c1",
+       "result": "loss",
+       "end": "stalemate_zero_units",
+       "l0_score": 52.52,
+       "seconds": 691
+      },
+      {
+       "match_number": 8,
+       "opponent": "Steamhammer",
+       "version": "v1",
+       "result": "loss",
+       "end": "stalemate_one_army_or_less",
+       "l0_score": 43.08,
+       "seconds": 439
+      }
+     ],
+     "match_number": 5,
+     "opponent": "PylonPuller",
+     "map": "Destination",
+     "version": "c1",
+     "result": "win",
+     "end": "natural",
+     "frame": 21299,
+     "seconds": 895,
+     "l0_score": 93.25,
+     "self_name": "StarterBot",
+     "opponent_name": "UAlbertaBot",
+     "race": "Protoss",
+     "opponent_race": "Protoss",
+     "id": "b-r02-c1-pylonpuller-win",
+     "file": "reps/b-r02-c1-pylonpuller-win.rep",
+     "bytes": 235751,
+     "sha256": "0eb5884ffd93e807cdc33842f6d30f15ad3e6b474b09bb05dec472c2a2f3928a"
+    },
+    {
+     "round": 3,
+     "tested": "c2",
+     "parent": "v2",
+     "decision": "rejected",
+     "reason": "win_rate_lower",
+     "next_version": "v2",
+     "changed_files": [
+      "MacroBot.cpp",
+      "build_config.json"
+     ],
+     "cpp_changed_lines": 17,
+     "round_matches": [
+      {
+       "match_number": 9,
+       "opponent": "PylonPuller",
+       "version": "c2",
+       "result": "loss",
+       "end": "stalemate_one_army_or_less",
+       "l0_score": 36.56,
+       "seconds": 474
+      },
+      {
+       "match_number": 10,
+       "opponent": "Steamhammer",
+       "version": "c2",
+       "result": "loss",
+       "end": "stalemate_zero_units",
+       "l0_score": 64.4,
+       "seconds": 756
+      },
+      {
+       "match_number": 11,
+       "opponent": "BananaBrain",
+       "version": "c2",
+       "result": "loss",
+       "end": "stalemate_zero_units",
+       "l0_score": 41.0,
+       "seconds": 625
+      },
+      {
+       "match_number": 12,
+       "opponent": "BananaBrain",
+       "version": "v2",
+       "result": "loss",
+       "end": "stalemate_one_army_or_less",
+       "l0_score": 56.61,
+       "seconds": 650
+      }
+     ],
+     "match_number": 10,
+     "opponent": "Steamhammer",
+     "map": "Destination",
+     "version": "c2",
+     "result": "loss",
+     "end": "stalemate_zero_units",
+     "frame": 18005,
+     "seconds": 756,
+     "l0_score": 64.4,
+     "self_name": "StarterBot",
+     "opponent_name": "UAlbertaBot",
+     "race": "Protoss",
+     "opponent_race": "Protoss",
+     "id": "b-r03-c2-steamhammer-loss",
+     "file": "reps/b-r03-c2-steamhammer-loss.rep",
+     "bytes": 227251,
+     "sha256": "eb9dc11735da5a3f25ee3af03dd0e63deae97986ee7f3d2f6bb16fc90aa24c6d"
+    },
+    {
+     "round": 4,
+     "tested": "c3",
+     "parent": "v2",
+     "decision": "rejected",
+     "reason": "regression_on_PylonPuller",
+     "next_version": "v2",
+     "changed_files": [
+      "MacroBot.cpp",
+      "build_config.json"
+     ],
+     "cpp_changed_lines": 18,
+     "round_matches": [
+      {
+       "match_number": 13,
+       "opponent": "PylonPuller",
+       "version": "c3",
+       "result": "loss",
+       "end": "stalemate_zero_units",
+       "l0_score": 50.07,
+       "seconds": 691
+      },
+      {
+       "match_number": 14,
+       "opponent": "Steamhammer",
+       "version": "c3",
+       "result": "loss",
+       "end": "stalemate_zero_units",
+       "l0_score": 4.31,
+       "seconds": 252
+      },
+      {
+       "match_number": 15,
+       "opponent": "BananaBrain",
+       "version": "c3",
+       "result": "loss",
+       "end": "stalemate_zero_units",
+       "l0_score": 39.89,
+       "seconds": 504
+      },
+      {
+       "match_number": 16,
+       "opponent": "PylonPuller",
+       "version": "v2",
+       "result": "loss",
+       "end": "stalemate_zero_units",
+       "l0_score": 45.47,
+       "seconds": 494
+      }
+     ],
+     "match_number": 13,
+     "opponent": "PylonPuller",
+     "map": "Destination",
+     "version": "c3",
+     "result": "loss",
+     "end": "stalemate_zero_units",
+     "frame": 16442,
+     "seconds": 691,
+     "l0_score": 50.07,
+     "self_name": "StarterBot",
+     "opponent_name": "UAlbertaBot",
+     "race": "Protoss",
+     "opponent_race": "Protoss",
+     "id": "b-r04-c3-pylonpuller-loss",
+     "file": "reps/b-r04-c3-pylonpuller-loss.rep",
+     "bytes": 146536,
+     "sha256": "835652369e44593d513f6d3964fe4584e00c76996faed18a58eaafe2ce0bab13"
+    },
+    {
+     "round": 5,
+     "tested": "c4",
+     "parent": "v2",
+     "decision": "promoted",
+     "reason": "win_rate_improved",
+     "next_version": "v3",
+     "changed_files": [
+      "MacroBot.cpp"
+     ],
+     "cpp_changed_lines": 29,
+     "round_matches": [
+      {
+       "match_number": 17,
+       "opponent": "PylonPuller",
+       "version": "c4",
+       "result": "win",
+       "end": "natural",
+       "l0_score": 91.5,
+       "seconds": 1100
+      },
+      {
+       "match_number": 18,
+       "opponent": "Steamhammer",
+       "version": "c4",
+       "result": "loss",
+       "end": "stalemate_one_army_or_less",
+       "l0_score": 53.33,
+       "seconds": 625
+      },
+      {
+       "match_number": 19,
+       "opponent": "BananaBrain",
+       "version": "c4",
+       "result": "loss",
+       "end": "stalemate_zero_units",
+       "l0_score": 42.69,
+       "seconds": 580
+      },
+      {
+       "match_number": 20,
+       "opponent": "Steamhammer",
+       "version": "v2",
+       "result": "loss",
+       "end": "stalemate_zero_units",
+       "l0_score": 46.26,
+       "seconds": 670
+      }
+     ],
+     "match_number": 17,
+     "opponent": "PylonPuller",
+     "map": "Destination",
+     "version": "c4",
+     "result": "win",
+     "end": "natural",
+     "frame": 26197,
+     "seconds": 1100,
+     "l0_score": 91.5,
+     "self_name": "StarterBot",
+     "opponent_name": "UAlbertaBot",
+     "race": "Protoss",
+     "opponent_race": "Protoss",
+     "id": "b-r05-c4-pylonpuller-win",
+     "file": "reps/b-r05-c4-pylonpuller-win.rep",
+     "bytes": 410252,
+     "sha256": "3f823d528c75ca4c0798ba31b1ff4727ba2ac8a1780d6910d14dfa4a100aec27"
+    },
+    {
+     "round": 6,
+     "tested": "c5",
+     "parent": "v3",
+     "decision": "rejected",
+     "reason": "win_rate_lower",
+     "next_version": "v3",
+     "changed_files": [
+      "MacroBot.cpp",
+      "build_config.json"
+     ],
+     "cpp_changed_lines": 7,
+     "round_matches": [
+      {
+       "match_number": 21,
+       "opponent": "PylonPuller",
+       "version": "c5",
+       "result": "loss",
+       "end": "stalemate_one_army_or_less",
+       "l0_score": 13.8,
+       "seconds": 413
+      },
+      {
+       "match_number": 22,
+       "opponent": "Steamhammer",
+       "version": "c5",
+       "result": "loss",
+       "end": "stalemate_zero_units",
+       "l0_score": 20.76,
+       "seconds": 403
+      },
+      {
+       "match_number": 23,
+       "opponent": "BananaBrain",
+       "version": "c5",
+       "result": "loss",
+       "end": "stalemate_zero_units",
+       "l0_score": 11.54,
+       "seconds": 292
+      },
+      {
+       "match_number": 24,
+       "opponent": "BananaBrain",
+       "version": "v3",
+       "result": "loss",
+       "end": "stalemate_zero_units",
+       "l0_score": 50.72,
+       "seconds": 610
+      }
+     ],
+     "match_number": 22,
+     "opponent": "Steamhammer",
+     "map": "Destination",
+     "version": "c5",
+     "result": "loss",
+     "end": "stalemate_zero_units",
+     "frame": 9603,
+     "seconds": 403,
+     "l0_score": 20.76,
+     "self_name": "StarterBot",
+     "opponent_name": "UAlbertaBot",
+     "race": "Protoss",
+     "opponent_race": "Protoss",
+     "id": "b-r06-c5-steamhammer-loss",
+     "file": "reps/b-r06-c5-steamhammer-loss.rep",
+     "bytes": 99907,
+     "sha256": "4138020db32730613ca2f77e5362d1d55f7b73cc7a83b51a06b6f6abf5365aca"
+    },
+    {
+     "round": 7,
+     "tested": "c6",
+     "parent": "v3",
+     "decision": "promoted",
+     "reason": "win_rate_improved",
+     "next_version": "v4",
+     "changed_files": [
+      "MacroBot.cpp"
+     ],
+     "cpp_changed_lines": 14,
+     "round_matches": [
+      {
+       "match_number": 25,
+       "opponent": "PylonPuller",
+       "version": "c6",
+       "result": "loss",
+       "end": "stalemate_zero_units",
+       "l0_score": 44.99,
+       "seconds": 681
+      },
+      {
+       "match_number": 26,
+       "opponent": "Steamhammer",
+       "version": "c6",
+       "result": "win",
+       "end": "natural",
+       "l0_score": 93.46,
+       "seconds": 888
+      },
+      {
+       "match_number": 27,
+       "opponent": "BananaBrain",
+       "version": "c6",
+       "result": "loss",
+       "end": "stalemate_one_army_or_less",
+       "l0_score": 15.71,
+       "seconds": 313
+      },
+      {
+       "match_number": 28,
+       "opponent": "PylonPuller",
+       "version": "v3",
+       "result": "loss",
+       "end": "stalemate_zero_units",
+       "l0_score": 57.72,
+       "seconds": 615
+      }
+     ],
+     "match_number": 26,
+     "opponent": "Steamhammer",
+     "map": "Destination",
+     "version": "c6",
+     "result": "win",
+     "end": "natural",
+     "frame": 21144,
+     "seconds": 888,
+     "l0_score": 93.46,
+     "self_name": "StarterBot",
+     "opponent_name": "UAlbertaBot",
+     "race": "Protoss",
+     "opponent_race": "Protoss",
+     "id": "b-r07-c6-steamhammer-win",
+     "file": "reps/b-r07-c6-steamhammer-win.rep",
+     "bytes": 428848,
+     "sha256": "9e2f438fee1f2a5a54d571278b5bf426e2e84dcd982412d41ec0df6aa7249979"
+    },
+    {
+     "round": 8,
+     "tested": "c7",
+     "parent": "v4",
+     "decision": "promoted",
+     "reason": "win_rate_improved",
+     "next_version": "v5",
+     "changed_files": [
+      "MacroBot.cpp"
+     ],
+     "cpp_changed_lines": 15,
+     "round_matches": [
+      {
+       "match_number": 29,
+       "opponent": "PylonPuller",
+       "version": "c7",
+       "result": "loss",
+       "end": "stalemate_one_army_or_less",
+       "l0_score": 71.3,
+       "seconds": 1104
+      },
+      {
+       "match_number": 30,
+       "opponent": "Steamhammer",
+       "version": "c7",
+       "result": "win",
+       "end": "natural",
+       "l0_score": 93.4,
+       "seconds": 793
+      },
+      {
+       "match_number": 31,
+       "opponent": "BananaBrain",
+       "version": "c7",
+       "result": "loss",
+       "end": "natural",
+       "l0_score": 45.55,
+       "seconds": 621
+      },
+      {
+       "match_number": 32,
+       "opponent": "Steamhammer",
+       "version": "v4",
+       "result": "loss",
+       "end": "stalemate_zero_units",
+       "l0_score": 52.37,
+       "seconds": 600
+      }
+     ],
+     "match_number": 30,
+     "opponent": "Steamhammer",
+     "map": "Destination",
+     "version": "c7",
+     "result": "win",
+     "end": "natural",
+     "frame": 18881,
+     "seconds": 793,
+     "l0_score": 93.4,
+     "self_name": "StarterBot",
+     "opponent_name": "UAlbertaBot",
+     "race": "Protoss",
+     "opponent_race": "Protoss",
+     "id": "b-r08-c7-steamhammer-win",
+     "file": "reps/b-r08-c7-steamhammer-win.rep",
+     "bytes": 392307,
+     "sha256": "26d0ac4567d6f907fbcdf6a1c35f90fce9f34e288281443119ea17cf9ad294b5"
+    },
+    {
+     "round": 9,
+     "tested": "c8",
+     "parent": "v5",
+     "decision": "rejected",
+     "reason": "win_rate_lower",
+     "next_version": "v5",
+     "changed_files": [
+      "MacroBot.cpp"
+     ],
+     "cpp_changed_lines": 14,
+     "round_matches": [
+      {
+       "match_number": 33,
+       "opponent": "PylonPuller",
+       "version": "c8",
+       "result": "loss",
+       "end": "stalemate_zero_units",
+       "l0_score": 46.64,
+       "seconds": 726
+      },
+      {
+       "match_number": 34,
+       "opponent": "Steamhammer",
+       "version": "c8",
+       "result": "loss",
+       "end": "natural",
+       "l0_score": 53.57,
+       "seconds": 699
+      },
+      {
+       "match_number": 35,
+       "opponent": "BananaBrain",
+       "version": "c8",
+       "result": "loss",
+       "end": "natural",
+       "l0_score": 46.55,
+       "seconds": 635
+      },
+      {
+       "match_number": 36,
+       "opponent": "BananaBrain",
+       "version": "v5",
+       "result": "loss",
+       "end": "stalemate_zero_units",
+       "l0_score": 59.17,
+       "seconds": 701
+      }
+     ],
+     "match_number": 34,
+     "opponent": "Steamhammer",
+     "map": "Destination",
+     "version": "c8",
+     "result": "loss",
+     "end": "natural",
+     "frame": 16649,
+     "seconds": 699,
+     "l0_score": 53.57,
+     "self_name": "StarterBot",
+     "opponent_name": "UAlbertaBot",
+     "race": "Protoss",
+     "opponent_race": "Protoss",
+     "id": "b-r09-c8-steamhammer-loss",
+     "file": "reps/b-r09-c8-steamhammer-loss.rep",
+     "bytes": 188625,
+     "sha256": "2b3af2bfaedad20250ba7ae2262ae42ebe9f4563fc3c1b8a3eb9e37680188269"
+    },
+    {
+     "round": 10,
+     "tested": "c9",
+     "parent": "v5",
+     "decision": "rejected",
+     "reason": "win_rate_lower",
+     "next_version": "v5",
+     "changed_files": [
+      "MacroBot.cpp"
+     ],
+     "cpp_changed_lines": 7,
+     "round_matches": [
+      {
+       "match_number": 37,
+       "opponent": "PylonPuller",
+       "version": "c9",
+       "result": "loss",
+       "end": "stalemate_one_army_or_less",
+       "l0_score": 55.84,
+       "seconds": 721
+      },
+      {
+       "match_number": 38,
+       "opponent": "Steamhammer",
+       "version": "c9",
+       "result": "loss",
+       "end": "stalemate_one_army_or_less",
+       "l0_score": 43.04,
+       "seconds": 524
+      },
+      {
+       "match_number": 39,
+       "opponent": "BananaBrain",
+       "version": "c9",
+       "result": "loss",
+       "end": "stalemate_zero_units",
+       "l0_score": 17.39,
+       "seconds": 318
+      },
+      {
+       "match_number": 40,
+       "opponent": "PylonPuller",
+       "version": "v5",
+       "result": "loss",
+       "end": "stalemate_zero_units",
+       "l0_score": 60.26,
+       "seconds": 635
+      }
+     ],
+     "match_number": 37,
+     "opponent": "PylonPuller",
+     "map": "Destination",
+     "version": "c9",
+     "result": "loss",
+     "end": "stalemate_one_army_or_less",
+     "frame": 17165,
+     "seconds": 721,
+     "l0_score": 55.84,
+     "self_name": "StarterBot",
+     "opponent_name": "UAlbertaBot",
+     "race": "Protoss",
+     "opponent_race": "Protoss",
+     "id": "b-r10-c9-pylonpuller-loss",
+     "file": "reps/b-r10-c9-pylonpuller-loss.rep",
+     "bytes": 135246,
+     "sha256": "b7ecdbb2a9c15a32bdcb870be30509dbcb1d2610a16b26d7ee2f0e6ac6c63c5b"
+    },
+    {
+     "round": 11,
+     "tested": "c10",
+     "parent": "v5",
+     "decision": "promoted",
+     "reason": "win_rate_improved",
+     "next_version": "v6",
+     "changed_files": [
+      "MacroBot.cpp",
+      "build_config.json"
+     ],
+     "cpp_changed_lines": 10,
+     "round_matches": [
+      {
+       "match_number": 41,
+       "opponent": "PylonPuller",
+       "version": "c10",
+       "result": "loss",
+       "end": "stalemate_one_army_or_less",
+       "l0_score": 60.47,
+       "seconds": 660
+      },
+      {
+       "match_number": 42,
+       "opponent": "Steamhammer",
+       "version": "c10",
+       "result": "win",
+       "end": "natural",
+       "l0_score": 88.39,
+       "seconds": 689
+      },
+      {
+       "match_number": 43,
+       "opponent": "BananaBrain",
+       "version": "c10",
+       "result": "loss",
+       "end": "stalemate_zero_units",
+       "l0_score": 19.5,
+       "seconds": 353
+      },
+      {
+       "match_number": 44,
+       "opponent": "Steamhammer",
+       "version": "v5",
+       "result": "loss",
+       "end": "stalemate_zero_units",
+       "l0_score": 12.4,
+       "seconds": 338
+      }
+     ],
+     "match_number": 42,
+     "opponent": "Steamhammer",
+     "map": "Destination",
+     "version": "c10",
+     "result": "win",
+     "end": "natural",
+     "frame": 16401,
+     "seconds": 689,
+     "l0_score": 88.39,
+     "self_name": "StarterBot",
+     "opponent_name": "UAlbertaBot",
+     "race": "Protoss",
+     "opponent_race": "Protoss",
+     "id": "b-r11-c10-steamhammer-win",
+     "file": "reps/b-r11-c10-steamhammer-win.rep",
+     "bytes": 232123,
+     "sha256": "562b0245224a64282c54fbf00d0cd8b7f3950e91ad46f52afeff5b2e493a1f85"
+    },
+    {
+     "round": 12,
+     "tested": "c11",
+     "parent": "v6",
+     "decision": "rejected",
+     "reason": "single_opponent_score_drop",
+     "next_version": "v6",
+     "changed_files": [
+      "MacroBot.cpp"
+     ],
+     "cpp_changed_lines": 5,
+     "round_matches": [
+      {
+       "match_number": 45,
+       "opponent": "PylonPuller",
+       "version": "c11",
+       "result": "win",
+       "end": "natural",
+       "l0_score": 82.37,
+       "seconds": 633
+      },
+      {
+       "match_number": 46,
+       "opponent": "Steamhammer",
+       "version": "c11",
+       "result": "loss",
+       "end": "stalemate_zero_units",
+       "l0_score": 50.88,
+       "seconds": 544
+      },
+      {
+       "match_number": 47,
+       "opponent": "BananaBrain",
+       "version": "c11",
+       "result": "loss",
+       "end": "stalemate_zero_units",
+       "l0_score": 51.99,
+       "seconds": 615
+      },
+      {
+       "match_number": 48,
+       "opponent": "BananaBrain",
+       "version": "v6",
+       "result": "loss",
+       "end": "stalemate_zero_units",
+       "l0_score": 9.45,
+       "seconds": 333
+      }
+     ],
+     "match_number": 45,
+     "opponent": "PylonPuller",
+     "map": "Destination",
+     "version": "c11",
+     "result": "win",
+     "end": "natural",
+     "frame": 15068,
+     "seconds": 633,
+     "l0_score": 82.37,
+     "self_name": "StarterBot",
+     "opponent_name": "UAlbertaBot",
+     "race": "Protoss",
+     "opponent_race": "Protoss",
+     "id": "b-r12-c11-pylonpuller-win",
+     "file": "reps/b-r12-c11-pylonpuller-win.rep",
+     "bytes": 120938,
+     "sha256": "92435315dc44780caf9647c1b29ebf2cdf0d5721a065d6eb56b3a9868432202e"
+    },
+    {
+     "round": 13,
+     "tested": "c12",
+     "parent": "v6",
+     "decision": "rejected",
+     "reason": "regression_on_PylonPuller",
+     "next_version": "v6",
+     "changed_files": [
+      "MacroBot.cpp"
+     ],
+     "cpp_changed_lines": 9,
+     "round_matches": [
+      {
+       "match_number": 49,
+       "opponent": "PylonPuller",
+       "version": "c12",
+       "result": "loss",
+       "end": "stalemate_one_army_or_less",
+       "l0_score": 43.44,
+       "seconds": 499
+      },
+      {
+       "match_number": 50,
+       "opponent": "Steamhammer",
+       "version": "c12",
+       "result": "win",
+       "end": "natural",
+       "l0_score": 93.6,
+       "seconds": 897
+      },
+      {
+       "match_number": 51,
+       "opponent": "BananaBrain",
+       "version": "c12",
+       "result": "loss",
+       "end": "stalemate_one_army_or_less",
+       "l0_score": 33.46,
+       "seconds": 519
+      },
+      {
+       "match_number": 52,
+       "opponent": "PylonPuller",
+       "version": "v6",
+       "result": "win",
+       "end": "natural",
+       "l0_score": 89.08,
+       "seconds": 1020
+      }
+     ],
+     "match_number": 50,
+     "opponent": "Steamhammer",
+     "map": "Destination",
+     "version": "c12",
+     "result": "win",
+     "end": "natural",
+     "frame": 21361,
+     "seconds": 897,
+     "l0_score": 93.6,
+     "self_name": "StarterBot",
+     "opponent_name": "UAlbertaBot",
+     "race": "Protoss",
+     "opponent_race": "Protoss",
+     "id": "b-r13-c12-steamhammer-win",
+     "file": "reps/b-r13-c12-steamhammer-win.rep",
+     "bytes": 472329,
+     "sha256": "7e8835d2e4d5b271a32a37499529b7e735cc15d0be4f1982f883cb0e74988ae5"
+    },
+    {
+     "round": 14,
+     "tested": "c13",
+     "parent": "v6",
+     "decision": "rejected",
+     "reason": "regression_on_PylonPuller",
+     "next_version": "v6",
+     "changed_files": [
+      "MacroBot.cpp",
+      "build_config.json"
+     ],
+     "cpp_changed_lines": 18,
+     "round_matches": [
+      {
+       "match_number": 53,
+       "opponent": "PylonPuller",
+       "version": "c13",
+       "result": "loss",
+       "end": "stalemate_zero_units",
+       "l0_score": 50.07,
+       "seconds": 686
+      },
+      {
+       "match_number": 54,
+       "opponent": "Steamhammer",
+       "version": "c13",
+       "result": "loss",
+       "end": "stalemate_one_army_or_less",
+       "l0_score": 49.96,
+       "seconds": 605
+      },
+      {
+       "match_number": 55,
+       "opponent": "BananaBrain",
+       "version": "c13",
+       "result": "loss",
+       "end": "natural",
+       "l0_score": 30.65,
+       "seconds": 507
+      },
+      {
+       "match_number": 56,
+       "opponent": "Steamhammer",
+       "version": "v6",
+       "result": "loss",
+       "end": "stalemate_zero_units",
+       "l0_score": 22.37,
+       "seconds": 393
+      }
+     ],
+     "match_number": 53,
+     "opponent": "PylonPuller",
+     "map": "Destination",
+     "version": "c13",
+     "result": "loss",
+     "end": "stalemate_zero_units",
+     "frame": 16324,
+     "seconds": 686,
+     "l0_score": 50.07,
+     "self_name": "StarterBot",
+     "opponent_name": "UAlbertaBot",
+     "race": "Protoss",
+     "opponent_race": "Protoss",
+     "id": "b-r14-c13-pylonpuller-loss",
+     "file": "reps/b-r14-c13-pylonpuller-loss.rep",
+     "bytes": 132909,
+     "sha256": "0756bafa6bc4979f861d503b60ff25dbe32d33631335a24f759cfd636034a4c1"
+    },
+    {
+     "round": 15,
+     "tested": "c14",
+     "parent": "v6",
+     "decision": "rejected",
+     "reason": "regression_on_Steamhammer",
+     "next_version": "v6",
+     "changed_files": [
+      "MacroBot.cpp"
+     ],
+     "cpp_changed_lines": 16,
+     "round_matches": [
+      {
+       "match_number": 57,
+       "opponent": "PylonPuller",
+       "version": "c14",
+       "result": "win",
+       "end": "natural",
+       "l0_score": 87.9,
+       "seconds": 706
+      },
+      {
+       "match_number": 58,
+       "opponent": "Steamhammer",
+       "version": "c14",
+       "result": "loss",
+       "end": "stalemate_one_army_or_less",
+       "l0_score": 34.22,
+       "seconds": 459
+      },
+      {
+       "match_number": 59,
+       "opponent": "BananaBrain",
+       "version": "c14",
+       "result": "loss",
+       "end": "natural",
+       "l0_score": 58.38,
+       "seconds": 896
+      },
+      {
+       "match_number": 60,
+       "opponent": "BananaBrain",
+       "version": "v6",
+       "result": "loss",
+       "end": "stalemate_zero_units",
+       "l0_score": 20.01,
+       "seconds": 479
+      }
+     ],
+     "match_number": 57,
+     "opponent": "PylonPuller",
+     "map": "Destination",
+     "version": "c14",
+     "result": "win",
+     "end": "natural",
+     "frame": 16804,
+     "seconds": 706,
+     "l0_score": 87.9,
+     "self_name": "StarterBot",
+     "opponent_name": "UAlbertaBot",
+     "race": "Protoss",
+     "opponent_race": "Protoss",
+     "id": "b-r15-c14-pylonpuller-win",
+     "file": "reps/b-r15-c14-pylonpuller-win.rep",
+     "bytes": 160661,
+     "sha256": "c1e2db14bb596f545fef891be92f96ac22e580e68c591be6ef4b613e2387d36d"
+    },
+    {
+     "round": 16,
+     "tested": "c15",
+     "parent": "v6",
+     "decision": "rejected",
+     "reason": "regression_on_Steamhammer",
+     "next_version": "v6",
+     "changed_files": [
+      "MacroBot.cpp"
+     ],
+     "cpp_changed_lines": 11,
+     "round_matches": [
+      {
+       "match_number": 61,
+       "opponent": "PylonPuller",
+       "version": "c15",
+       "result": "loss",
+       "end": "stalemate_zero_units",
+       "l0_score": 56.43,
+       "seconds": 691
+      },
+      {
+       "match_number": 62,
+       "opponent": "Steamhammer",
+       "version": "c15",
+       "result": "loss",
+       "end": "stalemate_one_army_or_less",
+       "l0_score": 35.59,
+       "seconds": 519
+      },
+      {
+       "match_number": 63,
+       "opponent": "BananaBrain",
+       "version": "c15",
+       "result": "loss",
+       "end": "stalemate_zero_units",
+       "l0_score": 12.75,
+       "seconds": 333
+      },
+      {
+       "match_number": 64,
+       "opponent": "PylonPuller",
+       "version": "v6",
+       "result": "loss",
+       "end": "stalemate_zero_units",
+       "l0_score": 52.01,
+       "seconds": 615
+      }
+     ],
+     "match_number": 61,
+     "opponent": "PylonPuller",
+     "map": "Destination",
+     "version": "c15",
+     "result": "loss",
+     "end": "stalemate_zero_units",
+     "frame": 16445,
+     "seconds": 691,
+     "l0_score": 56.43,
+     "self_name": "StarterBot",
+     "opponent_name": "UAlbertaBot",
+     "race": "Protoss",
+     "opponent_race": "Protoss",
+     "id": "b-r16-c15-pylonpuller-loss",
+     "file": "reps/b-r16-c15-pylonpuller-loss.rep",
+     "bytes": 136315,
+     "sha256": "da153df98424aff2af03c3074aa3df83c3915d54dd3274e592f365af77b2b826"
+    },
+    {
+     "round": 17,
+     "tested": "c16",
+     "parent": "v6",
+     "decision": "promoted",
+     "reason": "win_rate_improved",
+     "next_version": "v7",
+     "changed_files": [
+      "MacroBot.cpp"
+     ],
+     "cpp_changed_lines": 37,
+     "round_matches": [
+      {
+       "match_number": 65,
+       "opponent": "PylonPuller",
+       "version": "c16",
+       "result": "win",
+       "end": "natural",
+       "l0_score": 89.82,
+       "seconds": 1079
+      },
+      {
+       "match_number": 66,
+       "opponent": "Steamhammer",
+       "version": "c16",
+       "result": "loss",
+       "end": "stalemate_zero_units",
+       "l0_score": 49.19,
+       "seconds": 600
+      },
+      {
+       "match_number": 67,
+       "opponent": "BananaBrain",
+       "version": "c16",
+       "result": "loss",
+       "end": "natural",
+       "l0_score": 59.2,
+       "seconds": 892
+      },
+      {
+       "match_number": 68,
+       "opponent": "Steamhammer",
+       "version": "v6",
+       "result": "loss",
+       "end": "stalemate_zero_units",
+       "l0_score": 12.75,
+       "seconds": 323
+      }
+     ],
+     "match_number": 65,
+     "opponent": "PylonPuller",
+     "map": "Destination",
+     "version": "c16",
+     "result": "win",
+     "end": "natural",
+     "frame": 25701,
+     "seconds": 1079,
+     "l0_score": 89.82,
+     "self_name": "StarterBot",
+     "opponent_name": "UAlbertaBot",
+     "race": "Protoss",
+     "opponent_race": "Protoss",
+     "id": "b-r17-c16-pylonpuller-win",
+     "file": "reps/b-r17-c16-pylonpuller-win.rep",
+     "bytes": 336614,
+     "sha256": "b5fda4d7c9f7f19b1c7a677e351144a93afd8af0b1c0f04a8b14517f944366c9"
+    },
+    {
+     "round": 18,
+     "tested": "c17",
+     "parent": "v7",
+     "decision": "rejected",
+     "reason": "win_rate_lower",
+     "next_version": "v7",
+     "changed_files": [
+      "MacroBot.cpp"
+     ],
+     "cpp_changed_lines": 11,
+     "round_matches": [
+      {
+       "match_number": 69,
+       "opponent": "PylonPuller",
+       "version": "c17",
+       "result": "loss",
+       "end": "stalemate_zero_units",
+       "l0_score": 54.07,
+       "seconds": 580
+      },
+      {
+       "match_number": 70,
+       "opponent": "Steamhammer",
+       "version": "c17",
+       "result": "draw",
+       "end": "max_frames",
+       "l0_score": 89.61,
+       "seconds": 1512
+      },
+      {
+       "match_number": 71,
+       "opponent": "BananaBrain",
+       "version": "c17",
+       "result": "loss",
+       "end": "stalemate_one_army_or_less",
+       "l0_score": 42.87,
+       "seconds": 605
+      },
+      {
+       "match_number": 72,
+       "opponent": "BananaBrain",
+       "version": "v7",
+       "result": "loss",
+       "end": "natural",
+       "l0_score": 25.92,
+       "seconds": 504
+      }
+     ],
+     "match_number": 70,
+     "opponent": "Steamhammer",
+     "map": "Destination",
+     "version": "c17",
+     "result": "draw",
+     "end": "max_frames",
+     "frame": 36004,
+     "seconds": 1512,
+     "l0_score": 89.61,
+     "self_name": "StarterBot",
+     "opponent_name": "UAlbertaBot",
+     "race": "Protoss",
+     "opponent_race": "Protoss",
+     "id": "b-r18-c17-steamhammer-draw",
+     "file": "reps/b-r18-c17-steamhammer-draw.rep",
+     "bytes": 1001603,
+     "sha256": "57a10627ef81bce6e39cc1e3d1be7dd672ed656784ea83ea7cb2a7547d4226bd"
+    },
+    {
+     "round": 19,
+     "tested": "c18",
+     "parent": "v7",
+     "decision": "rejected",
+     "reason": "regression_on_PylonPuller",
+     "next_version": "v7",
+     "changed_files": [
+      "MacroBot.cpp"
+     ],
+     "cpp_changed_lines": 15,
+     "round_matches": [
+      {
+       "match_number": 73,
+       "opponent": "PylonPuller",
+       "version": "c18",
+       "result": "loss",
+       "end": "stalemate_zero_units",
+       "l0_score": 51.33,
+       "seconds": 615
+      },
+      {
+       "match_number": 74,
+       "opponent": "Steamhammer",
+       "version": "c18",
+       "result": "win",
+       "end": "natural",
+       "l0_score": 93.75,
+       "seconds": 785
+      },
+      {
+       "match_number": 75,
+       "opponent": "BananaBrain",
+       "version": "c18",
+       "result": "loss",
+       "end": "stalemate_one_army_or_less",
+       "l0_score": 21.32,
+       "seconds": 378
+      },
+      {
+       "match_number": 76,
+       "opponent": "PylonPuller",
+       "version": "v7",
+       "result": "win",
+       "end": "natural",
+       "l0_score": 83.8,
+       "seconds": 569
+      }
+     ],
+     "match_number": 74,
+     "opponent": "Steamhammer",
+     "map": "Destination",
+     "version": "c18",
+     "result": "win",
+     "end": "natural",
+     "frame": 18695,
+     "seconds": 785,
+     "l0_score": 93.75,
+     "self_name": "StarterBot",
+     "opponent_name": "UAlbertaBot",
+     "race": "Protoss",
+     "opponent_race": "Protoss",
+     "id": "b-r19-c18-steamhammer-win",
+     "file": "reps/b-r19-c18-steamhammer-win.rep",
+     "bytes": 289132,
+     "sha256": "5887a3542cef3b3194d13d9cc0c2996c80bf64710fde8a4aafc578b630256880"
+    },
+    {
+     "round": 20,
+     "tested": "c19",
+     "parent": "v7",
+     "decision": "rejected",
+     "reason": "regression_on_PylonPuller",
+     "next_version": "v7",
+     "changed_files": [
+      "MacroBot.cpp"
+     ],
+     "cpp_changed_lines": 18,
+     "round_matches": [
+      {
+       "match_number": 77,
+       "opponent": "PylonPuller",
+       "version": "c19",
+       "result": "loss",
+       "end": "stalemate_one_army_or_less",
+       "l0_score": 38.64,
+       "seconds": 504
+      },
+      {
+       "match_number": 78,
+       "opponent": "Steamhammer",
+       "version": "c19",
+       "result": "loss",
+       "end": "stalemate_one_army_or_less",
+       "l0_score": 40.06,
+       "seconds": 575
+      },
+      {
+       "match_number": 79,
+       "opponent": "BananaBrain",
+       "version": "c19",
+       "result": "loss",
+       "end": "natural",
+       "l0_score": 48.84,
+       "seconds": 619
+      },
+      {
+       "match_number": 80,
+       "opponent": "Steamhammer",
+       "version": "v7",
+       "result": "loss",
+       "end": "stalemate_one_army_or_less",
+       "l0_score": 67.39,
+       "seconds": 741
+      }
+     ],
+     "match_number": 79,
+     "opponent": "BananaBrain",
+     "map": "Destination",
+     "version": "c19",
+     "result": "loss",
+     "end": "natural",
+     "frame": 14727,
+     "seconds": 619,
+     "l0_score": 48.84,
+     "self_name": "StarterBot",
+     "opponent_name": "UAlbertaBot",
+     "race": "Protoss",
+     "opponent_race": "Protoss",
+     "id": "b-r20-c19-bananabrain-loss",
+     "file": "reps/b-r20-c19-bananabrain-loss.rep",
+     "bytes": 226619,
+     "sha256": "1e44b2216f3175d87c88ad750fe03250524938e28b476cd9319b1171ce778293"
+    },
+    {
+     "round": 21,
+     "tested": "c20",
+     "parent": "v7",
+     "decision": "rejected",
+     "reason": "insufficient_improvement",
+     "next_version": "v7",
+     "changed_files": [
+      "MacroBot.cpp",
+      "build_config.json"
+     ],
+     "cpp_changed_lines": 10,
+     "round_matches": [
+      {
+       "match_number": 81,
+       "opponent": "PylonPuller",
+       "version": "c20",
+       "result": "win",
+       "end": "natural",
+       "l0_score": 85.15,
+       "seconds": 758
+      },
+      {
+       "match_number": 82,
+       "opponent": "Steamhammer",
+       "version": "c20",
+       "result": "loss",
+       "end": "stalemate_one_army_or_less",
+       "l0_score": 56.53,
+       "seconds": 887
+      },
+      {
+       "match_number": 83,
+       "opponent": "BananaBrain",
+       "version": "c20",
+       "result": "loss",
+       "end": "stalemate_zero_units",
+       "l0_score": 24.94,
+       "seconds": 388
+      },
+      {
+       "match_number": 84,
+       "opponent": "BananaBrain",
+       "version": "v7",
+       "result": "loss",
+       "end": "stalemate_one_army_or_less",
+       "l0_score": 13.53,
+       "seconds": 267
+      }
+     ],
+     "match_number": 81,
+     "opponent": "PylonPuller",
+     "map": "Destination",
+     "version": "c20",
+     "result": "win",
+     "end": "natural",
+     "frame": 18044,
+     "seconds": 758,
+     "l0_score": 85.15,
+     "self_name": "StarterBot",
+     "opponent_name": "UAlbertaBot",
+     "race": "Protoss",
+     "opponent_race": "Protoss",
+     "id": "b-r21-c20-pylonpuller-win",
+     "file": "reps/b-r21-c20-pylonpuller-win.rep",
+     "bytes": 169486,
+     "sha256": "caf1a221e746ef2506492f9d32b553e558769eb3dbb6c9c5d78ac2e01d581ac6"
+    },
+    {
+     "round": 22,
+     "tested": "c21",
+     "parent": "v7",
+     "decision": "promoted",
+     "reason": "score_improved",
+     "next_version": "v8",
+     "changed_files": [
+      "MacroBot.cpp",
+      "build_config.json"
+     ],
+     "cpp_changed_lines": 7,
+     "round_matches": [
+      {
+       "match_number": 85,
+       "opponent": "PylonPuller",
+       "version": "c21",
+       "result": "win",
+       "end": "natural",
+       "l0_score": 90.72,
+       "seconds": 1181
+      },
+      {
+       "match_number": 86,
+       "opponent": "Steamhammer",
+       "version": "c21",
+       "result": "loss",
+       "end": "stalemate_zero_units",
+       "l0_score": 51.22,
+       "seconds": 761
+      },
+      {
+       "match_number": 87,
+       "opponent": "BananaBrain",
+       "version": "c21",
+       "result": "loss",
+       "end": "stalemate_one_army_or_less",
+       "l0_score": 60.54,
+       "seconds": 756
+      },
+      {
+       "match_number": 88,
+       "opponent": "PylonPuller",
+       "version": "v7",
+       "result": "win",
+       "end": "natural",
+       "l0_score": 83.28,
+       "seconds": 595
+      }
+     ],
+     "match_number": 85,
+     "opponent": "PylonPuller",
+     "map": "Destination",
+     "version": "c21",
+     "result": "win",
+     "end": "natural",
+     "frame": 28119,
+     "seconds": 1181,
+     "l0_score": 90.72,
+     "self_name": "StarterBot",
+     "opponent_name": "UAlbertaBot",
+     "race": "Protoss",
+     "opponent_race": "Protoss",
+     "id": "b-r22-c21-pylonpuller-win",
+     "file": "reps/b-r22-c21-pylonpuller-win.rep",
+     "bytes": 328569,
+     "sha256": "630878a0b8684ff814cef7e76b33fd69a9a790bc2b22591e5f96e9c5bbb8f422"
+    },
+    {
+     "round": 23,
+     "tested": "c22",
+     "parent": "v8",
+     "decision": "rejected",
+     "reason": "win_rate_lower",
+     "next_version": "v8",
+     "changed_files": [
+      "MacroBot.cpp"
+     ],
+     "cpp_changed_lines": 8,
+     "round_matches": [
+      {
+       "match_number": 89,
+       "opponent": "PylonPuller",
+       "version": "c22",
+       "result": "loss",
+       "end": "stalemate_zero_units",
+       "l0_score": 39.56,
+       "seconds": 529
+      },
+      {
+       "match_number": 90,
+       "opponent": "Steamhammer",
+       "version": "c22",
+       "result": "loss",
+       "end": "stalemate_one_army_or_less",
+       "l0_score": 32.53,
+       "seconds": 439
+      },
+      {
+       "match_number": 91,
+       "opponent": "BananaBrain",
+       "version": "c22",
+       "result": "loss",
+       "end": "stalemate_zero_units",
+       "l0_score": 39.07,
+       "seconds": 550
+      },
+      {
+       "match_number": 92,
+       "opponent": "Steamhammer",
+       "version": "v8",
+       "result": "loss",
+       "end": "stalemate_zero_units",
+       "l0_score": 31.65,
+       "seconds": 459
+      }
+     ],
+     "match_number": 89,
+     "opponent": "PylonPuller",
+     "map": "Destination",
+     "version": "c22",
+     "result": "loss",
+     "end": "stalemate_zero_units",
+     "frame": 12603,
+     "seconds": 529,
+     "l0_score": 39.56,
+     "self_name": "StarterBot",
+     "opponent_name": "UAlbertaBot",
+     "race": "Protoss",
+     "opponent_race": "Protoss",
+     "id": "b-r23-c22-pylonpuller-loss",
+     "file": "reps/b-r23-c22-pylonpuller-loss.rep",
+     "bytes": 100337,
+     "sha256": "be19b64786cfd0a465d6696e5af5ef23db17a6a33f2548d1a521875b5dad3e9e"
+    }
+   ]
+  }
+ ]
+}

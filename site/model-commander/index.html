@@ -1,26 +1,66 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title data-nav-title="model">模型指挥迭代 · Replay Archive</title>
+  <meta name="description" content="Model commander self-iteration: one native StarCraft 1.16.1 replay per iteration round.">
+  <title data-nav-title="model">Model commander · Replay Archive</title>
   <link rel="icon" href="data:,">
   <link rel="stylesheet" href="../app.css">
+  <link rel="stylesheet" href="mc.css">
   <script src="../navigation.js" defer></script>
+  <script src="mc.js" defer></script>
 </head>
 <body>
-  <a href="#main" class="skip">跳到正文</a>
+  <a href="#main" class="skip">Skip to content</a>
   <header>
-    <a class="brand" href="../?lang=zh" data-nav>REPLAY ARCHIVE<span>STARCRAFT / BROOD WAR</span></a>
+    <a class="brand" href="../" data-nav>REPLAY ARCHIVE<span>STARCRAFT / BROOD WAR</span></a>
     <nav>
-      <a href="../?lang=zh" data-nav="library">比赛库</a>
-      <a href="../replay-room.html?lang=zh" data-nav="room">对战效果</a>
-      <a href="../llm-vs-code/?lang=zh" data-nav="llm">LLM 指挥对比</a>
-      <a href="../human-commander/?lang=zh" data-nav="human">人类指挥</a>
-      <a href="./?lang=zh" data-nav="model" aria-current="page">模型指挥迭代</a>
-      <button id="language" type="button" lang="en">English</button>
+      <a href="../" data-nav="library">Match library</a>
+      <a href="../replay-room.html" data-nav="room">Replay room</a>
+      <a href="../llm-vs-code/" data-nav="llm">LLM commander</a>
+      <a href="../human-commander/" data-nav="human">Human commander</a>
+      <a href="./" data-nav="model" aria-current="page">Model commander</a>
+      <button id="language" type="button" lang="zh-CN">中文</button>
     </nav>
   </header>
-  <main id="main" tabindex="-1"></main>
+  <main id="main" tabindex="-1">
+    <section id="mc-library">
+      <h1 data-i18n="title">Model commander iteration</h1>
+      <p class="mc-intro" data-i18n="intro"></p>
+      <div id="mc-runs"></div>
+    </section>
+
+    <section id="mc-detail" hidden>
+      <a class="back" id="mc-back" href="./" data-i18n="back">← All rounds</a>
+      <p class="mc-eyebrow" id="mc-eyebrow"></p>
+      <h1 id="mc-title"></h1>
+      <p id="mc-meta" class="mc-meta"></p>
+      <div class="mc-facts" id="mc-facts"></div>
+      <div class="player-toolbar">
+        <div class="mc-switch" id="mc-view" role="group">
+          <button type="button" data-view="all" aria-pressed="true" data-i18n="viewAll">Full map</button>
+          <button type="button" data-view="self" aria-pressed="false" data-i18n="viewSelf">Our vision</button>
+        </div>
+        <span id="mc-status" role="status"></span>
+        <button id="mc-fullscreen" type="button" data-i18n="fullscreen">Fullscreen</button>
+      </div>
+      <div id="mc-screen"><iframe id="mc-viewer" title="Interactive replay player" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
+      <p class="mc-help" data-i18n="controls"></p>
+      <h2 class="mc-h2" data-i18n="roundTable">All matches in this round</h2>
+      <table class="mc-table" id="mc-round"></table>
+      <p class="mc-help" id="mc-files"></p>
+    </section>
+
+    <section id="mc-missing" class="empty" hidden>
+      <h1 data-i18n="missing">Replay unavailable</h1>
+      <a class="button" href="./" data-i18n="back">← All rounds</a>
+    </section>
+    <section id="mc-error" class="empty" role="alert" hidden>
+      <h2 data-i18n="loadError">The page could not load.</h2>
+      <p id="mc-error-detail"></p>
+    </section>
+  </main>
+  <footer><span data-i18n="footer">Model commander experiment · data from local native match logs</span><a href="../" data-nav>Replay Archive</a></footer>
 </body>
 </html>
