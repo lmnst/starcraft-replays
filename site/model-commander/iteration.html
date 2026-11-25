@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>迭代过程 · 模型指挥迭代</title>
+<style>
+html{color-scheme:dark}
+body{margin:0;background:#101615;color:#e7eee8;font:15px/1.85 "Microsoft YaHei",system-ui,sans-serif;padding:18px 24px;overflow-wrap:anywhere}
+h1{font-size:23px;margin:26px 0 12px}
+h1:first-child{margin-top:4px}
+h2{font-size:18px;margin:24px 0 8px;color:#c4db91}
+h3{font-size:15px;margin:16px 0 6px;color:#d6e4be}
+p{margin:8px 0}
+ul,ol{padding-left:24px;margin:8px 0}
+li{margin:5px 0}
+table{width:100%;border-collapse:collapse;margin:14px 0 22px;font-size:13px}
+th,td{border:1px solid #34413b;padding:7px 10px;vertical-align:top;text-align:left}
+th{font-weight:600;background:#202a26;color:#e7eee8}
+code{font-size:12.5px;background:#1a2321;padding:1px 5px;border-radius:3px}
+.note{border-left:3px solid #c4db91;background:#161f1d;padding:10px 14px;margin:12px 0;font-size:14px;color:#cfd8d2}
+.tag{display:inline-block;font:12px monospace;padding:1px 6px;border-radius:3px;border:1px solid #4d6146;color:#c4db91;margin-right:6px}
+.tag.rej{border-color:#785b4c;color:#e1b697}
+.tag.keep{border-color:#4b5a55;color:#a1afa6}
+@media(max-width:600px){body{padding:12px}th,td{padding:6px}table{font-size:12px}}
+</style>
+</head>
+<body>
+<article>
+<h1>模型指挥自主迭代（RSI）</h1>
+<p>本模块记录大模型在星际争霸 1.16.1（神族，地图 Destination）中，使用与人类指挥相同的顶排按键指挥层进行<strong>实时局内指挥 + 赛后自主复盘迭代</strong>的完整过程。所有版本编号、对局结果、帧号与修改内容均取自本地原始对局与复盘日志。</p>
+
+<h2>指挥接口（沿用人类指挥最终版 11 键）</h2>
+<p>局内决策层与人类指挥共享同一套 <code>toprow_commands_v17</code> 指挥层：常规采矿、造兵、建筑与科技由底层 Bot 负责，大模型在关键事件（开局、敌情变化、交战接触、定期检查）触发时决定是否按键接管，高频条件还可蒸馏进本地快速规则（<code>rules.py</code>）。</p>
+<table>
+  <thead><tr><th>按键</th><th>功能</th><th>作用简述</th></tr></thead>
+  <tbody>
+    <tr><td><code>1</code></td><td>探机避险</td><td>接管侦察或受威胁探机持续脱险</td></tr>
+    <tr><td><code>2</code></td><td>强制采矿</td><td>屏蔽探机参战/追敌，强制维持采矿与建造</td></tr>
+    <tr><td><code>3</code> / <code>4</code></td><td>小队 / 全队模式</td><td>切换后续战术指令作用于 1/4 兵力小队还是全部作战部队</td></tr>
+    <tr><td><code>5</code></td><td>攻近敌／分矿建筑</td><td>优先清理近点或分矿建筑，沿途迎击敌军，完成后撤离待命</td></tr>
+    <tr><td><code>6</code></td><td>主基地区域清场</td><td>锁定敌方主基地区域，沿途先清敌军与炮台，再拆外围水晶与核心</td></tr>
+    <tr><td><code>7</code></td><td>持续区域警戒</td><td>在警戒区迎击敌兵和炮台、忽略探机，限制追击</td></tr>
+    <tr><td><code>8</code></td><td>原地集结等援兵</td><td>前线固守待援，受压时前往共同局部避险点</td></tr>
+    <tr><td><code>9</code></td><td>安全撤离集结</td><td>前线先脱战，与后方新兵在安全点汇合待命</td></tr>
+    <tr><td><code>0</code></td><td>全军回防</td><td>全军分守主矿与分矿，限距拦截入侵敌军</td></tr>
+    <tr><td><code>-</code></td><td>全局重置</td><td>解除所有人工/模型接管任务，交回底层 Bot 自动控制</td></tr>
+  </tbody>
+</table>
+
+<h1>第一批：10 轮 × 2 局（9 对手轮换，规则与运营参数探索）</h1>
+<p>目标：跑通「实时指挥 → 赛后多工具复盘 → 自主修改策略/规则/参数 → 校验上线」的完整闭环，观察模型在面对 9 个不同对手轮换时的自主迭代表现。</p>
+<div class="note">
+  <strong>实验条件说明：</strong>第一批由 <code>20261124-145321-768219</code>（前 3 轮，使用固定 <code>Baseline.dll</code>，模型只能改 <code>rules.py</code> 和 <code>strategy.md</code>）与 <code>20261124-193345-717393</code>（后 7 轮，切换为可调参的 <code>MacroBot.dll</code>，新增 <code>build_config.json</code>）连续衔接组成。中途定位并修复了 3 处基础设施问题：局内多 JSON 回复解析、PurpleWave 在 JDK 21 下缺 <code>--add-opens</code> 导致启动即崩溃（故第 3 轮 B-5 对 PurpleWave 的胜局为对手崩溃导致的<strong>无效胜局</strong>，未纳入复盘）、以及并行时 Java 对手连错客户端（修复为 Java 对手单独一波运行）。
+</div>
+
+<h2>第一批逐轮迭代（第 1–10 轮）</h2>
+<table>
+  <thead><tr><th>轮次</th><th>测试版本</th><th>对手（2 局）</th><th>复盘改动与要点</th></tr></thead>
+  <tbody>
+    <tr><td>第 1 轮</td><td><code>v1</code></td><td>Stardust (负)、McRave (负)</td><td><span class="tag">修改 → v2</span> 修复 <code>rules.py</code> 中 <code>release_idle_defense</code> 误解锁：新增 <code>_enemies_near_army</code>，军队 384px 内有敌方作战单位或正在交战时不解除回防锁。</td></tr>
+    <tr><td>第 2 轮</td><td><code>v2</code></td><td>BananaBrain (负)、Steamhammer (负)</td><td><span class="tag">修改 → v3</span> 蒸馏新规则 <code>withdraw_one_sided_fight</code>（中场/敌前遭遇 3+ 敌军压制且我方 0 接战、敌力 ≥ 我方 1/2 时按 <code>9</code> 撤退）；<code>strategy.md</code> 补充对 BananaBrain 龙骑与 Steamhammer 贴脸炮台的注意事项。</td></tr>
+    <tr><td>第 3 轮</td><td><code>v3</code></td><td>PurpleWave (对手崩溃无效)、HladHammer (手停)</td><td><span class="tag keep">中止修复</span> 发现 PurpleWave Java 启动异常后手动中止本轮、未触发复盘；修好环境并引入 <code>MacroBot.dll</code> 后从 <code>v3</code> 续跑。</td></tr>
+    <tr><td>第 4 轮</td><td><code>E/v1</code> (=v3)</td><td>PurpleWave (负)、HladHammer (负)</td><td><span class="tag">修改 → v2</span> 调 <code>build_config.json</code>：<code>proactive_cannon_frame</code> 由 <code>-1</code> 改为 <code>6000</code>，即使未侦察到隐刀也提前下 Forge 补基地炮台。</td></tr>
+    <tr><td>第 5 轮</td><td><code>E/v2</code></td><td>tscmoo (胜)、PylonPuller (胜)</td><td><span class="tag keep">保持 v2</span> 两局全胜，模型决定保留当前版本继续验证。</td></tr>
+    <tr><td>第 6 轮</td><td><code>E/v2</code></td><td>Locutus (负)、Stardust (负)</td><td><span class="tag">修改 → v3</span> Locutus 隐刀来得更早，炮台来不及完成；将 <code>proactive_cannon_frame</code> 提前到 <code>4800</code>，<code>cannons_per_base</code> 从 <code>1</code> 增至 <code>2</code>。</td></tr>
+    <tr><td>第 7 轮</td><td><code>E/v3</code></td><td>McRave (负)、BananaBrain (负)</td><td><span class="tag">修改 → v4</span> 针对 McRave 局中回防锁被反复误解，改 <code>rules.py</code>：<code>release_idle_defense</code> 与 <code>early_commit_enemy_main</code> 均要求我方健康兵力 ≥ 敌方峰值兵力（<code>_enemy_peak</code>）。</td></tr>
+    <tr><td>第 8 轮</td><td><code>E/v4</code></td><td>Steamhammer (负)、PurpleWave (负)</td><td><span class="tag">修改 → v5</span> 4800 帧双炮台拖慢了 BY 和龙骑出兵速度，导致被纯龙骑碾压；回调 <code>proactive_cannon_frame</code> 至 <code>6500</code>、<code>cannons_per_base</code> 回 <code>1</code>。</td></tr>
+    <tr><td>第 9 轮</td><td><code>E/v5</code></td><td>HladHammer (负)、tscmoo (胜)</td><td><span class="tag">修改 → v6</span> 仅改 <code>strategy.md</code>：补充遇到 HladHammer 主基地炮台/龙骑时的回防提示。</td></tr>
+    <tr><td>第 10 轮</td><td><code>E/v6</code></td><td>PylonPuller (负)、Locutus (负)</td><td><span class="tag">修改 → v7</span> 再次被早隐刀击穿，改为提前走反隐科技 <code>proactive_observer_frame: -1 → 5000</code>（末轮产物，未上场）。</td></tr>
+  </tbody>
+</table>
+
+<h2>第一批暴露的瓶颈（为什么升级为第二批）</h2>
+<ol>
+  <li><strong>9 个对手轮换导致样本过稀、无法验证修改效果</strong>：同一个对手约 4.5 轮才重逢一次，复盘只能针对刚刚输掉的那个对手打补丁，导致炮台时间在 <code>4800</code> 与 <code>6500</code> 之间来回震荡。</li>
+  <li><strong>无版本准入/淘汰机制</strong>：每次修改直接覆盖生效，退步版本会继续往下演进。</li>
+  <li><strong>只改参数难以解决结构缺陷</strong>：盲目 6 兵进攻、无快攻识别、叮当不跟部队、矿钱被建筑卡死等问题都在底层 C++ 逻辑里，仅靠调 <code>build_config.json</code> 改不动。</li>
+</ol>
+
+<h1>第二批：24 轮 × 4 局（固定 3 对手 + 冠军/挑战者淘汰 + 自主改 C++ 源码）</h1>
+<p>第二批（<code>20261124-224218-659920</code>，共 24 轮 96 局）针对第一批的瓶颈做了三项核心升级：</p>
+<ul>
+  <li><strong>固定核心对手池</strong>：每轮候选版本对阵固定 3 个对手（<code>PylonPuller</code>、<code>Steamhammer</code>、<code>BananaBrain</code>），外加 1 局当前冠军版本复测（2×2 并行，每轮 4 局），让每次改动的得失都能在同一基准上直接对照。</li>
+  <li><strong>严格晋升 / 淘汰机制</strong>：引入纯 L0 综合评分（结合胜负、存活、科技里程碑、战损比等），候选版本必须实现胜率或综合分提升且不能在单对手上明显退步才能晋升为新冠军；否则<strong>立即淘汰并回退到当前冠军</strong>重新诊断。</li>
+  <li><strong>开放修改底层 C++ 源码</strong>：模型复盘时可直接修改 <code>MacroBot.cpp</code> 与 <code>build_config.json</code>，自动编译并通过校验后进入实机评测。</li>
+</ul>
+
+<h2>主线晋升谱系（23 次提案中 7 次晋升：v1 → v8）</h2>
+
+<h3>初始基线 v1（第 1 轮）</h3>
+<p>起始版本在第一批基础上修复了主动炮台优先级与分矿冷却。第 1 轮基线评测（对 PylonPuller 1 胜 1 负、Steamhammer 0 胜 2 负、BananaBrain 0 胜 1 负）暴露出核心问题：底层 Bot 只要凑够 6 个兵就无脑前压，屡次在敌方门前被兵力占优的龙骑全歼。</p>
+
+<h3>第 2 轮：c1 晋升为 v2（<code>MacroBot.cpp</code> Δ34 行 + <code>build_config.json</code>）</h3>
+<ul>
+  <li><strong>问题诊断</strong>：3 场败局均为 6–8 个无射程狂热者过早出击送掉，且开气偏晚导致龙骑出不来。</li>
+  <li><strong>模型改动</strong>：改写交战阈值——改为我方兵力 ≥ 8 且估算战力 ≥ 记忆中敌军战力 1.4 倍 + 4 才发起进攻，战力跌破敌方 0.9 倍或不足 4 兵即撤回集结；同时提早开气（<code>gas1_zealots: 3→1</code>、<code>gas1_frame: 4400→3200</code>）。</li>
+  <li><strong>评测结果</strong>：<span class="tag">晋升 → v2</span> 对 PylonPuller 获胜（L0 93.2），对 Steamhammer / BananaBrain 均分显著抬升（63.7 / 52.5）。</li>
+</ul>
+
+<h3>第 5 轮：c4 晋升为 v3（<code>MacroBot.cpp</code> Δ29 行）</h3>
+<ul>
+  <li><strong>问题诊断</strong>：前两轮（<code>c2</code> 改开矿点、<code>c3</code> 改 6000 帧主动叮当）均因表现退步被淘汰；复盘发现面对 Steamhammer 早期狂热者快攻时，2 兵营等 12 农、BY 排在前面，且拉 17 个探机硬扛导致 6000 帧即崩盘。</li>
+  <li><strong>模型改动</strong>：新增早期快攻检测（<code>rushSeen</code>：6500 帧前在我方主矿 1600px 内见到 ≥2 敌方初期兵即触发），触发后立即补 2 兵营与 3 兵营并优先于科技，同时比较家门口威胁战力，避免探机白白送死。</li>
+  <li><strong>评测结果</strong>：<span class="tag">晋升 → v3</span> 稳住 PylonPuller 胜局（91.5），抗快攻能力提升。</li>
+</ul>
+
+<h3>第 7 轮：c6 晋升为 v4（<code>MacroBot.cpp</code> Δ14 行）</h3>
+<ul>
+  <li><strong>问题诊断</strong>：<code>c5</code> 尝试补炮台未果被淘汰；日志显示我方侦察探机早在 3360–3480 帧就合法看到了对手主矿的双兵营无科技开局，但 <code>v3</code> 的快攻响应要等到敌兵走到家门口（晚了约 2000 帧）才启动。</li>
+  <li><strong>模型改动</strong>：将 <code>rushSeen</code> 前移至侦察阶段——5000 帧前只要侦察到对手 ≥2 兵营（且无气矿/科技）或 3800 帧前见到狂热者即立刻触发防快攻出兵。</li>
+  <li><strong>评测结果</strong>：<span class="tag">晋升 → v4</span> 首次正面击败 Steamhammer（L0 93.5）。</li>
+</ul>
+
+<h3>第 8 轮：c7 晋升为 v5（<code>MacroBot.cpp</code> Δ15 行）</h3>
+<ul>
+  <li><strong>问题诊断</strong>：虽然已提前侦察到 BananaBrain 快攻，但防快攻期间仍把钱花在气矿（75）、BY（150）和过早的 3 兵营上，气矿攒到 120 没用上，正面只够出 4 个狂热者。</li>
+  <li><strong>模型改动</strong>：侦察到快攻后，6500 帧前（无隐刀信号）凑齐 4 兵之前停止造气矿与 BY、暂停采气，把 225+ 晶体全转成狂热者；3 兵营要求余钱 ≥200；且家里兵力处于劣势时禁止单位追出 260px 以外送死。</li>
+  <li><strong>评测结果</strong>：<span class="tag">晋升 → v5</span> 连续击败 Steamhammer（L0 93.4），且对 PylonPuller（71.3）与 BananaBrain（45.5）均分全面高于 v4。</li>
+</ul>
+
+<h3>第 11 轮：c10 晋升为 v6（<code>MacroBot.cpp</code> Δ10 行 + <code>build_config.json</code>）</h3>
+<ul>
+  <li><strong>问题诊断</strong>：<code>c8</code>、<code>c9</code> 尝试局部补防均未通过；复盘发现 <code>v5</code> 输给隐刀并非缺静态防御，而是 BY 和 VR 一直被造兵抢光矿钱（BY 拖到 5736 帧、VR 拖到 9360 帧分矿之后），叮当比隐刀晚了 1500 帧。</li>
+  <li><strong>模型改动</strong>：在 <code>production()</code> 中为待建的 BY / VR / 叮当建筑强制预留矿气；在无家门口威胁时把 VR 排在二基地之前，并将 <code>robo_frame</code> 9000→7800、<code>robo_army</code> 10→8。</li>
+  <li><strong>评测结果</strong>：<span class="tag">晋升 → v6</span> 再次击败 Steamhammer（L0 88.4），科技节奏明显提前。</li>
+</ul>
+
+<h3>第 17 轮：c16 晋升为 v7（<code>MacroBot.cpp</code> Δ37 行）</h3>
+<ul>
+  <li><strong>问题诊断</strong>：从第 12 到第 16 轮连续 5 次探索（<code>c11–c15</code>：拉农阈值、分矿时机、5400 帧主动叮当、中场追击限制、看 BY 出反隐）均因在某一对手上退步被淘汰。第 17 轮定位到真正病灶：我方明明已有 2 个叮当和 13 个兵，却因为叮当一直停在主矿，导致分矿的隐刀全程隐身屠光主力。</li>
+  <li><strong>模型改动</strong>：新增 <code>cloakMemory</code> 记住最近合法看到的隐形攻击单位位置与帧号，并分配双叮当职责——0 号叮当贴近主力追猎最近隐形目标，1 号叮当守护基地，同时在追猎时缩小规避防空半径。</li>
+  <li><strong>评测结果</strong>：<span class="tag">晋升 → v7</span> 反隐实战立竿见影，<code>v7</code> 在后续累计对 PylonPuller 取得 <strong>3 胜 0 负（均分 85.6）</strong>，成为最稳的阶段性突破。</li>
+</ul>
+
+<h3>第 22 轮：c21 晋升为 v8（<code>MacroBot.cpp</code> Δ7 行 + <code>build_config.json</code>）</h3>
+<ul>
+  <li><strong>问题诊断</strong>：第 18–21 轮（<code>c17–c20</code>：修气体预留负值、对炮台开局补反隐、防追击牵引、6000 帧主动炮台）先后出现对 PylonPuller 退步或提升不足被淘汰（其中 <code>c17</code> 对 Steamhammer 打满 36,000 帧平局、L0 89.6）。第 22 轮转向开局矿钱卡位：2 兵营在 3240 帧就要建，却被狂热者和探机抢钱拖到 4632 帧，刚好撞上 BananaBrain 4680 帧的狂热者压境。</li>
+  <li><strong>模型改动</strong>：为 2 兵营强制预留 150 晶体，<code>gate2_workers</code> 从 12 降至 10，并让分矿逻辑跳过敌方建筑 320px 内点位及拉黑失败选址。</li>
+  <li><strong>评测结果</strong>：<span class="tag">晋升 → v8</span> 最终冠军版本：对 PylonPuller 获胜（90.7），对 BananaBrain 得分提升至 60.5（三对手均分全面超越 v7）。末两轮 <code>c22</code>（进攻阈值改保守）与 <code>c23</code>（5700 帧主动炮台）均未胜过 <code>v8</code>，最终保留 <code>v8</code> 作为收官冠军。</li>
+</ul>
+
+<h2>被淘汰探索的共性观察（16 次淘汰）</h2>
+<ul>
+  <li><strong>静态防御 / 过早反隐常引发经济退步</strong>：<code>c3</code>、<code>c5</code>、<code>c13</code>、<code>c20</code>、<code>c23</code> 试图靠固定帧号提前下炮台或叮当，往往在未遇快攻隐刀的对局里拖慢正面产兵，被淘汰机制拦下。</li>
+  <li><strong>单一对手特化易破坏已建立优势</strong>：<code>c12</code>、<code>c14</code>、<code>c15</code>、<code>c18</code>、<code>c19</code> 虽然在某一场打出高分甚至赢下 Steamhammer（如 <code>c12</code> 93.6、<code>c18</code> 93.8），但同时在 PylonPuller 上失守，因此被 <code>regression_on_PylonPuller</code> 拒绝晋升。</li>
+</ul>
+
+<h2>第二批 24 轮完整演进表</h2>
+<table>
+  <thead><tr><th>轮次</th><th>被测版本</th><th>父版</th><th>改动文件</th><th>判定</th><th>各对手战绩与 L0 均分（被测版本）</th></tr></thead>
+  <tbody>
+    <tr><td>R1</td><td><code>v1</code></td><td>—</td><td>基线种子</td><td><span class="tag keep">基线</span></td><td>PylonPuller 1W/1L (68.6)；Steamhammer 0W/2L (43.8)；BananaBrain 0W/1L (49.7)</td></tr>
+    <tr><td>R2</td><td><code>c1</code></td><td><code>v1</code></td><td>MacroBot.cpp, build_config (Δ34L)</td><td><span class="tag">晋升 → v2</span></td><td>PylonPuller 1W/0L (93.2)；Steamhammer 0W/1L (63.7)；BananaBrain 0W/1L (52.5)</td></tr>
+    <tr><td>R3</td><td><code>c2</code></td><td><code>v2</code></td><td>MacroBot.cpp, build_config (Δ17L)</td><td><span class="tag rej">淘汰</span> 胜率低</td><td>PylonPuller 0W/1L (36.6)；Steamhammer 0W/1L (64.4)；BananaBrain 0W/1L (41.0)</td></tr>
+    <tr><td>R4</td><td><code>c3</code></td><td><code>v2</code></td><td>MacroBot.cpp, build_config (Δ18L)</td><td><span class="tag rej">淘汰</span> 对PP退步</td><td>PylonPuller 0W/1L (50.1)；Steamhammer 0W/1L (4.3)；BananaBrain 0W/1L (39.9)</td></tr>
+    <tr><td>R5</td><td><code>c4</code></td><td><code>v2</code></td><td>MacroBot.cpp (Δ29L)</td><td><span class="tag">晋升 → v3</span></td><td>PylonPuller 1W/0L (91.5)；Steamhammer 0W/1L (53.3)；BananaBrain 0W/1L (42.7)</td></tr>
+    <tr><td>R6</td><td><code>c5</code></td><td><code>v3</code></td><td>MacroBot.cpp, build_config (Δ7L)</td><td><span class="tag rej">淘汰</span> 胜率低</td><td>PylonPuller 0W/1L (13.8)；Steamhammer 0W/1L (20.8)；BananaBrain 0W/1L (11.5)</td></tr>
+    <tr><td>R7</td><td><code>c6</code></td><td><code>v3</code></td><td>MacroBot.cpp (Δ14L)</td><td><span class="tag">晋升 → v4</span></td><td>PylonPuller 0W/1L (45.0)；Steamhammer 1W/0L (93.5)；BananaBrain 0W/1L (15.7)</td></tr>
+    <tr><td>R8</td><td><code>c7</code></td><td><code>v4</code></td><td>MacroBot.cpp (Δ15L)</td><td><span class="tag">晋升 → v5</span></td><td>PylonPuller 0W/1L (71.3)；Steamhammer 1W/0L (93.4)；BananaBrain 0W/1L (45.5)</td></tr>
+    <tr><td>R9</td><td><code>c8</code></td><td><code>v5</code></td><td>MacroBot.cpp (Δ14L)</td><td><span class="tag rej">淘汰</span> 胜率低</td><td>PylonPuller 0W/1L (46.6)；Steamhammer 0W/1L (53.6)；BananaBrain 0W/1L (46.5)</td></tr>
+    <tr><td>R10</td><td><code>c9</code></td><td><code>v5</code></td><td>MacroBot.cpp (Δ7L)</td><td><span class="tag rej">淘汰</span> 胜率低</td><td>PylonPuller 0W/1L (55.8)；Steamhammer 0W/1L (43.0)；BananaBrain 0W/1L (17.4)</td></tr>
+    <tr><td>R11</td><td><code>c10</code></td><td><code>v5</code></td><td>MacroBot.cpp, build_config (Δ10L)</td><td><span class="tag">晋升 → v6</span></td><td>PylonPuller 0W/1L (60.5)；Steamhammer 1W/0L (88.4)；BananaBrain 0W/1L (19.5)</td></tr>
+    <tr><td>R12</td><td><code>c11</code></td><td><code>v6</code></td><td>MacroBot.cpp (Δ5L)</td><td><span class="tag rej">淘汰</span> 单对手降分</td><td>PylonPuller 1W/0L (82.4)；Steamhammer 0W/1L (50.9)；BananaBrain 0W/1L (52.0)</td></tr>
+    <tr><td>R13</td><td><code>c12</code></td><td><code>v6</code></td><td>MacroBot.cpp (Δ9L)</td><td><span class="tag rej">淘汰</span> 对PP退步</td><td>PylonPuller 0W/1L (43.4)；Steamhammer 1W/0L (93.6)；BananaBrain 0W/1L (33.5)</td></tr>
+    <tr><td>R14</td><td><code>c13</code></td><td><code>v6</code></td><td>MacroBot.cpp, build_config (Δ18L)</td><td><span class="tag rej">淘汰</span> 对PP退步</td><td>PylonPuller 0W/1L (50.1)；Steamhammer 0W/1L (50.0)；BananaBrain 0W/1L (30.6)</td></tr>
+    <tr><td>R15</td><td><code>c14</code></td><td><code>v6</code></td><td>MacroBot.cpp (Δ16L)</td><td><span class="tag rej">淘汰</span> 对SH退步</td><td>PylonPuller 1W/0L (87.9)；Steamhammer 0W/1L (34.2)；BananaBrain 0W/1L (58.4)</td></tr>
+    <tr><td>R16</td><td><code>c15</code></td><td><code>v6</code></td><td>MacroBot.cpp (Δ11L)</td><td><span class="tag rej">淘汰</span> 对SH退步</td><td>PylonPuller 0W/1L (56.4)；Steamhammer 0W/1L (35.6)；BananaBrain 0W/1L (12.8)</td></tr>
+    <tr><td>R17</td><td><code>c16</code></td><td><code>v6</code></td><td>MacroBot.cpp (Δ37L)</td><td><span class="tag">晋升 → v7</span></td><td>PylonPuller 1W/0L (89.8)；Steamhammer 0W/1L (49.2)；BananaBrain 0W/1L (59.2)</td></tr>
+    <tr><td>R18</td><td><code>c17</code></td><td><code>v7</code></td><td>MacroBot.cpp (Δ11L)</td><td><span class="tag rej">淘汰</span> 胜率低</td><td>PylonPuller 0W/1L (54.1)；Steamhammer 0W/0L/1平 (89.6)；BananaBrain 0W/1L (42.9)</td></tr>
+    <tr><td>R19</td><td><code>c18</code></td><td><code>v7</code></td><td>MacroBot.cpp (Δ15L)</td><td><span class="tag rej">淘汰</span> 对PP退步</td><td>PylonPuller 0W/1L (51.3)；Steamhammer 1W/0L (93.8)；BananaBrain 0W/1L (21.3)</td></tr>
+    <tr><td>R20</td><td><code>c19</code></td><td><code>v7</code></td><td>MacroBot.cpp (Δ18L)</td><td><span class="tag rej">淘汰</span> 对PP退步</td><td>PylonPuller 0W/1L (38.6)；Steamhammer 0W/1L (40.1)；BananaBrain 0W/1L (48.8)</td></tr>
+    <tr><td>R21</td><td><code>c20</code></td><td><code>v7</code></td><td>MacroBot.cpp, build_config (Δ10L)</td><td><span class="tag rej">淘汰</span> 提升不足</td><td>PylonPuller 1W/0L (85.2)；Steamhammer 0W/1L (56.5)；BananaBrain 0W/1L (24.9)</td></tr>
+    <tr><td>R22</td><td><code>c21</code></td><td><code>v7</code></td><td>MacroBot.cpp, build_config (Δ7L)</td><td><span class="tag">晋升 → v8</span></td><td>PylonPuller 1W/0L (90.7)；Steamhammer 0W/1L (51.2)；BananaBrain 0W/1L (60.5)</td></tr>
+    <tr><td>R23</td><td><code>c22</code></td><td><code>v8</code></td><td>MacroBot.cpp (Δ8L)</td><td><span class="tag rej">淘汰</span> 胜率低</td><td>PylonPuller 0W/1L (39.6)；Steamhammer 0W/1L (32.5)；BananaBrain 0W/1L (39.1)</td></tr>
+    <tr><td>R24</td><td><code>c23</code></td><td><code>v8</code></td><td>MacroBot.cpp, build_config (Δ13L)</td><td><span class="tag rej">淘汰</span> 胜率低</td><td>PylonPuller 0W/1L (44.1)；Steamhammer 0W/1L (62.9)；BananaBrain 0W/1L (59.4)</td></tr>
+  </tbody>
+</table>
+
+<h2>总体战绩汇总</h2>
+<h3>第一批有效对局（不含对手崩溃/手停局）</h3>
+<table>
+  <thead><tr><th>阶段</th><th>底层 Bot</th><th>有效局数</th><th>胜 / 负</th><th>说明</th></tr></thead>
+  <tbody>
+    <tr><td>前 2 轮（145321）</td><td>Baseline.dll</td><td>4</td><td>0 胜 / 4 负</td><td>第 3 轮 B-5 因对手 PurpleWave 启动崩溃无效、B-6 手动中止</td></tr>
+    <tr><td>后 7 轮（193345）</td><td>MacroBot.dll</td><td>14</td><td>3 胜 / 11 负</td><td>胜 tscmoo 2 局、PylonPuller 1 局；其余 7 个对手 0 胜</td></tr>
+  </tbody>
+</table>
+
+<h3>第二批全部 96 局（含所有淘汰候选与冠军复测）</h3>
+<table id="opponent-results">
+  <thead><tr><th>对手</th><th>总对局</th><th>胜</th><th>负</th><th>平（满帧）</th><th>总胜率</th><th>最终冠军 v8 累计（L0 均分）</th></tr></thead>
+  <tbody>
+    <tr><td>PylonPuller</td><td>32</td><td>11</td><td>21</td><td>0</td><td>34.4%</td><td>1W / 0L（90.7）</td></tr>
+    <tr><td>Steamhammer</td><td>32</td><td>5</td><td>26</td><td>1</td><td>15.6%</td><td>0W / 2L（41.4）</td></tr>
+    <tr><td>BananaBrain</td><td>32</td><td>0</td><td>32</td><td>0</td><td>0%</td><td>0W / 2L（57.7）</td></tr>
+    <tr><td><b>合计</b></td><td><b>96</b></td><td><b>16</b></td><td><b>79</b></td><td><b>1</b></td><td><b>16.7%</b></td><td><b>1W / 4L（v7 对 PP 曾达 3W/0L）</b></td></tr>
+  </tbody>
+</table>
+</article>
+</body>
+</html>

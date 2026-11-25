@@ -77,6 +77,7 @@ const T = {
   en: {
     title: 'Model commander iteration',
     intro: 'A language model commands our Protoss bot live through the same keyboard command layer used by human commanders. After each round it reviews the match logs and edits the bot\u2019s policy, then the next round tests the new version. One original replay is published per round.',
+    iterSummary: 'Iteration notes (Chinese)',
     runA: 'Run 1', runB: 'Run 2',
     runDesc: r => `${r.rounds} rounds · ${r.matches_per_round} matches per round (${r.parallel} in parallel) · ${r.map}`,
     runNoteA: 'Each round plays 2 matches; after the round the model revises the version or keeps it.',
@@ -115,6 +116,7 @@ const T = {
   zh: {
     title: '模型指挥迭代',
     intro: '由大模型通过与人类指挥相同的按键指挥层实时指挥我方神族 bot；每轮结束后，模型复盘对局日志并修改 bot 策略，下一轮测试新版本。每一轮公开一局原始回放。',
+    iterSummary: '迭代过程',
     runA: '第一批', runB: '第二批',
     runDesc: r => `${r.rounds} 轮 · 每轮 ${r.matches_per_round} 局（${r.parallel} 局并行）· ${r.map}`,
     runNoteA: '每轮 2 局，轮后由模型决定修改版本或保持不变。',
